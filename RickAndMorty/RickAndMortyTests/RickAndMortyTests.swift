@@ -59,9 +59,3 @@ final class RickAndMortyTests: XCTestCase {
         wait(for: expectation)
     }
 }
-
-extension XCTestCase {
-    func wait(for expectation: XCTestExpectation) {
-        wait(for: [expectation])
-    }
-}
