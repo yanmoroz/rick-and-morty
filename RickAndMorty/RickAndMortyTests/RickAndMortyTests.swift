@@ -58,4 +58,29 @@ final class RickAndMortyTests: XCTestCase {
         task.resume()
         wait(for: expectation)
     }
+    
+    func test_simpleRequest_async() async {
+        let fakeExtenralCompletion: (Result<Any, Error>) -> Void = { result in
+            
+        }
+        
+        // 0. Build URL or URLRequest
+        let url = URL(string: "https://rickandmortyapi.com/api/episode/5")!
+        do {
+            // 1. Proceed http request
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            // 2. Validate response
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode > 300 {
+                // ...
+            }
+            
+            // 3. and decode data to some <T>
+            let episode = try JSONDecoder().decode(Episode.self, from: data)
+            fakeExtenralCompletion(.success(episode))
+        } catch {
+            // 4. Handle error
+            fakeExtenralCompletion(.failure(error))
+        }
+    }
 }
