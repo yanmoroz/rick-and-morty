@@ -84,8 +84,8 @@ final class NetworkServiceTests: XCTestCase {
                 XCTFail("Shouldn't be succeed")
             case .failure(let error):
                 switch error {
-                case .badStatusCode:
-                    break
+                case .badStatusCode(let statusCode):
+                    XCTAssertEqual(statusCode, Locals.badStatusCode)
                 default:
                     XCTFail("Should be .badStatusCode")
                 }
