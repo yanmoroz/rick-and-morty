@@ -13,6 +13,25 @@ protocol HTTPClient {
     func request(_ request: URLRequest, completion: @escaping Completion) -> CancellableTask
 }
 
+// 2-level
+protocol NetworkService {
+    typealias Completion = (Result<Data, NetworkServiceError>) -> Void
+    func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask
+}
+
+enum NetworkServiceError: Error {
+    
+}
+
+protocol APIRequest {
+    func urlRequest(using apiConfiguration: APIConfiguration) -> URLRequest
+}
+
+protocol APIConfiguration {
+    var baseURL: URL { get }
+}
+
+// Global-level
 protocol CancellableTask {
     func cancel()
 }
