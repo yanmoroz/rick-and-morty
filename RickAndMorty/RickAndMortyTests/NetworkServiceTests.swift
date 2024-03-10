@@ -8,6 +8,12 @@
 import XCTest
 
 final class NetworkServiceTests: XCTestCase {
+    
+    enum Locals {
+        static let baseUrl = URL(string: "https://mock.api.io")!
+        static let badStatusCode = 404
+    }
+    
     func test_networkServiceMock_returnsEmptyResponseError() {
         let sut = makeSUT()
         let request = APIRequestMock()
@@ -54,6 +60,34 @@ final class NetworkServiceTests: XCTestCase {
                     break
                 default:
                     XCTFail("Should be .responseIsNotHTTP")
+                }
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_networkServiceMock_returnBadStatusCodeError() {
+        let sut = makeSUT()
+        let request = APIRequestMock()
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            let response = HTTPURLResponse(url: Locals.baseUrl, statusCode: Locals.badStatusCode)
+            return (nil, response, nil)
+        }
+        
+        sut.request(request) { result in
+            switch result {
+            case .success:
+                XCTFail("Shouldn't be succeed")
+            case .failure(let error):
+                switch error {
+                case .badStatusCode:
+                    break
+                default:
+                    XCTFail("Should be .badStatusCode")
                 }
             }
             exp.fulfill()
