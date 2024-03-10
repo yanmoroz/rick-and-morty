@@ -16,6 +16,7 @@ protocol HTTPClient {
 // 2-level
 protocol NetworkService {
     typealias Completion = (Result<Data, NetworkServiceError>) -> Void
+    @discardableResult
     func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask
 }
 
