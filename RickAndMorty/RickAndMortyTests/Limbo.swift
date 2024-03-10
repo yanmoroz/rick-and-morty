@@ -20,7 +20,9 @@ protocol NetworkService {
 }
 
 enum NetworkServiceError: Error {
-    
+    case httpClient(URLError)
+    case responseIsNotHTTP
+    case emptyResponse
 }
 
 protocol APIRequest {

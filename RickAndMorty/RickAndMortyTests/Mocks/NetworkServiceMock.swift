@@ -43,5 +43,35 @@ protocol URLResponseValidator {
 }
 
 enum URLResponseError: Error {
+    case emptyResponse
+    case responseIsNotHTTP
+}
+
+struct URLResponseValidatorMock: URLResponseValidator {
+    func validate(response: URLResponse?) -> URLResponseError? {
+        guard let response else {
+            return .emptyResponse
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            return .responseIsNotHTTP
+        }
+        
+        return nil
+    }
+}
+
+struct NetworkServiceErrorResolverMock: NetworkServiceErrorResolver {
+    func resolve(_ error: URLError) -> NetworkServiceError {
+        .httpClient(error)
+    }
     
+    func resolve(_ error: URLResponseError) -> NetworkServiceError {
+        switch error {
+        case .emptyResponse:
+            return .emptyResponse
+        case .responseIsNotHTTP:
+            return .responseIsNotHTTP
+        }
+    }
 }
