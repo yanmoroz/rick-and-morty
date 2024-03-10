@@ -12,6 +12,7 @@ final class NetworkServiceTests: XCTestCase {
     enum Locals {
         static let baseUrl = URL(string: "https://mock.api.io")!
         static let badStatusCode = 404
+        static let cancellationError = URLError(URLError.cancelled)
     }
     
     func test_networkServiceMock_returnsEmptyResponseError() {
@@ -47,7 +48,7 @@ final class NetworkServiceTests: XCTestCase {
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
-            return (nil, URLResponse(), nil)
+            (nil, URLResponse(), nil)
         }
         
         sut.request(request) { result in
@@ -68,7 +69,7 @@ final class NetworkServiceTests: XCTestCase {
         wait(for: exp)
     }
     
-    func test_networkServiceMock_returnBadStatusCodeError() {
+    func test_networkServiceMock_returnsBadStatusCodeError() {
         let sut = makeSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
@@ -88,6 +89,38 @@ final class NetworkServiceTests: XCTestCase {
                     XCTAssertEqual(statusCode, Locals.badStatusCode)
                 default:
                     XCTFail("Should be .badStatusCode")
+                }
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_networkServiceMock_returnsHttpClientError() {
+        let sut = makeSUT()
+        let request = APIRequestMock()
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, Locals.cancellationError)
+        }
+        
+        sut.request(request) { result in
+            switch result {
+            case .success:
+                XCTFail("Shouldn't be succeed")
+            case .failure(let error):
+                switch error {
+                case .httpClient(let httpClientError):
+                    switch httpClientError {
+                    case Locals.cancellationError.code:
+                        break
+                    default:
+                        XCTFail("Should be .cancellationError")
+                    }
+                default:
+                    XCTFail("Should be .httpClient")
                 }
             }
             exp.fulfill()
