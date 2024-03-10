@@ -15,7 +15,7 @@ final class HTTPClientTests: XCTestCase {
         static let cancellationError = URLError(URLError.cancelled)
         static let someError = URLError(URLError.notConnectedToInternet)
         static let badStatusCode = 404
-        static let response = HTTPURLResponse(url: baseUrl, statusCode: badStatusCode, httpVersion: nil, headerFields: nil)
+        static let response = HTTPURLResponse(url: baseUrl, statusCode: badStatusCode)
     }
     
     func test_httpClientMock_cancels() {
