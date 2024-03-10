@@ -31,6 +31,24 @@ protocol APIConfiguration {
     var baseURL: URL { get }
 }
 
+// 3-level
+protocol APIService {
+    typealias Completion<T> = (Result<T, APIServiceError>) -> Void
+    func request<T>(_ request: DecodableAPIRequest, completion: @escaping Completion<T>) -> CancellableTask
+}
+
+enum APIServiceError: Error {
+    
+}
+
+protocol DecodableAPIRequest: APIRequest {
+    var decoder: ResponseDecoder { get }
+}
+
+protocol ResponseDecoder {
+    func decode<T: Decodable>(_ data: Data) -> T
+}
+
 // Global-level
 protocol CancellableTask {
     func cancel()
