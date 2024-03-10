@@ -10,6 +10,7 @@
 		A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */; };
 		A3944C6D2B9D39AE0086B326 /* Limbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6C2B9D39AE0086B326 /* Limbo.swift */; };
 		A3944C752B9D3E750086B326 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C742B9D3E750086B326 /* URLProtocolMock.swift */; };
+		A3944C772B9D3ED50086B326 /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C762B9D3ED50086B326 /* HTTPClientMock.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
 		A3D165D12B97C67D00F225CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D02B97C67D00F225CE /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		A3944C6C2B9D39AE0086B326 /* Limbo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Limbo.swift; sourceTree = "<group>"; };
 		A3944C742B9D3E750086B326 /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
+		A3944C762B9D3ED50086B326 /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D165C72B97C67B00F225CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D165C92B97C67B00F225CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		A3944C732B9D3E680086B326 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				A3944C762B9D3ED50086B326 /* HTTPClientMock.swift */,
 				A3944C742B9D3E750086B326 /* URLProtocolMock.swift */,
 			);
 			path = Mocks;
@@ -246,6 +249,7 @@
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
 				A3D165DF2B97C67D00F225CE /* RickAndMortyTests.swift in Sources */,
 				A3944C6D2B9D39AE0086B326 /* Limbo.swift in Sources */,
+				A3944C772B9D3ED50086B326 /* HTTPClientMock.swift in Sources */,
 				A3944C752B9D3E750086B326 /* URLProtocolMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
