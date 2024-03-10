@@ -16,6 +16,7 @@ final class HTTPClientTests: XCTestCase {
         static let someError = URLError(URLError.notConnectedToInternet)
         static let badStatusCode = 404
         static let response = HTTPURLResponse(url: baseUrl, statusCode: badStatusCode)
+        static let data = "foo bar".data(using: .utf8)
     }
     
     func test_httpClientMock_cancels() {
@@ -71,5 +72,21 @@ final class HTTPClientTests: XCTestCase {
         }
         
         wait(for: exp)
+    }
+    
+    func test_httpClientMock_returnsData() {
+        let sut = HTTPClientMock()
+        
+        URLProtocolMock.requestHandler = { request in
+            (Locals.data, nil, nil)
+        }
+        
+        let exp = XCTestExpectation()
+        sut.request(Locals.request) { data, _, _ in
+            defer { exp.fulfill() }
+            XCTAssertEqual(data, Locals.data)
+        }
+        
+        wait(for: [exp])
     }
 }
