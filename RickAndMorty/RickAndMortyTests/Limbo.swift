@@ -53,3 +53,5 @@ protocol ResponseDecoder {
 protocol CancellableTask {
     func cancel()
 }
+
+extension URLSessionDataTask: CancellableTask { }
