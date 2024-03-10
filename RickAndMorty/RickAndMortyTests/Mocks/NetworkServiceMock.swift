@@ -45,6 +45,7 @@ protocol URLResponseValidator {
 enum URLResponseError: Error {
     case emptyResponse
     case responseIsNotHTTP
+    case badStatusCode
 }
 
 struct URLResponseValidatorMock: URLResponseValidator {
@@ -57,7 +58,7 @@ struct URLResponseValidatorMock: URLResponseValidator {
             return .responseIsNotHTTP
         }
         
-        return nil
+        return httpResponse.statusCode < 300 ? nil : .badStatusCode
     }
 }
 
@@ -72,6 +73,8 @@ struct NetworkServiceErrorResolverMock: NetworkServiceErrorResolver {
             return .emptyResponse
         case .responseIsNotHTTP:
             return .responseIsNotHTTP
+        case .badStatusCode:
+            return .badStatusCode
         }
     }
 }
