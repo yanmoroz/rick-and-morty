@@ -13,6 +13,7 @@ final class NetworkServiceTests: XCTestCase {
         static let baseUrl = URL(string: "https://mock.api.io")!
         static let badStatusCode = 404
         static let cancellationError = URLError(URLError.cancelled)
+        static let notConnectedToInternet = URLError(URLError.notConnectedToInternet)
     }
     
     func test_networkServiceMock_returnsEmptyResponseError() {
@@ -103,10 +104,42 @@ final class NetworkServiceTests: XCTestCase {
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
-            (nil, nil, Locals.cancellationError)
+            (nil, nil, Locals.notConnectedToInternet)
         }
         
         sut.request(request) { result in
+            switch result {
+            case .success:
+                XCTFail("Shouldn't be succeed")
+            case .failure(let error):
+                switch error {
+                case .httpClient(let httpClientError):
+                    switch httpClientError {
+                    case Locals.notConnectedToInternet.code:
+                        break
+                    default:
+                        XCTFail("Should be .cancellationError")
+                    }
+                default:
+                    XCTFail("Should be .httpClient")
+                }
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_networkServiceMock_cancels() {
+        let sut = makeSUT()
+        let request = APIRequestMock()
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, nil)
+        }
+        
+        let task = sut.request(request) { result in
             switch result {
             case .success:
                 XCTFail("Shouldn't be succeed")
@@ -126,6 +159,7 @@ final class NetworkServiceTests: XCTestCase {
             exp.fulfill()
         }
         
+        task.cancel()
         wait(for: exp)
     }
     
