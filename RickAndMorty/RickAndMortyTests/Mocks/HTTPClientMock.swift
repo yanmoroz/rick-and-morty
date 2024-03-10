@@ -16,7 +16,9 @@ class HTTPClientMock: HTTPClient {
     
     @discardableResult
     func request(_ request: URLRequest, completion: @escaping Completion) -> CancellableTask {
-        let task = urlSession.dataTask(with: request, completionHandler: completion)
+        let task = urlSession.dataTask(with: request) { data, response, error in
+            completion(data, response, error as? URLError)
+        }
         task.resume()
         return task
     }

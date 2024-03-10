@@ -9,7 +9,7 @@ import Foundation
 
 // 1-level
 protocol HTTPClient {
-    typealias Completion = (Data?, URLResponse?, Error?) -> Void
+    typealias Completion = (Data?, URLResponse?, URLError?) -> Void
     func request(_ request: URLRequest, completion: @escaping Completion) -> CancellableTask
 }
 
