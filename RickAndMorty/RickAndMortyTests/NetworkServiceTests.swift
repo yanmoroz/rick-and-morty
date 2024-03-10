@@ -14,6 +14,7 @@ final class NetworkServiceTests: XCTestCase {
         static let badStatusCode = 404
         static let cancellationError = URLError(URLError.cancelled)
         static let notConnectedToInternet = URLError(URLError.notConnectedToInternet)
+        static let data = "foo bar".data(using: .utf8)
     }
     
     func test_networkServiceMock_returnsEmptyResponseError() {
@@ -160,6 +161,29 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         task.cancel()
+        wait(for: exp)
+    }
+    
+    func test_networkServiceMock_returnsData() {
+        let sut = makeSUT()
+        let request = APIRequestMock()
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            let response = HTTPURLResponse(url: Locals.baseUrl, statusCode: 200)
+            return (Locals.data, response, nil)
+        }
+        
+        sut.request(request) { result in
+            switch result {
+            case .success(let data):
+                XCTAssertEqual(data, Locals.data)
+            case .failure:
+                XCTFail("Shouldn't be fail")
+            }
+            exp.fulfill()
+        }
+        
         wait(for: exp)
     }
     
