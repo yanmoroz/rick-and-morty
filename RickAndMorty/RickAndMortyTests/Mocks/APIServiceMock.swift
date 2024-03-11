@@ -11,6 +11,7 @@ struct APIServiceMock: APIService {
     let networkService: NetworkService
     let errorResolver: APIServiceErrorResolver
     
+    @discardableResult
     func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
     -> CancellableTask where Request.DecodeTargetType == T {
         networkService.request(request) { result in
