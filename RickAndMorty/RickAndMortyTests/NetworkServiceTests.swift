@@ -27,18 +27,15 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         sut.request(request) { result in
-            switch result {
-            case .success:
-                XCTFail("Shouldn't be succeed")
-            case .failure(let error):
-                switch error {
-                case .emptyResponse:
-                    break
-                default:
-                    XCTFail("Should be .emptyResponse")
-                }
+            defer {
+                exp.fulfill()
             }
-            exp.fulfill()
+            
+            guard case .failure(let networkServiceError) = result,
+                  case .emptyResponse = networkServiceError else {
+                XCTFail("Should be .emptyResponse")
+                return
+            }
         }
         
         wait(for: exp)
@@ -54,18 +51,15 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         sut.request(request) { result in
-            switch result {
-            case .success:
-                XCTFail("Shouldn't be succeed")
-            case .failure(let error):
-                switch error {
-                case .responseIsNotHTTP:
-                    break
-                default:
-                    XCTFail("Should be .responseIsNotHTTP")
-                }
+            defer {
+                exp.fulfill()
             }
-            exp.fulfill()
+            
+            guard case .failure(let networkServiceError) = result,
+                  case .responseIsNotHTTP = networkServiceError else {
+                XCTFail("Should be .responseIsNotHTTP")
+                return
+            }
         }
         
         wait(for: exp)
@@ -82,18 +76,15 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         sut.request(request) { result in
-            switch result {
-            case .success:
-                XCTFail("Shouldn't be succeed")
-            case .failure(let error):
-                switch error {
-                case .badStatusCode(let statusCode):
-                    XCTAssertEqual(statusCode, Locals.badStatusCode)
-                default:
-                    XCTFail("Should be .badStatusCode")
-                }
+            defer {
+                exp.fulfill()
             }
-            exp.fulfill()
+            
+            guard case .failure(let networkServiceError) = result,
+                  case .badStatusCode = networkServiceError else {
+                XCTFail("Should be .badStatusCode")
+                return
+            }
         }
         
         wait(for: exp)
@@ -109,23 +100,16 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         sut.request(request) { result in
-            switch result {
-            case .success:
-                XCTFail("Shouldn't be succeed")
-            case .failure(let error):
-                switch error {
-                case .httpClient(let httpClientError):
-                    switch httpClientError {
-                    case Locals.notConnectedToInternet.code:
-                        break
-                    default:
-                        XCTFail("Should be .cancellationError")
-                    }
-                default:
-                    XCTFail("Should be .httpClient")
-                }
+            defer {
+                exp.fulfill()
             }
-            exp.fulfill()
+            
+            guard case .failure(let networkServiceError) = result,
+                  case let .httpClient(urlError) = networkServiceError,
+                  case .notConnectedToInternet = urlError.code else {
+                XCTFail("Should be .notConnectedToInternet")
+                return
+            }
         }
         
         wait(for: exp)
@@ -141,23 +125,16 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         let task = sut.request(request) { result in
-            switch result {
-            case .success:
-                XCTFail("Shouldn't be succeed")
-            case .failure(let error):
-                switch error {
-                case .httpClient(let httpClientError):
-                    switch httpClientError {
-                    case Locals.cancellationError.code:
-                        break
-                    default:
-                        XCTFail("Should be .cancellationError")
-                    }
-                default:
-                    XCTFail("Should be .httpClient")
-                }
+            defer {
+                exp.fulfill()
             }
-            exp.fulfill()
+            
+            guard case let .failure(networkServiceError) = result,
+                  case let .httpClient(urlError) = networkServiceError,
+                  case .cancelled = urlError.code else {
+                XCTFail("Should be .cancellationError")
+                return
+            }
         }
         
         task.cancel()
@@ -175,13 +152,16 @@ final class NetworkServiceTests: XCTestCase {
         }
         
         sut.request(request) { result in
-            switch result {
-            case .success(let data):
-                XCTAssertEqual(data, Locals.data)
-            case .failure:
-                XCTFail("Shouldn't be fail")
+            defer {
+                exp.fulfill()
             }
-            exp.fulfill()
+            
+            guard case let .success(data) = result else {
+                XCTFail("Shouldn't be fail")
+                return
+            }
+            
+            XCTAssertEqual(data, Locals.data)
         }
         
         wait(for: exp)

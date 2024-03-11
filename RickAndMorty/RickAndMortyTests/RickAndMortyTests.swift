@@ -19,13 +19,13 @@ final class RickAndMortyTests: XCTestCase {
             
         }
         
-        let expectation = XCTestExpectation()
+        let exp = XCTestExpectation()
         // 0. Build URL or URLRequest
         let url = URL(string: "https://rickandmortyapi.com/api/episode/5")!
         // 1. Proceed HTTP request
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             defer {
-                expectation.fulfill()
+                exp.fulfill()
             }
             
             // 2. Handle error
@@ -56,7 +56,7 @@ final class RickAndMortyTests: XCTestCase {
         }
         
         task.resume()
-        wait(for: expectation)
+        wait(for: exp)
     }
     
     func test_simpleRequest_async() async {

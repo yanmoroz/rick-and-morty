@@ -10,16 +10,30 @@ import XCTest
 final class APIServiceTests: XCTestCase {
     
     func test_apiServiceMock_cancels() {
-//        let sut = makeSUT()
-//        let request = DecodableAPIRequestMock(decoder: ResponseDecoderMock())
-//        let exp = XCTestExpectation()
-//        
-//        let task = sut.request(request) { result in
-//            exp.fulfill()
-//        }
-//        
-//        task.cancel()
-//        wait(for: exp)
+        let sut = makeSUT()
+        let request = DecodableAPIRequestMock<DecodableMock>(decoder: ResponseDecoderMock())
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, nil)
+        }
+        
+        let task = sut.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case let .networkService(networkServiceError) = apiServiceError,
+                  case let .httpClient(urlError) = networkServiceError,
+                  urlError.code == .cancelled else {
+                XCTFail("Should be .cancelled")
+                return
+            }
+        }
+        
+        task.cancel()
+        wait(for: exp)
     }
     
     func makeSUT() -> APIService {
@@ -35,7 +49,9 @@ final class APIServiceTests: XCTestCase {
     }
 }
 
-struct DecodableAPIRequestMock: DecodableAPIRequest {
+struct DecodableAPIRequestMock<Response>: DecodableAPIRequest {
+    typealias Response = Response
+    
     var decoder: ResponseDecoder
     
     func urlRequest(using apiConfiguration: APIConfiguration) -> URLRequest {

@@ -28,7 +28,9 @@ final class HTTPClientTests: XCTestCase {
         
         let exp = XCTestExpectation()
         let task = sut.request(Locals.request) { _, _, error in
-            defer { exp.fulfill() }
+            defer {
+                exp.fulfill()
+            }
             
             guard let error else {
                 XCTFail("Shouldn't be fail")
@@ -51,7 +53,9 @@ final class HTTPClientTests: XCTestCase {
         
         let exp = XCTestExpectation()
         sut.request(Locals.request) { _, _, error in
-            defer { exp.fulfill() }
+            defer {
+                exp.fulfill()
+            }
             
             guard let error else {
                 XCTFail("Shouldn't be fail")
@@ -73,7 +77,10 @@ final class HTTPClientTests: XCTestCase {
         
         let exp = XCTestExpectation()
         sut.request(Locals.request) { _, response, _ in
-            defer { exp.fulfill() }
+            defer {
+                exp.fulfill()
+            }
+            
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == Locals.badStatusCode else {
                 XCTFail("Shouldn't fail")
@@ -93,7 +100,10 @@ final class HTTPClientTests: XCTestCase {
         
         let exp = XCTestExpectation()
         sut.request(Locals.request) { data, _, _ in
-            defer { exp.fulfill() }
+            defer {
+                exp.fulfill()
+            }
+            
             XCTAssertEqual(data, Locals.data)
         }
         

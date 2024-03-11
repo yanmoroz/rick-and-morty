@@ -8,10 +8,12 @@
 import Foundation
 
 struct APIServiceMock: APIService {
+    
     let networkService: NetworkService
     let errorResolver: APIServiceErrorResolver
     
-    func request<T: Decodable>(_ request: DecodableAPIRequest, completion: @escaping Completion<T>) -> CancellableTask {
+    func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
+    -> CancellableTask where T == Request.Response {
         networkService.request(request) { result in
             switch result {
             case .success(let data):
