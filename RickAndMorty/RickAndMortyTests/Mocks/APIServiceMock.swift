@@ -11,7 +11,7 @@ struct APIServiceMock: APIService {
     let networkService: NetworkService
     let errorResolver: APIServiceErrorResolver
     
-    func request<T>(_ request: DecodableAPIRequest, completion: @escaping Completion<T>) -> CancellableTask {
+    func request<T: Decodable>(_ request: DecodableAPIRequest, completion: @escaping Completion<T>) -> CancellableTask {
         networkService.request(request) { result in
             switch result {
             case .success(let data):
@@ -28,7 +28,7 @@ struct APIServiceMock: APIService {
         }
     }
     
-    private func decode<T>(_ data: Data, using decoder: ResponseDecoder) -> Result<T, Error> {
+    private func decode<T: Decodable>(_ data: Data, using decoder: ResponseDecoder) -> Result<T, Error> {
         do {
             let decoded = try decoder.decode(data, toType: T.self)
             return .success(decoded)

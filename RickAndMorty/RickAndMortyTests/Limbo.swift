@@ -59,7 +59,7 @@ protocol APIConfiguration {
 // 3-level
 protocol APIService {
     typealias Completion<T> = (Result<T, APIServiceError>) -> Void
-    func request<T>(_ request: DecodableAPIRequest, completion: @escaping Completion<T>) -> CancellableTask
+    func request<T: Decodable>(_ request: DecodableAPIRequest, completion: @escaping Completion<T>) -> CancellableTask
 }
 
 enum APIServiceError: Error {
@@ -72,7 +72,7 @@ protocol DecodableAPIRequest: APIRequest {
 }
 
 protocol ResponseDecoder {
-    func decode<T>(_ data: Data, toType: T.Type) throws -> T
+    func decode<T: Decodable>(_ data: Data, toType: T.Type) throws -> T
 }
 
 // Global-level
