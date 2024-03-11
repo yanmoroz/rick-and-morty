@@ -133,23 +133,3 @@ final class APIServiceTests: XCTestCase {
         )
     }
 }
-
-struct DecodableAPIRequestMock<DecodeTargetType>: DecodableAPIRequest {
-    typealias DecodeTargetType = DecodeTargetType
-    
-    var decoder: ResponseDecoder
-    
-    func urlRequest(using apiConfiguration: APIConfiguration) -> URLRequest {
-        URLRequest(url: apiConfiguration.baseURL)
-    }
-}
-
-struct ResponseDecoderMock: ResponseDecoder {
-    func decode<T: Decodable>(_ data: Data, toType: T.Type) throws -> T {
-        try JSONDecoder().decode(T.self, from: data)
-    }
-}
-
-struct DecodableMock: Decodable {
-    let id: Int
-}

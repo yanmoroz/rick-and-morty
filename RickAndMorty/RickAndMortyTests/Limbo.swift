@@ -65,6 +65,10 @@ protocol APIService {
     -> CancellableTask where Request.DecodeTargetType == T
 }
 
+protocol APIServiceErrorResolver {
+    func resolve(_ error: NetworkServiceError) -> APIServiceError
+}
+
 enum APIServiceError: Error {
     case networkService(NetworkServiceError)
     case decode(Error)

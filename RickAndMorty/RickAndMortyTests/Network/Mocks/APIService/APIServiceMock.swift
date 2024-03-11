@@ -39,13 +39,3 @@ struct APIServiceMock: APIService {
         }
     }
 }
-
-protocol APIServiceErrorResolver {
-    func resolve(_ error: NetworkServiceError) -> APIServiceError
-}
-
-struct APIServiceErrorResolverMock: APIServiceErrorResolver {
-    func resolve(_ error: NetworkServiceError) -> APIServiceError {
-        .networkService(error)
-    }
-}
