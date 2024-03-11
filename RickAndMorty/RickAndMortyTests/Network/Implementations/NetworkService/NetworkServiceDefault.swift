@@ -1,19 +1,18 @@
 //
-//  NetworkServiceMock.swift
+//  NetworkServiceDefault.swift
 //  RickAndMortyTests
 //
-//  Created by Yan Moroz on 10.03.2024.
+//  Created by Yan Moroz on 11.03.2024.
 //
 
 import Foundation
 
-struct NetworkServiceMock: NetworkService {
+struct NetworkServiceDefault: NetworkService {
     let httpClient: HTTPClient
     let apiConfiguration: APIConfiguration
     let errorResolver: NetworkServiceErrorResolver
     let responseValidator: URLResponseValidator
     
-    @discardableResult
     func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask {
         httpClient.request(request.urlRequest(using: apiConfiguration)) { data, response, urlError in
             if let urlError {

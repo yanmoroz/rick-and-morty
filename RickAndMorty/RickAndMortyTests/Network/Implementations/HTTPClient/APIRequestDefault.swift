@@ -1,5 +1,5 @@
 //
-//  APIRequestMock.swift
+//  APIRequestDefault.swift
 //  RickAndMortyTests
 //
 //  Created by Yan Moroz on 11.03.2024.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct APIRequestMock: APIRequest {
+struct APIRequestDefault: APIRequest {
     func urlRequest(using apiConfiguration: APIConfiguration) -> URLRequest {
-        return URLRequest(url: apiConfiguration.baseURL)
+        URLRequest(url: apiConfiguration.baseURL)
     }
 }

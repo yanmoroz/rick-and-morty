@@ -60,6 +60,9 @@ protocol APIConfiguration {
 protocol APIService {
     typealias Completion<T> = (Result<T, APIServiceError>) -> Void
     
+    var networkService: NetworkService { get }
+    var errorResolver: APIServiceErrorResolver { get }
+    
     @discardableResult
     func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
     -> CancellableTask where Request.DecodeTargetType == T
