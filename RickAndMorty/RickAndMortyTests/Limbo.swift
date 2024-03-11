@@ -63,7 +63,8 @@ protocol APIService {
 }
 
 enum APIServiceError: Error {
-    
+    case networkService(NetworkServiceError)
+    case decode(Error)
 }
 
 protocol DecodableAPIRequest: APIRequest {
@@ -71,7 +72,7 @@ protocol DecodableAPIRequest: APIRequest {
 }
 
 protocol ResponseDecoder {
-    func decode<T: Decodable>(_ data: Data) -> T
+    func decode<T>(_ data: Data) throws -> T
 }
 
 // Global-level
