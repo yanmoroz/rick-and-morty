@@ -188,17 +188,11 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func makeSUT() -> NetworkService {
-        let httpClient = HTTPClientMock()
-        let apiConfiguration = APIConfigurationMock()
-        let errorResolver = NetworkServiceErrorResolverMock()
-        let responseValidator = URLResponseValidatorMock()
-        let sut = NetworkServiceMock(
-            httpClient: httpClient,
-            apiConfiguration: apiConfiguration,
-            errorResolver: errorResolver,
-            responseValidator: responseValidator
+        NetworkServiceMock(
+            httpClient: HTTPClientMock(),
+            apiConfiguration: APIConfigurationMock(),
+            errorResolver: NetworkServiceErrorResolverMock(),
+            responseValidator: URLResponseValidatorMock()
         )
-        
-        return sut
     }
 }
