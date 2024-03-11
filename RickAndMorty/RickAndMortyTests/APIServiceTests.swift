@@ -49,8 +49,8 @@ final class APIServiceTests: XCTestCase {
     }
 }
 
-struct DecodableAPIRequestMock<Response>: DecodableAPIRequest {
-    typealias Response = Response
+struct DecodableAPIRequestMock<DecodeTargetType>: DecodableAPIRequest {
+    typealias DecodeTargetType = DecodeTargetType
     
     var decoder: ResponseDecoder
     

@@ -8,7 +8,6 @@
 import XCTest
 
 class URLProtocolMock: URLProtocol {
-    
     static var requestHandler: ((URLRequest) -> (Data?, URLResponse?, Error?))?
     
     override class func canInit(with request: URLRequest) -> Bool {
