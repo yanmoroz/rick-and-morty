@@ -16,8 +16,29 @@ protocol HTTPClient {
 // 2-level
 protocol NetworkService {
     typealias Completion = (Result<Data, NetworkServiceError>) -> Void
+    
+    var httpClient: HTTPClient { get }
+    var apiConfiguration: APIConfiguration { get }
+    var errorResolver: NetworkServiceErrorResolver { get }
+    var responseValidator: URLResponseValidator { get }
+    
     @discardableResult
     func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask
+}
+
+protocol NetworkServiceErrorResolver {
+    func resolve(_ error: URLError) -> NetworkServiceError
+    func resolve(_ error: URLResponseError) -> NetworkServiceError
+}
+
+protocol URLResponseValidator {
+    func validate(response: URLResponse?) -> URLResponseError?
+}
+
+enum URLResponseError: Error {
+    case emptyResponse
+    case responseIsNotHTTP
+    case badStatusCode(Int)
 }
 
 enum NetworkServiceError: Error {
