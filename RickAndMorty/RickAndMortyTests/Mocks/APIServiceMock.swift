@@ -30,7 +30,7 @@ struct APIServiceMock: APIService {
     
     private func decode<T>(_ data: Data, using decoder: ResponseDecoder) -> Result<T, Error> {
         do {
-            let decoded: T = try decoder.decode(data)
+            let decoded = try decoder.decode(data, toType: T.self)
             return .success(decoded)
         } catch {
             return .failure(error)

@@ -72,7 +72,7 @@ protocol DecodableAPIRequest: APIRequest {
 }
 
 protocol ResponseDecoder {
-    func decode<T>(_ data: Data) throws -> T
+    func decode<T>(_ data: Data, toType: T.Type) throws -> T
 }
 
 // Global-level
