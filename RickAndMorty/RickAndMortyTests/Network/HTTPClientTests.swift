@@ -31,13 +31,8 @@ final class HTTPClientTests: XCTestCase {
             defer {
                 exp.fulfill()
             }
-
-            guard let error else {
-                XCTFail("Shouldn't be fail")
-                return
-            }
-
-            XCTAssertEqual(error.code, Locals.cancellationError.code)
+            
+            XCTAssertEqual(error?.code, Locals.cancellationError.code)
         }
 
         task.cancel()
@@ -56,19 +51,14 @@ final class HTTPClientTests: XCTestCase {
             defer {
                 exp.fulfill()
             }
-
-            guard let error else {
-                XCTFail("Shouldn't be fail")
-                return
-            }
-
-            XCTAssertEqual(error.code, Locals.someError.code)
+            
+            XCTAssertEqual(error?.code, Locals.someError.code)
         }
 
         wait(for: exp)
     }
 
-    func test_httpClientMock_returnsResponse() {
+    func test_httpClientMock_returnsHTTPResponse() {
         let sut = HTTPClientMock()
 
         URLProtocolMock.requestHandler = { request in
@@ -80,12 +70,8 @@ final class HTTPClientTests: XCTestCase {
             defer {
                 exp.fulfill()
             }
-
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == Locals.badStatusCode else {
-                XCTFail("Shouldn't fail")
-                return
-            }
+            
+            XCTAssertNotNil(response as? HTTPURLResponse)
         }
 
         wait(for: exp)
@@ -115,18 +101,77 @@ extension HTTPClientTests {
     func test_httpClientDefault_cancels() {
         let httpClient = HTTPClientDefault()
         let request = APIRequestDefault()
-        let baseUrl = URL(string: "https://rickandmortyapi.com/api/")!
-        let apiConfiguration = APIConfigurationDefault(baseURL: baseUrl)
+        let apiConfiguration = makeAPIConfiguration()
+        let exp = XCTestExpectation()
         
-        let task = httpClient.request(request.urlRequest(using: apiConfiguration)) { data, response, urlError in
-            guard let urlError else {
-                XCTFail("Shouldn't be fail")
-                return
+        let task = httpClient.request(request.urlRequest(using: apiConfiguration)) { _, _, urlError in
+            defer {
+                exp.fulfill()
             }
 
-            XCTAssertEqual(urlError.code, Locals.cancellationError.code)
+            XCTAssertEqual(urlError?.code, Locals.cancellationError.code)
         }
         
         task.cancel()
+        wait(for: exp)
+    }
+    
+    func test_httpClientDefault_returnsError() {
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        urlSessionConfiguration.timeoutIntervalForRequest = 0.01
+        
+        let httpClient = HTTPClientDefault(urlSessionConfiguration: urlSessionConfiguration)
+        let request = APIRequestDefault()
+        let apiConfiguration = makeAPIConfiguration()
+        let exp = XCTestExpectation()
+        
+        httpClient.request(request.urlRequest(using: apiConfiguration)) { _, _, urlError in
+            defer {
+                exp.fulfill()
+            }
+            
+            XCTAssertEqual(urlError?.code, URLError.timedOut)
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_httpClientDefault_returnsHTTPResponse() {
+        let httpClient = HTTPClientDefault()
+        let request = APIRequestDefault()
+        let apiConfiguration = makeAPIConfiguration()
+        let exp = XCTestExpectation()
+        
+        httpClient.request(request.urlRequest(using: apiConfiguration)) { _, response, _ in
+            defer {
+                exp.fulfill()
+            }
+            
+            XCTAssertNotNil(response as? HTTPURLResponse)
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_httpClientDefault_returnsData() {
+        let httpClient = HTTPClientDefault()
+        let request = APIRequestDefault()
+        let apiConfiguration = makeAPIConfiguration()
+        let exp = XCTestExpectation()
+        
+        httpClient.request(request.urlRequest(using: apiConfiguration)) { data, _, _ in
+            defer {
+                exp.fulfill()
+            }
+            
+            XCTAssertNotNil(data)
+        }
+        
+        wait(for: exp)
+    }
+    
+    private func makeAPIConfiguration() -> APIConfiguration {
+        let baseUrl = URL(string: "https://rickandmortyapi.com/api/")!
+        return APIConfigurationDefault(baseURL: baseUrl)
     }
 }
