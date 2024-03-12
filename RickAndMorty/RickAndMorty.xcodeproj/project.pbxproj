@@ -109,8 +109,6 @@
 		A36DE83B2B9F4BA6009F4A3A /* HTTPClient */ = {
 			isa = PBXGroup;
 			children = (
-				A3944C812B9E6E7D0086B326 /* APIConfigurationMock.swift */,
-				A3944C832B9E705A0086B326 /* APIRequestMock.swift */,
 				A3944C762B9D3ED50086B326 /* HTTPClientMock.swift */,
 				A3944C742B9D3E750086B326 /* URLProtocolMock.swift */,
 			);
@@ -120,6 +118,8 @@
 		A36DE83C2B9F4BAC009F4A3A /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				A3944C812B9E6E7D0086B326 /* APIConfigurationMock.swift */,
+				A3944C832B9E705A0086B326 /* APIRequestMock.swift */,
 				A3944C7D2B9DFA470086B326 /* NetworkServiceMock.swift */,
 			);
 			path = NetworkService;
@@ -148,8 +148,6 @@
 		A36DE83F2B9F6248009F4A3A /* HTTPClient */ = {
 			isa = PBXGroup;
 			children = (
-				A36DE8472B9F6CCE009F4A3A /* APIConfigurationDefault.swift */,
-				A36DE8452B9F6CC0009F4A3A /* APIRequestDefault.swift */,
 				A36DE8402B9F625F009F4A3A /* HTTPClientDefault.swift */,
 			);
 			path = HTTPClient;
@@ -158,6 +156,8 @@
 		A36DE8422B9F6856009F4A3A /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				A36DE8472B9F6CCE009F4A3A /* APIConfigurationDefault.swift */,
+				A36DE8452B9F6CC0009F4A3A /* APIRequestDefault.swift */,
 				A36DE8432B9F6864009F4A3A /* NetworkServiceDefault.swift */,
 			);
 			path = NetworkService;
