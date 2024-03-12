@@ -27,15 +27,4 @@ struct APIServiceDefault: APIService {
             }
         }
     }
-    
-    func request(_ request: APIRequest, completion: @escaping NeverCompletion) -> CancellableTask {
-        networkService.request(request) { result in
-            switch result {
-            case .success:
-                break
-            case .failure(let networkServiceError):
-                completion(.failure(APIServiceError(networkServiceError)))
-            }
-        }
-    }
 }

@@ -138,7 +138,8 @@ extension APIServiceTests {
             apiConfiguration: APIConfigurationDefault(baseURL: URL(string: "https://rickandmortyapi.com/api/")!)
         )
         let apiService = APIServiceDefault(networkService: networkService)
-        let request = APIRequestDefault()
+        let decoder = ResponseDecoderDefault()
+        let request = DecodableAPIRequestDefault<Empty>(decoder: decoder)
         let exp = XCTestExpectation()
         
         let task = apiService.request(request) { result in
@@ -158,4 +159,8 @@ extension APIServiceTests {
         task.cancel()
         wait(for: exp)
     }
+}
+
+struct Empty: Decodable {
+    
 }

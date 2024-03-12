@@ -73,10 +73,6 @@ protocol APIService {
     @discardableResult
     func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
     -> CancellableTask where Request.DecodeTargetType == T
-    
-    @discardableResult
-    func request(_ request: APIRequest, completion: @escaping NeverCompletion)
-    -> CancellableTask
 }
 
 enum APIServiceError: Error {
