@@ -126,7 +126,6 @@ final class APIServiceTests: XCTestCase {
             networkService: NetworkServiceMock(
                 httpClient: HTTPClientMock(),
                 apiConfiguration: APIConfigurationMock(),
-                errorResolver: NetworkServiceErrorResolverMock(),
                 responseValidator: URLResponseValidatorMock()
             ),
             errorResolver: APIServiceErrorResolverMock()

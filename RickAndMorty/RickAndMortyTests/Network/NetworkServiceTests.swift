@@ -171,7 +171,6 @@ final class NetworkServiceTests: XCTestCase {
         NetworkServiceMock(
             httpClient: HTTPClientMock(),
             apiConfiguration: APIConfigurationMock(),
-            errorResolver: NetworkServiceErrorResolverMock(),
             responseValidator: URLResponseValidatorMock()
         )
     }
@@ -270,7 +269,6 @@ extension NetworkServiceTests {
         NetworkServiceDefault(
             httpClient: HTTPClientDefault(),
             apiConfiguration: APIConfigurationDefault(baseURL: URL(string: baseURLString)!),
-            errorResolver: NetworkServiceErrorResolverDefault(),
             responseValidator: URLResponseValidatorDefault()
         )
     }

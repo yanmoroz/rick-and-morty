@@ -19,41 +19,18 @@ protocol NetworkService {
     
     var httpClient: HTTPClient { get }
     var apiConfiguration: APIConfiguration { get }
-    var errorResolver: NetworkServiceErrorResolver { get }
     var responseValidator: URLResponseValidator { get }
     
     @discardableResult
     func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask
 }
 
-protocol NetworkServiceErrorResolver {
-    func resolve(_ error: URLError) -> NetworkServiceError
-    func resolve(_ error: URLResponseError) -> NetworkServiceError
-}
-
-extension NetworkServiceErrorResolver {
-    func resolve(_ error: URLError) -> NetworkServiceError {
-        .httpClient(error)
-    }
-    
-    func resolve(_ error: URLResponseError) -> NetworkServiceError {
-        switch error {
-        case .emptyResponse:
-            return .emptyResponse
-        case .responseIsNotHTTP:
-            return .responseIsNotHTTP
-        case .badStatusCode(let statusCode):
-            return .badStatusCode(statusCode)
-        }
-    }
-}
-
 protocol URLResponseValidator {
-    func validate(response: URLResponse?) -> URLResponseError?
+    func validate(response: URLResponse?) -> URLResponseValidationError?
 }
 
 extension URLResponseValidator {
-    func validate(response: URLResponse?) -> URLResponseError? {
+    func validate(response: URLResponse?) -> URLResponseValidationError? {
         guard let response else {
             return .emptyResponse
         }
@@ -66,7 +43,7 @@ extension URLResponseValidator {
     }
 }
 
-enum URLResponseError: Error {
+enum URLResponseValidationError: Error {
     case emptyResponse
     case responseIsNotHTTP
     case badStatusCode(Int)
@@ -77,6 +54,21 @@ enum NetworkServiceError: Error {
     case responseIsNotHTTP
     case emptyResponse
     case badStatusCode(Int)
+    
+    init(_ urlError: URLError) {
+        self = .httpClient(urlError)
+    }
+    
+    init(_ urlResponseValidationError: URLResponseValidationError) {
+        switch urlResponseValidationError {
+        case .emptyResponse:
+            self = .emptyResponse
+        case .responseIsNotHTTP:
+            self = .responseIsNotHTTP
+        case .badStatusCode(let statusCode):
+            self = .badStatusCode(statusCode)
+        }
+    }
 }
 
 protocol APIRequest {

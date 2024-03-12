@@ -10,19 +10,18 @@ import Foundation
 struct NetworkServiceMock: NetworkService {
     let httpClient: HTTPClient
     let apiConfiguration: APIConfiguration
-    let errorResolver: NetworkServiceErrorResolver
     let responseValidator: URLResponseValidator
     
     @discardableResult
     func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask {
         httpClient.request(request.urlRequest(using: apiConfiguration)) { data, response, urlError in
             if let urlError {
-                completion(.failure(errorResolver.resolve(urlError)))
+                completion(.failure(NetworkServiceError(urlError)))
                 return
             }
             
-            if let responseError = responseValidator.validate(response: response) {
-                completion(.failure(errorResolver.resolve(responseError)))
+            if let responseValidationError = responseValidator.validate(response: response) {
+                completion(.failure(NetworkServiceError(responseValidationError)))
                 return
             }
             
