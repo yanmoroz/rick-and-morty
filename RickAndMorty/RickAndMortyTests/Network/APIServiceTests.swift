@@ -61,7 +61,7 @@ final class APIServiceTests: XCTestCase {
             }
             
             guard case let .failure(apiServiceError) = result,
-                  case .decode = apiServiceError else {
+                  case .decoding = apiServiceError else {
                 XCTFail("Should be .decode")
                 return
             }
@@ -122,7 +122,7 @@ final class APIServiceTests: XCTestCase {
     }
     
     func makeMockSUT() -> APIService {
-        return APIServiceMock(
+        APIServiceMock(
             networkService: NetworkServiceMock(
                 httpClient: HTTPClientMock(),
                 apiConfiguration: APIConfigurationMock()
@@ -133,11 +133,7 @@ final class APIServiceTests: XCTestCase {
 
 extension APIServiceTests {
     func test_apiServiceDefault_cancels() {
-        let networkService = NetworkServiceDefault(
-            httpClient: HTTPClientDefault(),
-            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: "https://rickandmortyapi.com/api/")!)
-        )
-        let apiService = APIServiceDefault(networkService: networkService)
+        let apiService = makeDefaultSUT()
         let decoder = ResponseDecoderDefault()
         let request = DecodableAPIRequestDefault<Empty>(decoder: decoder)
         let exp = XCTestExpectation()
@@ -159,8 +155,74 @@ extension APIServiceTests {
         task.cancel()
         wait(for: exp)
     }
-}
-
-struct Empty: Decodable {
     
+    func test_apiServiceDefault_returnsDecodingError() {
+        let apiService = makeDefaultSUT()
+        let decoder = ResponseDecoderDefault()
+        let request = DecodableAPIRequestDefault<StructToFailDecoding>(decoder: decoder)
+        let exp = XCTestExpectation()
+        
+        apiService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case .decoding = apiServiceError else {
+                XCTFail("Should be decodingError error")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiServiceDefault_decodes() {
+        let apiService = makeDefaultSUT()
+        let decoder = ResponseDecoderDefault()
+        let request = DecodableAPIRequestDefault<RickAndMortyAPIRoot>(decoder: decoder)
+        let exp = XCTestExpectation()
+        
+        apiService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .success = result else {
+                XCTFail("Should succesfully decode")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiServiceDefault_returnsNetworkServiceError() {
+        let apiService = makeDefaultSUT(baseUrlString: "https://rickandmortyapi-pepega.com/api/")
+        let decoder = ResponseDecoderDefault()
+        let request = DecodableAPIRequestDefault<Empty>(decoder: decoder)
+        let exp = XCTestExpectation()
+        
+        apiService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case .networkService = apiServiceError else {
+                XCTFail("Should be .networkService")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func makeDefaultSUT(baseUrlString: String = "https://rickandmortyapi.com/api/") -> APIService {
+        let networkService = NetworkServiceDefault(
+            httpClient: HTTPClientDefault(),
+            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: baseUrlString)!)
+        )
+        return APIServiceDefault(networkService: networkService)
+    }
 }

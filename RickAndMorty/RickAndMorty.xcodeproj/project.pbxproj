@@ -29,6 +29,9 @@
 		A3B754B42BA0C978004E22CB /* APIServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754B32BA0C978004E22CB /* APIServiceDefault.swift */; };
 		A3B754B62BA0F0C1004E22CB /* DecodableAPIRequestDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754B52BA0F0C1004E22CB /* DecodableAPIRequestDefault.swift */; };
 		A3B754B82BA0F0D9004E22CB /* ResponseDecoderDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754B72BA0F0D9004E22CB /* ResponseDecoderDefault.swift */; };
+		A3B754BA2BA10DDC004E22CB /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754B92BA10DDC004E22CB /* Empty.swift */; };
+		A3B754BC2BA10E7F004E22CB /* StructToFailDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754BB2BA10E7F004E22CB /* StructToFailDecoding.swift */; };
+		A3B754BE2BA11236004E22CB /* RickAndMortyAPIRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754BD2BA11236004E22CB /* RickAndMortyAPIRoot.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
 		A3D165D12B97C67D00F225CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D02B97C67D00F225CE /* Assets.xcassets */; };
@@ -70,6 +73,9 @@
 		A3B754B32BA0C978004E22CB /* APIServiceDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceDefault.swift; sourceTree = "<group>"; };
 		A3B754B52BA0F0C1004E22CB /* DecodableAPIRequestDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableAPIRequestDefault.swift; sourceTree = "<group>"; };
 		A3B754B72BA0F0D9004E22CB /* ResponseDecoderDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDecoderDefault.swift; sourceTree = "<group>"; };
+		A3B754B92BA10DDC004E22CB /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		A3B754BB2BA10E7F004E22CB /* StructToFailDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructToFailDecoding.swift; sourceTree = "<group>"; };
+		A3B754BD2BA11236004E22CB /* RickAndMortyAPIRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyAPIRoot.swift; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D165C72B97C67B00F225CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D165C92B97C67B00F225CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +148,9 @@
 		A36DE83E2B9F6220009F4A3A /* Implementations */ = {
 			isa = PBXGroup;
 			children = (
+				A3B754B92BA10DDC004E22CB /* Empty.swift */,
+				A3B754BD2BA11236004E22CB /* RickAndMortyAPIRoot.swift */,
+				A3B754BB2BA10E7F004E22CB /* StructToFailDecoding.swift */,
 				A3B754B22BA0C96A004E22CB /* APIService */,
 				A36DE83F2B9F6248009F4A3A /* HTTPClient */,
 				A36DE8422B9F6856009F4A3A /* NetworkService */,
@@ -367,11 +376,14 @@
 				A3944C8C2B9E8AAA0086B326 /* APIServiceMock.swift in Sources */,
 				A3944C7E2B9DFA470086B326 /* NetworkServiceMock.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
+				A3B754BE2BA11236004E22CB /* RickAndMortyAPIRoot.swift in Sources */,
 				A3D165DF2B97C67D00F225CE /* RickAndMortyTests.swift in Sources */,
 				A36DE8352B9F4A07009F4A3A /* ResponseDecoderMock.swift in Sources */,
+				A3B754BA2BA10DDC004E22CB /* Empty.swift in Sources */,
 				A36DE8412B9F625F009F4A3A /* HTTPClientDefault.swift in Sources */,
 				A3B754B62BA0F0C1004E22CB /* DecodableAPIRequestDefault.swift in Sources */,
 				A3944C842B9E705A0086B326 /* APIRequestMock.swift in Sources */,
+				A3B754BC2BA10E7F004E22CB /* StructToFailDecoding.swift in Sources */,
 				A3B754B82BA0F0D9004E22CB /* ResponseDecoderDefault.swift in Sources */,
 				A36DE8442B9F6864009F4A3A /* NetworkServiceDefault.swift in Sources */,
 				A3944C7A2B9D403D0086B326 /* HTTPClientTests.swift in Sources */,

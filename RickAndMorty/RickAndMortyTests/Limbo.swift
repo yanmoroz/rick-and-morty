@@ -77,14 +77,14 @@ protocol APIService {
 
 enum APIServiceError: Error {
     case networkService(NetworkServiceError)
-    case decode(DecodingError)
+    case decoding(DecodingError)
     
     init(_ networkServiceError: NetworkServiceError) {
         self = .networkService(networkServiceError)
     }
     
     init(_ decodingError: DecodingError) {
-        self = .decode(decodingError)
+        self = .decoding(decodingError)
     }
 }
 
