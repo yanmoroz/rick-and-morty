@@ -18,7 +18,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func test_networkServiceMock_returnsEmptyResponseError() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
         
@@ -42,7 +42,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func test_networkServiceMock_returnsResponseIsNotHTTPError() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
         
@@ -66,7 +66,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func test_networkServiceMock_returnsBadStatusCodeError() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
         
@@ -91,7 +91,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func test_networkServiceMock_returnsHttpClientError() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
         
@@ -116,7 +116,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func test_networkServiceMock_cancels() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
         
@@ -142,7 +142,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     func test_networkServiceMock_returnsData() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = APIRequestMock()
         let exp = XCTestExpectation()
         
@@ -167,12 +167,46 @@ final class NetworkServiceTests: XCTestCase {
         wait(for: exp)
     }
     
-    func makeSUT() -> NetworkService {
+    func makeMockSUT() -> NetworkService {
         NetworkServiceMock(
             httpClient: HTTPClientMock(),
             apiConfiguration: APIConfigurationMock(),
             errorResolver: NetworkServiceErrorResolverMock(),
             responseValidator: URLResponseValidatorMock()
+        )
+    }
+}
+
+extension NetworkServiceTests {
+    func test_networkServiceDefault_cancels() {
+        let networkService = makeDefaultSUT()
+        let request = APIRequestDefault()
+        let exp = XCTestExpectation()
+        
+        let task = networkService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(networkServiceError) = result,
+                  case let .httpClient(urlError) = networkServiceError else {
+                XCTFail("Shouldn't be fail")
+                return
+            }
+            
+            XCTAssertEqual(urlError.code, URLError.cancelled)
+        }
+        
+        task.cancel()
+        wait(for: exp)
+    }
+    
+    func makeDefaultSUT() -> NetworkService {
+        NetworkServiceDefault(
+            httpClient: HTTPClientDefault(),
+            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: "https://rickandmortyapi.com/api/")!),
+            errorResolver: NetworkServiceErrorResolverDefault(),
+            responseValidator: URLResponseValidatorDefault()
         )
     }
 }

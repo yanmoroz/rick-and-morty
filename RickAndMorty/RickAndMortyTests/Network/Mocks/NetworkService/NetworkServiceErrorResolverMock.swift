@@ -7,19 +7,4 @@
 
 import Foundation
 
-struct NetworkServiceErrorResolverMock: NetworkServiceErrorResolver {
-    func resolve(_ error: URLError) -> NetworkServiceError {
-        .httpClient(error)
-    }
-    
-    func resolve(_ error: URLResponseError) -> NetworkServiceError {
-        switch error {
-        case .emptyResponse:
-            return .emptyResponse
-        case .responseIsNotHTTP:
-            return .responseIsNotHTTP
-        case .badStatusCode(let statusCode):
-            return .badStatusCode(statusCode)
-        }
-    }
-}
+struct NetworkServiceErrorResolverMock: NetworkServiceErrorResolver { }

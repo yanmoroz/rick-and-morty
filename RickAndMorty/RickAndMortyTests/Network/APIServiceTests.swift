@@ -20,7 +20,7 @@ final class APIServiceTests: XCTestCase {
     }
     
     func test_apiServiceMock_cancels() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = DecodableAPIRequestMock<DecodableMock>(decoder: ResponseDecoderMock())
         let exp = XCTestExpectation()
         
@@ -47,7 +47,7 @@ final class APIServiceTests: XCTestCase {
     }
     
     func test_apiServiceMock_returnsDecodeError() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = DecodableAPIRequestMock<DecodableMock>(decoder: ResponseDecoderMock())
         let exp = XCTestExpectation()
         
@@ -71,7 +71,7 @@ final class APIServiceTests: XCTestCase {
     }
     
     func test_apiServiceMock_decodes() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = DecodableAPIRequestMock<DecodableMock>(decoder: ResponseDecoderMock())
         let exp = XCTestExpectation()
         
@@ -96,7 +96,7 @@ final class APIServiceTests: XCTestCase {
     }
     
     func test_apiServiceMock_returnsNetworkServiceError() {
-        let sut = makeSUT()
+        let sut = makeMockSUT()
         let request = DecodableAPIRequestMock<DecodableMock>(decoder: ResponseDecoderMock())
         let exp = XCTestExpectation()
         
@@ -121,7 +121,7 @@ final class APIServiceTests: XCTestCase {
         wait(for: exp)
     }
     
-    func makeSUT() -> APIService {
+    func makeMockSUT() -> APIService {
         return APIServiceMock(
             networkService: NetworkServiceMock(
                 httpClient: HTTPClientMock(),

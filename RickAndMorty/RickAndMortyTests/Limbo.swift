@@ -31,8 +31,39 @@ protocol NetworkServiceErrorResolver {
     func resolve(_ error: URLResponseError) -> NetworkServiceError
 }
 
+extension NetworkServiceErrorResolver {
+    func resolve(_ error: URLError) -> NetworkServiceError {
+        .httpClient(error)
+    }
+    
+    func resolve(_ error: URLResponseError) -> NetworkServiceError {
+        switch error {
+        case .emptyResponse:
+            return .emptyResponse
+        case .responseIsNotHTTP:
+            return .responseIsNotHTTP
+        case .badStatusCode(let statusCode):
+            return .badStatusCode(statusCode)
+        }
+    }
+}
+
 protocol URLResponseValidator {
     func validate(response: URLResponse?) -> URLResponseError?
+}
+
+extension URLResponseValidator {
+    func validate(response: URLResponse?) -> URLResponseError? {
+        guard let response else {
+            return .emptyResponse
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            return .responseIsNotHTTP
+        }
+        
+        return httpResponse.statusCode < 300 ? nil : .badStatusCode(httpResponse.statusCode)
+    }
 }
 
 enum URLResponseError: Error {

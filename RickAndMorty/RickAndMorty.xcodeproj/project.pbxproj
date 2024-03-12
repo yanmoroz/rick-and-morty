@@ -29,6 +29,8 @@
 		A3944C8A2B9E89440086B326 /* URLResponseValidatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C892B9E89440086B326 /* URLResponseValidatorMock.swift */; };
 		A3944C8C2B9E8AAA0086B326 /* APIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C8B2B9E8AAA0086B326 /* APIServiceMock.swift */; };
 		A3944C8E2B9E8FCB0086B326 /* APIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C8D2B9E8FCB0086B326 /* APIServiceTests.swift */; };
+		A3B754AF2BA0C4BD004E22CB /* NetworkServiceErrorResolverDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754AE2BA0C4BD004E22CB /* NetworkServiceErrorResolverDefault.swift */; };
+		A3B754B12BA0C4CC004E22CB /* URLResponseValidatorDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754B02BA0C4CC004E22CB /* URLResponseValidatorDefault.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
 		A3D165D12B97C67D00F225CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D02B97C67D00F225CE /* Assets.xcassets */; };
@@ -70,6 +72,8 @@
 		A3944C892B9E89440086B326 /* URLResponseValidatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseValidatorMock.swift; sourceTree = "<group>"; };
 		A3944C8B2B9E8AAA0086B326 /* APIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceMock.swift; sourceTree = "<group>"; };
 		A3944C8D2B9E8FCB0086B326 /* APIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTests.swift; sourceTree = "<group>"; };
+		A3B754AE2BA0C4BD004E22CB /* NetworkServiceErrorResolverDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceErrorResolverDefault.swift; sourceTree = "<group>"; };
+		A3B754B02BA0C4CC004E22CB /* URLResponseValidatorDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseValidatorDefault.swift; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D165C72B97C67B00F225CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D165C92B97C67B00F225CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				A36DE8432B9F6864009F4A3A /* NetworkServiceDefault.swift */,
+				A3B754AE2BA0C4BD004E22CB /* NetworkServiceErrorResolverDefault.swift */,
+				A3B754B02BA0C4CC004E22CB /* URLResponseValidatorDefault.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -362,7 +368,9 @@
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
 				A3D165DF2B97C67D00F225CE /* RickAndMortyTests.swift in Sources */,
 				A36DE8352B9F4A07009F4A3A /* ResponseDecoderMock.swift in Sources */,
+				A3B754B12BA0C4CC004E22CB /* URLResponseValidatorDefault.swift in Sources */,
 				A36DE8412B9F625F009F4A3A /* HTTPClientDefault.swift in Sources */,
+				A3B754AF2BA0C4BD004E22CB /* NetworkServiceErrorResolverDefault.swift in Sources */,
 				A3944C842B9E705A0086B326 /* APIRequestMock.swift in Sources */,
 				A36DE8442B9F6864009F4A3A /* NetworkServiceDefault.swift in Sources */,
 				A3944C7A2B9D403D0086B326 /* HTTPClientTests.swift in Sources */,
