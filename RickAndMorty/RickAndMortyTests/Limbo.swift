@@ -67,20 +67,23 @@ protocol APIService {
     typealias Completion<T> = (Result<T, APIServiceError>) -> Void
     
     var networkService: NetworkService { get }
-    var errorResolver: APIServiceErrorResolver { get }
     
     @discardableResult
     func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
     -> CancellableTask where Request.DecodeTargetType == T
 }
 
-protocol APIServiceErrorResolver {
-    func resolve(_ error: NetworkServiceError) -> APIServiceError
-}
-
 enum APIServiceError: Error {
     case networkService(NetworkServiceError)
-    case decode(Error)
+    case decode(DecodingError)
+    
+    init(_ networkServiceError: NetworkServiceError) {
+        self = .networkService(networkServiceError)
+    }
+    
+    init(_ decodingError: DecodingError) {
+        self = .decode(decodingError)
+    }
 }
 
 protocol DecodableAPIRequest: APIRequest {
@@ -89,7 +92,7 @@ protocol DecodableAPIRequest: APIRequest {
 }
 
 protocol ResponseDecoder {
-    func decode<T: Decodable>(_ data: Data, toType: T.Type) throws -> T
+    func decode<T: Decodable>(_ data: Data, toType: T.Type) -> Result<T, DecodingError>
 }
 
 // Global-level

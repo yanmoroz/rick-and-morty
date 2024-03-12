@@ -9,7 +9,6 @@ import Foundation
 
 struct APIServiceDefault: APIService {
     var networkService: NetworkService
-    var errorResolver: APIServiceErrorResolver
     
     func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
     -> CancellableTask where T == Request.DecodeTargetType {

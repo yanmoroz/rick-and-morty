@@ -8,7 +8,12 @@
 import Foundation
 
 struct ResponseDecoderMock: ResponseDecoder {
-    func decode<T: Decodable>(_ data: Data, toType: T.Type) throws -> T {
-        try JSONDecoder().decode(T.self, from: data)
+    func decode<T: Decodable>(_ data: Data, toType: T.Type) -> Result<T, DecodingError> {
+        do {
+            let decoded = try JSONDecoder().decode(T.self, from: data)
+            return .success(decoded)
+        } catch {
+            return .failure(error as! DecodingError)
+        }
     }
 }
