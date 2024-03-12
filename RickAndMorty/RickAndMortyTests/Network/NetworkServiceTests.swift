@@ -170,8 +170,7 @@ final class NetworkServiceTests: XCTestCase {
     func makeMockSUT() -> NetworkService {
         NetworkServiceMock(
             httpClient: HTTPClientMock(),
-            apiConfiguration: APIConfigurationMock(),
-            responseValidator: URLResponseValidatorMock()
+            apiConfiguration: APIConfigurationMock()
         )
     }
 }
@@ -268,8 +267,7 @@ extension NetworkServiceTests {
     func makeDefaultSUT(baseURLString: String = "https://rickandmortyapi.com/api/") -> NetworkService {
         NetworkServiceDefault(
             httpClient: HTTPClientDefault(),
-            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: baseURLString)!),
-            responseValidator: URLResponseValidatorDefault()
+            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: baseURLString)!)
         )
     }
 }

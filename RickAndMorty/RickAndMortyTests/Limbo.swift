@@ -19,34 +19,9 @@ protocol NetworkService {
     
     var httpClient: HTTPClient { get }
     var apiConfiguration: APIConfiguration { get }
-    var responseValidator: URLResponseValidator { get }
     
     @discardableResult
     func request(_ request: APIRequest, completion: @escaping Completion) -> CancellableTask
-}
-
-protocol URLResponseValidator {
-    func validate(response: URLResponse?) -> URLResponseValidationError?
-}
-
-extension URLResponseValidator {
-    func validate(response: URLResponse?) -> URLResponseValidationError? {
-        guard let response else {
-            return .emptyResponse
-        }
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            return .responseIsNotHTTP
-        }
-        
-        return httpResponse.statusCode < 300 ? nil : .badStatusCode(httpResponse.statusCode)
-    }
-}
-
-enum URLResponseValidationError: Error {
-    case emptyResponse
-    case responseIsNotHTTP
-    case badStatusCode(Int)
 }
 
 enum NetworkServiceError: Error {
@@ -59,15 +34,23 @@ enum NetworkServiceError: Error {
         self = .httpClient(urlError)
     }
     
-    init(_ urlResponseValidationError: URLResponseValidationError) {
-        switch urlResponseValidationError {
-        case .emptyResponse:
+    init?(_ urlResponse: URLResponse?) {
+        guard let urlResponse else {
             self = .emptyResponse
-        case .responseIsNotHTTP:
-            self = .responseIsNotHTTP
-        case .badStatusCode(let statusCode):
-            self = .badStatusCode(statusCode)
+            return
         }
+        
+        guard let httpResponse = urlResponse as? HTTPURLResponse else {
+            self = .responseIsNotHTTP
+            return
+        }
+        
+        guard httpResponse.statusCode < 300 else {
+            self = .badStatusCode(httpResponse.statusCode)
+            return
+        }
+        
+        return nil
     }
 }
 
