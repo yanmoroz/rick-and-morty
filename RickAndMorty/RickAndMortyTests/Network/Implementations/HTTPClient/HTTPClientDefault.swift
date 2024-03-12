@@ -9,18 +9,8 @@ import Foundation
 
 class HTTPClientDefault: HTTPClient {
     lazy var urlSession: URLSession = {
-        guard let urlSessionConfiguration else {
-            return URLSession.shared
-        }
-        
-        return URLSession(configuration: urlSessionConfiguration)
+        URLSession.shared
     }()
-    
-    let urlSessionConfiguration: URLSessionConfiguration?
-    
-    init(urlSessionConfiguration: URLSessionConfiguration? = nil) {
-        self.urlSessionConfiguration = urlSessionConfiguration
-    }
     
     @discardableResult
     func request(_ request: URLRequest, completion: @escaping Completion) -> CancellableTask {

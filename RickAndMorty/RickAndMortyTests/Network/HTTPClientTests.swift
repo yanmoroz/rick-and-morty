@@ -117,12 +117,9 @@ extension HTTPClientTests {
     }
     
     func test_httpClientDefault_returnsError() {
-        let urlSessionConfiguration = URLSessionConfiguration.default
-        urlSessionConfiguration.timeoutIntervalForRequest = 0.01
-        
-        let httpClient = HTTPClientDefault(urlSessionConfiguration: urlSessionConfiguration)
+        let httpClient = HTTPClientDefault()
         let request = APIRequestDefault()
-        let apiConfiguration = makeAPIConfiguration()
+        let apiConfiguration = makeAPIConfiguration(baseUrlString: "https://rickandmortyapi-pepega.com/api/")
         let exp = XCTestExpectation()
         
         httpClient.request(request.urlRequest(using: apiConfiguration)) { _, _, urlError in
@@ -130,7 +127,7 @@ extension HTTPClientTests {
                 exp.fulfill()
             }
             
-            XCTAssertEqual(urlError?.code, URLError.timedOut)
+            XCTAssertNotNil(urlError)
         }
         
         wait(for: exp)
@@ -170,8 +167,8 @@ extension HTTPClientTests {
         wait(for: exp)
     }
     
-    private func makeAPIConfiguration() -> APIConfiguration {
-        let baseUrl = URL(string: "https://rickandmortyapi.com/api/")!
+    private func makeAPIConfiguration(baseUrlString: String = "https://rickandmortyapi.com/api/") -> APIConfiguration {
+        let baseUrl = URL(string: baseUrlString)!
         return APIConfigurationDefault(baseURL: baseUrl)
     }
 }
