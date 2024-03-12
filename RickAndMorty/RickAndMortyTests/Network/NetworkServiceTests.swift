@@ -17,6 +17,58 @@ final class NetworkServiceTests: XCTestCase {
         static let data = "foo bar".data(using: .utf8)
     }
     
+    func test_networkServiceMock_cancels() {
+        let sut = makeMockSUT()
+        let request = APIRequestMock()
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, nil)
+        }
+        
+        let task = sut.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(networkServiceError) = result,
+                  case let .httpClient(urlError) = networkServiceError,
+                  case .cancelled = urlError.code else {
+                XCTFail("Should be .cancellationError")
+                return
+            }
+        }
+        
+        task.cancel()
+        wait(for: exp)
+    }
+    
+    func test_networkServiceMock_returnsData() {
+        let sut = makeMockSUT()
+        let request = APIRequestMock()
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            let response = HTTPURLResponse(url: Locals.baseUrl, statusCode: 200)
+            return (Locals.data, response, nil)
+        }
+        
+        sut.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .success(data) = result else {
+                XCTFail("Shouldn't be fail")
+                return
+            }
+            
+            XCTAssertEqual(data, Locals.data)
+        }
+        
+        wait(for: exp)
+    }
+    
     func test_networkServiceMock_returnsEmptyResponseError() {
         let sut = makeMockSUT()
         let request = APIRequestMock()
@@ -115,58 +167,6 @@ final class NetworkServiceTests: XCTestCase {
         wait(for: exp)
     }
     
-    func test_networkServiceMock_cancels() {
-        let sut = makeMockSUT()
-        let request = APIRequestMock()
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { request in
-            (nil, nil, nil)
-        }
-        
-        let task = sut.request(request) { result in
-            defer {
-                exp.fulfill()
-            }
-            
-            guard case let .failure(networkServiceError) = result,
-                  case let .httpClient(urlError) = networkServiceError,
-                  case .cancelled = urlError.code else {
-                XCTFail("Should be .cancellationError")
-                return
-            }
-        }
-        
-        task.cancel()
-        wait(for: exp)
-    }
-    
-    func test_networkServiceMock_returnsData() {
-        let sut = makeMockSUT()
-        let request = APIRequestMock()
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { request in
-            let response = HTTPURLResponse(url: Locals.baseUrl, statusCode: 200)
-            return (Locals.data, response, nil)
-        }
-        
-        sut.request(request) { result in
-            defer {
-                exp.fulfill()
-            }
-            
-            guard case let .success(data) = result else {
-                XCTFail("Shouldn't be fail")
-                return
-            }
-            
-            XCTAssertEqual(data, Locals.data)
-        }
-        
-        wait(for: exp)
-    }
-    
     func makeMockSUT() -> NetworkService {
         NetworkServiceMock(
             httpClient: HTTPClientMock(),
@@ -201,10 +201,75 @@ extension NetworkServiceTests {
         wait(for: exp)
     }
     
-    func makeDefaultSUT() -> NetworkService {
+    func test_networkServiceDefault_returnsData() {
+        let networkService = makeDefaultSUT()
+        let request = APIRequestDefault()
+        let exp = XCTestExpectation()
+        
+        networkService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .success(data) = result else {
+                XCTFail("Shouldn't be fail")
+                return
+            }
+            
+            XCTAssertNotNil(data)
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_networkServiceDefault_returnsBadStatusCodeError() {
+        let networkService = makeDefaultSUT(baseURLString: "https://rickandmortyapi.com/api/pepega")
+        let request = APIRequestDefault()
+        let exp = XCTestExpectation()
+        
+        networkService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(networkServiceError) = result,
+                  case let .badStatusCode(statusCode) = networkServiceError else {
+                XCTFail("Shouldn't be fail")
+                return
+            }
+            
+            XCTAssertTrue(statusCode > 200)
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_networkServiceDefault_returnsHttpClientError() {
+        let networkService = makeDefaultSUT(baseURLString: "https://rickandmortyapi-pepega.com/api/")
+        let request = APIRequestDefault()
+        let exp = XCTestExpectation()
+        
+        networkService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(networkServiceError) = result,
+                  case let .httpClient(urlError) = networkServiceError else {
+                XCTFail("Shouldn't be fail")
+                return
+            }
+            
+            XCTAssertNotNil(urlError)
+        }
+        
+        wait(for: exp)
+    }
+    
+    func makeDefaultSUT(baseURLString: String = "https://rickandmortyapi.com/api/") -> NetworkService {
         NetworkServiceDefault(
             httpClient: HTTPClientDefault(),
-            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: "https://rickandmortyapi.com/api/")!),
+            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: baseURLString)!),
             errorResolver: NetworkServiceErrorResolverDefault(),
             responseValidator: URLResponseValidatorDefault()
         )
