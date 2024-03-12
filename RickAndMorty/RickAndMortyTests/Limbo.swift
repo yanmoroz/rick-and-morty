@@ -10,6 +10,7 @@ import Foundation
 // 1-level
 protocol HTTPClient {
     typealias Completion = (Data?, URLResponse?, URLError?) -> Void
+    
     func request(_ request: URLRequest, completion: @escaping Completion) -> CancellableTask
 }
 
@@ -65,12 +66,17 @@ protocol APIConfiguration {
 // 3-level
 protocol APIService {
     typealias Completion<T> = (Result<T, APIServiceError>) -> Void
+    typealias NeverCompletion = (Result<Never, APIServiceError>) -> Void
     
     var networkService: NetworkService { get }
     
     @discardableResult
     func request<T: Decodable, Request: DecodableAPIRequest>(_ request: Request, completion: @escaping Completion<T>)
     -> CancellableTask where Request.DecodeTargetType == T
+    
+    @discardableResult
+    func request(_ request: APIRequest, completion: @escaping NeverCompletion)
+    -> CancellableTask
 }
 
 enum APIServiceError: Error {

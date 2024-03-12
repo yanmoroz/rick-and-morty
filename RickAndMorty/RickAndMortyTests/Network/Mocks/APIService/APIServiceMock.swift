@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct APIServiceMock: APIService {    
+struct APIServiceMock: APIService {
     let networkService: NetworkService
     
     @discardableResult
@@ -20,9 +20,20 @@ struct APIServiceMock: APIService {
                 switch decodeResult {
                 case .success(let decoded):
                     completion(.success(decoded))
-                case .failure(let decodeError):
-                    completion(.failure(APIServiceError(decodeError)))
+                case .failure(let decodingError):
+                    completion(.failure(APIServiceError(decodingError)))
                 }
+            case .failure(let networkServiceError):
+                completion(.failure(APIServiceError(networkServiceError)))
+            }
+        }
+    }
+    
+    func request(_ request: APIRequest, completion: @escaping NeverCompletion) -> CancellableTask {
+        networkService.request(request) { result in
+            switch result {
+            case .success:
+                break
             case .failure(let networkServiceError):
                 completion(.failure(APIServiceError(networkServiceError)))
             }

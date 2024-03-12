@@ -46,7 +46,7 @@ final class APIServiceTests: XCTestCase {
         wait(for: exp)
     }
     
-    func test_apiServiceMock_returnsDecodeError() {
+    func test_apiServiceMock_returnsDecodingError() {
         let sut = makeMockSUT()
         let request = DecodableAPIRequestMock<DecodableMock>(decoder: ResponseDecoderMock())
         let exp = XCTestExpectation()
@@ -128,5 +128,34 @@ final class APIServiceTests: XCTestCase {
                 apiConfiguration: APIConfigurationMock()
             )
         )
+    }
+}
+
+extension APIServiceTests {
+    func test_apiServiceDefault_cancels() {
+        let networkService = NetworkServiceDefault(
+            httpClient: HTTPClientDefault(),
+            apiConfiguration: APIConfigurationDefault(baseURL: URL(string: "https://rickandmortyapi.com/api/")!)
+        )
+        let apiService = APIServiceDefault(networkService: networkService)
+        let request = APIRequestDefault()
+        let exp = XCTestExpectation()
+        
+        let task = apiService.request(request) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case let .networkService(networkServiceError) = apiServiceError,
+                  case let .httpClient(urlError) = networkServiceError,
+                  urlError.code == URLError.cancelled else {
+                XCTFail("Should be .cancelled")
+                return
+            }
+        }
+        
+        task.cancel()
+        wait(for: exp)
     }
 }

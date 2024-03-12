@@ -49,9 +49,9 @@ final class RickAndMortyTests: XCTestCase {
                 // ... and decode to some <T>
                 let episode = try JSONDecoder().decode(Episode.self, from: data)
                 fakeExtenralCompletion(.success(episode))
-            } catch let decodeError {
+            } catch let decodingError {
                 // 5. Handle decode error
-                fakeExtenralCompletion(.failure(decodeError))
+                fakeExtenralCompletion(.failure(decodingError))
             }
         }
         
