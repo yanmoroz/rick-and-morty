@@ -7,12 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A34B3E162BA226D600963158 /* HTTPClientMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B3E142BA226D600963158 /* HTTPClientMockTests.swift */; };
+		A34B3E172BA226D600963158 /* HTTPClientAsyncMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B3E152BA226D600963158 /* HTTPClientAsyncMockTests.swift */; };
+		A34B3E1A2BA236DB00963158 /* APIServiceMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B3E192BA236DB00963158 /* APIServiceMockTests.swift */; };
 		A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */; };
+		A3B754C32BA1E2E8004E22CB /* Sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754C22BA1E2E8004E22CB /* Sandbox.swift */; };
+		A3B754C62BA224E5004E22CB /* URLProtocolAsyncMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754C52BA224E5004E22CB /* URLProtocolAsyncMock.swift */; };
+		A3B754C82BA224F6004E22CB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754C72BA224F6004E22CB /* URLProtocolMock.swift */; };
+		A3B754CB2BA22531004E22CB /* HTTPClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754CA2BA22531004E22CB /* HTTPClientMock.swift */; };
+		A3B754CD2BA2253F004E22CB /* HTTPClientAsyncMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754CC2BA2253F004E22CB /* HTTPClientAsyncMock.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
 		A3D165D12B97C67D00F225CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D02B97C67D00F225CE /* Assets.xcassets */; };
 		A3D165D42B97C67D00F225CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D22B97C67D00F225CE /* LaunchScreen.storyboard */; };
-		A3D165DF2B97C67D00F225CE /* RickAndMortyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165DE2B97C67D00F225CE /* RickAndMortyTests.swift */; };
+		A3D165DF2B97C67D00F225CE /* JunkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165DE2B97C67D00F225CE /* JunkTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,8 +34,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A34B3E142BA226D600963158 /* HTTPClientMockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientMockTests.swift; sourceTree = "<group>"; };
+		A34B3E152BA226D600963158 /* HTTPClientAsyncMockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientAsyncMockTests.swift; sourceTree = "<group>"; };
+		A34B3E192BA236DB00963158 /* APIServiceMockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceMockTests.swift; sourceTree = "<group>"; };
 		A3944C682B9CF03B0086B326 /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
 		A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
+		A3B754C22BA1E2E8004E22CB /* Sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sandbox.swift; sourceTree = "<group>"; };
+		A3B754C52BA224E5004E22CB /* URLProtocolAsyncMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolAsyncMock.swift; sourceTree = "<group>"; };
+		A3B754C72BA224F6004E22CB /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
+		A3B754CA2BA22531004E22CB /* HTTPClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientMock.swift; sourceTree = "<group>"; };
+		A3B754CC2BA2253F004E22CB /* HTTPClientAsyncMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientAsyncMock.swift; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D165C72B97C67B00F225CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D165C92B97C67B00F225CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,7 +51,7 @@
 		A3D165D32B97C67D00F225CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3D165D52B97C67D00F225CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D165DA2B97C67D00F225CE /* RickAndMortyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RickAndMortyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A3D165DE2B97C67D00F225CE /* RickAndMortyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyTests.swift; sourceTree = "<group>"; };
+		A3D165DE2B97C67D00F225CE /* JunkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JunkTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +99,35 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		A3B754C42BA224D5004E22CB /* URLProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				A3B754C52BA224E5004E22CB /* URLProtocolAsyncMock.swift */,
+				A3B754C72BA224F6004E22CB /* URLProtocolMock.swift */,
+			);
+			path = URLProtocols;
+			sourceTree = "<group>";
+		};
+		A3B754C92BA22524004E22CB /* HTTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				A3B754CC2BA2253F004E22CB /* HTTPClientAsyncMock.swift */,
+				A3B754CA2BA22531004E22CB /* HTTPClientMock.swift */,
+			);
+			path = HTTPClient;
+			sourceTree = "<group>";
+		};
+		A3B754D22BA225F3004E22CB /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A34B3E192BA236DB00963158 /* APIServiceMockTests.swift */,
+				A34B3E152BA226D600963158 /* HTTPClientAsyncMockTests.swift */,
+				A34B3E142BA226D600963158 /* HTTPClientMockTests.swift */,
+				A3D165DE2B97C67D00F225CE /* JunkTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		A3D165BB2B97C67B00F225CE = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +159,11 @@
 		A3D165DD2B97C67D00F225CE /* RickAndMortyTests */ = {
 			isa = PBXGroup;
 			children = (
-				A3D165DE2B97C67D00F225CE /* RickAndMortyTests.swift */,
+				A3B754C22BA1E2E8004E22CB /* Sandbox.swift */,
 				A3944C692B9CF2DE0086B326 /* Extensions */,
+				A3B754C92BA22524004E22CB /* HTTPClient */,
+				A3B754D22BA225F3004E22CB /* Tests */,
+				A3B754C42BA224D5004E22CB /* URLProtocols */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -229,8 +277,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34B3E162BA226D600963158 /* HTTPClientMockTests.swift in Sources */,
+				A3B754C82BA224F6004E22CB /* URLProtocolMock.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
-				A3D165DF2B97C67D00F225CE /* RickAndMortyTests.swift in Sources */,
+				A34B3E172BA226D600963158 /* HTTPClientAsyncMockTests.swift in Sources */,
+				A3B754CB2BA22531004E22CB /* HTTPClientMock.swift in Sources */,
+				A3B754CD2BA2253F004E22CB /* HTTPClientAsyncMock.swift in Sources */,
+				A3B754C32BA1E2E8004E22CB /* Sandbox.swift in Sources */,
+				A3B754C62BA224E5004E22CB /* URLProtocolAsyncMock.swift in Sources */,
+				A34B3E1A2BA236DB00963158 /* APIServiceMockTests.swift in Sources */,
+				A3D165DF2B97C67D00F225CE /* JunkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
