@@ -25,10 +25,8 @@ final class HTTPClientAsyncMockTests: XCTestCase {
             (Locals.data, Locals.response)
         }
         
-        guard let _ = try? await httpClient.request(Locals.urlRequest) else {
-            XCTFail("Shouldn't fail")
-            return
-        }
+        let result = try? await httpClient.request(Locals.urlRequest)
+        XCTAssertNotNil(result)
     }
     
     func test_httpClientAsync_returnsError() async {
@@ -38,8 +36,7 @@ final class HTTPClientAsyncMockTests: XCTestCase {
             throw Locals.notConnectedToInternetError
         }
         
-        if let _ = try? await httpClient.request(Locals.urlRequest) {
-            XCTFail("Shouldn't success")
-        }
+        let result = try? await httpClient.request(Locals.urlRequest)
+        XCTAssertNil(result)
     }
 }

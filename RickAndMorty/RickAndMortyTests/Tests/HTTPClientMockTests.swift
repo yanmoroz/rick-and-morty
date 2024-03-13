@@ -29,12 +29,8 @@ final class HTTPClientMockTests: XCTestCase {
         let task = httpClient.request(Locals.urlRequest) { _, _, error in
             defer { exp.fulfill() }
             
-            guard let urlError = error as? URLError else {
-                XCTFail("Should be URLError")
-                return
-            }
-            
-            XCTAssertEqual(urlError.code, URLError.cancelled)
+            let errorCode = (error as? URLError)?.code
+            XCTAssertEqual(errorCode, URLError.cancelled)
         }
         
         task.cancel()
@@ -52,10 +48,7 @@ final class HTTPClientMockTests: XCTestCase {
         httpClient.request(Locals.urlRequest) { data, _, _ in
             defer { exp.fulfill() }
             
-            guard data != nil else {
-                XCTFail("Data should exists")
-                return
-            }
+            XCTAssertNotNil(data)
         }
         
         wait(for: exp)
@@ -72,10 +65,7 @@ final class HTTPClientMockTests: XCTestCase {
         httpClient.request(Locals.urlRequest) { _, _, error in
             defer { exp.fulfill() }
             
-            guard error is URLError else {
-                XCTFail("Should be URLError")
-                return
-            }
+            XCTAssertTrue(error is URLError)
         }
         
         wait(for: exp)

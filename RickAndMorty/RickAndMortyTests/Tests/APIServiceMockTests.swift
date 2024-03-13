@@ -10,82 +10,267 @@ import XCTest
 final class APIServiceMockTests: XCTestCase {
     
     enum Locals {
-        static let baseAddress = "https://rickandmortyapi.com/api/"
-//        static let baseUrl = URL(string: baseAddress)!
-//        static let urlRequest = URLRequest(url: baseUrl)
-//        static let data = "foo bar baz".data(using: .utf8)
-//        static let response = HTTPURLResponse(url: Locals.baseUrl, statusCode: 200, httpVersion: nil, headerFields: nil)
-//        static let notConnectedToInternetError = URLError(URLError.notConnectedToInternet)
+        private static let baseAddress = "https://rickandmortyapi.com/"
+        static let baseUrl = URL(string: baseAddress)!
+        static let data = #"{"id": 13}"#.data(using: .utf8)
+        static let junkData = "foo bar baz".data(using: .utf8)
+        static let goodResponse = HTTPURLResponse(url: Locals.baseUrl, statusCode: 200, httpVersion: nil, headerFields: nil)
+        static let badResponse = HTTPURLResponse(url: Locals.baseUrl, statusCode: 404, httpVersion: nil, headerFields: nil)
         static let cancelledError = URLError(URLError.cancelled)
-    }
-    
-    func test_apiService_decodableRequest_cancels() {
-        let apiService = APIServiceMock(httpClient: HTTPClientMock())
-        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseAddress)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
-        let exp = XCTestExpectation()
-        
-        let task = apiService.request(httpRequest) { result in
-            defer { exp.fulfill() }
-            
-            guard case let .failure(apiServiceError) = result,
-                  case let .urlError(urlError) = apiServiceError,
-                  urlError.code == Locals.cancelledError.code else {
-                XCTFail("Should be .cancelled")
-                return
-            }
-        }
-        
-        task?.cancel()
-        wait(for: exp)
+        static let notConnectedToInternetError = URLError(URLError.notConnectedToInternet)
     }
     
     func test_apiService_request_cancels() {
         let apiService = APIServiceMock(httpClient: HTTPClientMock())
-        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseAddress)
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
         let httpRequest = HTTPRequestMock(configuration: configuration)
         let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, nil)
+        }
         
         let task = apiService.request(httpRequest) { apiServiceError in
             defer { exp.fulfill() }
             
             guard let apiServiceError,
-                  case let .urlError(urlError) = apiServiceError,
-                  urlError.code == Locals.cancelledError.code else {
-                XCTFail("Should be .cancelled")
+                  case let .urlError(urlError) = apiServiceError else {
+                XCTFail("Should be .urlError")
+                return
+            }
+            
+            XCTAssertEqual(urlError.code, Locals.cancelledError.code)
+        }
+        
+        task.cancel()
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_cancels() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, nil)
+        }
+        
+        let task = apiService.request(httpRequest) { result in
+            defer { exp.fulfill() }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case let .urlError(urlError) = apiServiceError else {
+                XCTFail("Should be .urlError")
+                return
+            }
+            
+            XCTAssertEqual(urlError.code, Locals.cancelledError.code)
+        }
+        
+        task.cancel()
+        wait(for: exp)
+    }
+    
+    func test_apiService_request_returnsNilErrorOnSuccess() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, Locals.goodResponse, nil)
+        }
+        
+        apiService.request(httpRequest) { apiServiceError in
+            defer { exp.fulfill() }
+            
+            XCTAssertNil(apiServiceError)
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_returnsSmthOnSuccess() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (Locals.data, Locals.goodResponse, nil)
+        }
+        
+        apiService.request(httpRequest) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Should be .success")
                 return
             }
         }
         
-        task?.cancel()
         wait(for: exp)
     }
-}
-
-extension HTTPRequest {
-    func urlRequest() -> URLRequest? {
-        guard let url = URL(string: configuration.baseUrl) else {
-            return nil
+    
+    func test_apiService_request_returnsUrlError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, Locals.notConnectedToInternetError)
         }
         
-        return URLRequest(url: url)
+        apiService.request(httpRequest) { apiServiceError in
+            defer { exp.fulfill() }
+            
+            guard let apiServiceError,
+                  case .urlError = apiServiceError else {
+                XCTFail("Should be .urlError")
+                return
+            }
+        }
+        
+        wait(for: exp)
     }
-}
-
-struct HTTPRequestMock: HTTPRequest {
-    let configuration: HTTPRequestConfiguration
-}
-
-struct DecodableHTTPRequestMock<T: Decodable>: DecodableHTTPRequest {
-    typealias DecodeType = T
     
-    let configuration: HTTPRequestConfiguration
-}
-
-struct HTTPRequestConfigurationMock: HTTPRequestConfiguration {
-    let baseUrl: String
-}
-
-struct DecodableMock: Decodable {
+    func test_apiService_request_returnsUrlResponseIsNotHttpError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, URLResponse(), nil)
+        }
+        
+        apiService.request(httpRequest) { apiServiceError in
+            defer { exp.fulfill() }
+            
+            guard let apiServiceError,
+                  case .urlResponseIsNotHttp = apiServiceError else {
+                XCTFail("Should be .urlResponseIsNotHttp")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
     
+    func test_apiService_request_returnsBadStatusCodeError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, Locals.badResponse, nil)
+        }
+        
+        apiService.request(httpRequest) { apiServiceError in
+            defer { exp.fulfill() }
+            
+            guard let apiServiceError,
+                  case .badStatusCode = apiServiceError else {
+                XCTFail("Should be .badStatusCode")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_returnsUrlError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, nil, Locals.notConnectedToInternetError)
+        }
+        
+        apiService.request(httpRequest) { result in
+            defer { exp.fulfill() }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case .urlError = apiServiceError else {
+                XCTFail("Should be .urlError")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_returnsUrlResponseIsNotHttpError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, URLResponse(), nil)
+        }
+        
+        apiService.request(httpRequest) { result in
+            defer { exp.fulfill() }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case .urlResponseIsNotHttp = apiServiceError else {
+                XCTFail("Should be .urlResponseIsNotHttp")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_returnsBadStatusCodeError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (nil, Locals.badResponse, nil)
+        }
+        
+        apiService.request(httpRequest) { result in
+            defer { exp.fulfill() }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case .badStatusCode = apiServiceError else {
+                XCTFail("Should be .badStatusCode")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_returnsDecodingError() {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { request in
+            (Locals.junkData, Locals.goodResponse, nil)
+        }
+        
+        apiService.request(httpRequest) { result in
+            defer { exp.fulfill() }
+            
+            guard case let .failure(apiServiceError) = result,
+                  case .decodingError = apiServiceError else {
+                XCTFail("Should be .decodingError")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
 }
