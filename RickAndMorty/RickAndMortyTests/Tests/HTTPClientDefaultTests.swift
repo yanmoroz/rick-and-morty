@@ -1,32 +1,29 @@
 //
-//  HTTPClientMockTests.swift
+//  HTTPClientIntegrationTests.swift
 //  RickAndMortyTests
 //
-//  Created by Yan Moroz on 13.03.2024.
+//  Created by Yan Moroz on 14.03.2024.
 //
 
 import XCTest
 
-final class HTTPClientMockTests: XCTestCase {
+final class HTTPClientDefaultTests: XCTestCase {
     enum Locals {
         static let baseAddress = "https://rickandmortyapi.com/api/"
         static let baseUrl = URL(string: baseAddress)!
         static let urlRequest = URLRequest(url: baseUrl)
-        static let data = "foo bar baz".data(using: .utf8)
-        static let response = HTTPURLResponse(url: Locals.baseUrl, statusCode: 200, httpVersion: nil, headerFields: nil)
-        static let notConnectedToInternetError = URLError(URLError.notConnectedToInternet)
+        
+        static let badBaseAddress = "https://rickandmortyapi-pepega.com/api/"
+        static let badBaseUrl = URL(string: badBaseAddress)!
+        static let badUrlRequest = URLRequest(url: badBaseUrl)
     }
 }
 
 // MARK: - Sync
-extension HTTPClientMockTests {
+extension HTTPClientDefaultTests {
     func test_httpClient_cancels() {
-        let httpClient = HTTPClientMock()
+        let httpClient = HTTPClientDefault()
         let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { request in
-            (nil, nil, nil)
-        }
         
         let task = httpClient.request(Locals.urlRequest) { result in
             defer { exp.fulfill() }
@@ -41,12 +38,8 @@ extension HTTPClientMockTests {
     }
     
     func test_httpClient_returnsData() {
-        let httpClient = HTTPClientMock()
+        let httpClient = HTTPClientDefault()
         let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { request in
-            (Locals.data, Locals.response, nil)
-        }
         
         httpClient.request(Locals.urlRequest) { result in
             defer { exp.fulfill() }
@@ -61,14 +54,10 @@ extension HTTPClientMockTests {
     }
     
     func test_httpClient_returnsError() {
-        let httpClient = HTTPClientMock()
+        let httpClient = HTTPClientDefault()
         let exp = XCTestExpectation()
         
-        URLProtocolMock.requestHandler = { request in
-            (nil, nil, Locals.notConnectedToInternetError)
-        }
-        
-        httpClient.request(Locals.urlRequest) { result in
+        httpClient.request(Locals.badUrlRequest) { result in
             defer { exp.fulfill() }
             
             guard case .failure = result else {
@@ -82,13 +71,9 @@ extension HTTPClientMockTests {
 }
 
 // MARK: - Async
-extension HTTPClientMockTests {
+extension HTTPClientDefaultTests {
     func test_httpClientAsync_returnsData() async {
-        let httpClient = HTTPClientMock()
-        
-        URLProtocolAsyncMock.requestHandler = { request in
-            (Locals.data, Locals.response)
-        }
+        let httpClient = HTTPClientDefault()
         
         guard case .success = await httpClient.requestAsync(Locals.urlRequest) else {
             XCTFail("Should be success")
@@ -97,13 +82,9 @@ extension HTTPClientMockTests {
     }
     
     func test_httpClientAsync_returnsError() async {
-        let httpClient = HTTPClientMock()
+        let httpClient = HTTPClientDefault()
         
-        URLProtocolAsyncMock.requestHandler = { request in
-            throw Locals.notConnectedToInternetError
-        }
-        
-        guard case .failure = await httpClient.requestAsync(Locals.urlRequest) else {
+        guard case .failure = await httpClient.requestAsync(Locals.badUrlRequest) else {
             XCTFail("Should be failure")
             return
         }
