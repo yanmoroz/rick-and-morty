@@ -8,10 +8,13 @@
 import Foundation
 
 protocol HTTPClient {
-    typealias Completion = (Data?, URLResponse?, Error?) -> Void
+    typealias Completion = (Result<(Data, HTTPURLResponse), URLError>) -> Void
     
     @discardableResult
     func request(_ urlRequest: URLRequest, completion: @escaping Completion) -> Cancellable
+    
+    @discardableResult
+    func requestAsync(_ urlRequest: URLRequest) async -> Result<(Data, HTTPURLResponse), URLError>
 }
 
 protocol Cancellable {
@@ -19,10 +22,6 @@ protocol Cancellable {
 }
 
 extension URLSessionTask: Cancellable { }
-
-protocol HTTPClientAsync {
-    func request(_ urlRequest: URLRequest) async throws -> (Data, URLResponse)
-}
 
 
 
@@ -52,7 +51,6 @@ protocol DecodableHTTPRequest: HTTPRequest {
 
 enum APIServiceError: Error {
     case urlError(URLError)
-    case urlResponseIsNotHttp(URLResponse?)
     case badStatusCode(Int)
     case decodingError(DecodingError)
 }
@@ -64,4 +62,8 @@ protocol APIService {
     func request<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
     -> Cancellable where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T
     func request(_ httpRequest: HTTPRequest, completion: @escaping Completion) -> Cancellable
+    
+    func requestAsync<T, Request>(_ httpRequest: Request) async
+    -> Result<T, APIServiceError> where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T
+    func requestAsync(_ httpRequest: HTTPRequest) async -> APIServiceError?
 }

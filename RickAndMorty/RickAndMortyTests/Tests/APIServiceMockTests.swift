@@ -8,7 +8,6 @@
 import XCTest
 
 final class APIServiceMockTests: XCTestCase {
-    
     enum Locals {
         private static let baseAddress = "https://rickandmortyapi.com/"
         static let baseUrl = URL(string: baseAddress)!
@@ -19,7 +18,10 @@ final class APIServiceMockTests: XCTestCase {
         static let cancelledError = URLError(URLError.cancelled)
         static let notConnectedToInternetError = URLError(URLError.notConnectedToInternet)
     }
-    
+}
+
+// MARK: - Sync
+extension APIServiceMockTests {
     func test_apiService_request_cancels() {
         let apiService = APIServiceMock(httpClient: HTTPClientMock())
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
@@ -136,29 +138,6 @@ final class APIServiceMockTests: XCTestCase {
         wait(for: exp)
     }
     
-    func test_apiService_request_returnsUrlResponseIsNotHttpError() {
-        let apiService = APIServiceMock(httpClient: HTTPClientMock())
-        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = HTTPRequestMock(configuration: configuration)
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { request in
-            (nil, URLResponse(), nil)
-        }
-        
-        apiService.request(httpRequest) { apiServiceError in
-            defer { exp.fulfill() }
-            
-            guard let apiServiceError,
-                  case .urlResponseIsNotHttp = apiServiceError else {
-                XCTFail("Should be .urlResponseIsNotHttp")
-                return
-            }
-        }
-        
-        wait(for: exp)
-    }
-    
     func test_apiService_request_returnsBadStatusCodeError() {
         let apiService = APIServiceMock(httpClient: HTTPClientMock())
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
@@ -198,29 +177,6 @@ final class APIServiceMockTests: XCTestCase {
             guard case let .failure(apiServiceError) = result,
                   case .urlError = apiServiceError else {
                 XCTFail("Should be .urlError")
-                return
-            }
-        }
-        
-        wait(for: exp)
-    }
-    
-    func test_apiService_decodableRequest_returnsUrlResponseIsNotHttpError() {
-        let apiService = APIServiceMock(httpClient: HTTPClientMock())
-        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { request in
-            (nil, URLResponse(), nil)
-        }
-        
-        apiService.request(httpRequest) { result in
-            defer { exp.fulfill() }
-            
-            guard case let .failure(apiServiceError) = result,
-                  case .urlResponseIsNotHttp = apiServiceError else {
-                XCTFail("Should be .urlResponseIsNotHttp")
                 return
             }
         }
@@ -272,5 +228,38 @@ final class APIServiceMockTests: XCTestCase {
         }
         
         wait(for: exp)
+    }
+}
+
+// MARK: - Async
+extension APIServiceMockTests {
+    func test_apiService_request_async_returnsNilErrorOnSuccess() async {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        
+        URLProtocolAsyncMock.requestHandler = { request in
+            (Locals.data, Locals.goodResponse)
+        }
+        
+        if let error = await apiService.requestAsync(httpRequest) {
+            XCTFail("Should be nil")
+        }
+    }
+    
+    func test_apiService_decodableRequest_async_returnsSmthOnSuccess() async {
+        let apiService = APIServiceMock(httpClient: HTTPClientMock())
+        let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        
+        URLProtocolAsyncMock.requestHandler = { request in
+            (Locals.data, Locals.goodResponse)
+        }
+        
+//        if let error = await apiService.request(httpRequest) {
+//            XCTFail("Should be nil")
+//        }
+        
+//        let foo = await apiService.request(httpRequest) as? Result<DecodableMock, APIServiceError>
     }
 }
