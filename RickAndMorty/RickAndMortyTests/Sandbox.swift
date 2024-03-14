@@ -102,6 +102,22 @@ protocol APIService {
     func requestAsync(_ httpRequest: HTTPRequest) async -> APIServiceError?
 }
 
+protocol HTTPResponseDecoder {
+    func decode<T>(_ data: Data) -> Result<T, DecodingError> where T: Decodable
+}
+
+extension HTTPResponseDecoder {
+    func decode<T>(_ data: Data) -> Result<T, DecodingError> where T: Decodable {
+        let decoder = JSONDecoder()
+        do {
+            let decoded = try decoder.decode(T.self, from: data)
+            return .success(decoded)
+        } catch {
+            return .failure(error as! DecodingError)
+        }
+    }
+}
+
 protocol HTTPURLResponseValidator {
     func validate(_ httpUrlResponse: HTTPURLResponse) -> APIServiceError?
 }

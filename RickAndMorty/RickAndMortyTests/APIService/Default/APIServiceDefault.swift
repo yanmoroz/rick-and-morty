@@ -1,13 +1,13 @@
 //
-//  APIServiceMock.swift
+//  APIServiceDefault.swift
 //  RickAndMortyTests
 //
-//  Created by Yan Moroz on 14.03.2024.
+//  Created by Yan Moroz on 15.03.2024.
 //
 
 import Foundation
 
-struct APIServiceMock: APIService {
+struct APIServiceDefault: APIService {
     let httpClient: HTTPClient
     let responseValidator: HTTPURLResponseValidator
     let responseDecoder: HTTPResponseDecoder
