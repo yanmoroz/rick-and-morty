@@ -59,11 +59,11 @@ protocol APIService {
     typealias DecodableCompletion<T> = (Result<T, APIServiceError>) -> Void
     typealias Completion = (APIServiceError?) -> Void
     
-    func request<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
+    func requestDecodable<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
     -> Cancellable where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T
     func request(_ httpRequest: HTTPRequest, completion: @escaping Completion) -> Cancellable
     
-    func requestAsync<T, Request>(_ httpRequest: Request) async
+    func requestDecodableAsync<T, Request>(_ httpRequest: Request) async
     -> Result<T, APIServiceError> where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T
     func requestAsync(_ httpRequest: HTTPRequest) async -> APIServiceError?
 }

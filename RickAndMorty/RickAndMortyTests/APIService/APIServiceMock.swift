@@ -11,7 +11,7 @@ struct APIServiceMock: APIService {
     let httpClient: HTTPClient
     
     @discardableResult
-    func request<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
+    func requestDecodable<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
     -> Cancellable where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T {
         httpClient.request(httpRequest.urlRequest) { result in
             switch result {
@@ -52,7 +52,7 @@ struct APIServiceMock: APIService {
         }
     }
     
-    func requestAsync<T, Request>(_ httpRequest: Request) async
+    func requestDecodableAsync<T, Request>(_ httpRequest: Request) async
     -> Result<T, APIServiceError> where T : Decodable, T == Request.DecodeType, Request : DecodableHTTPRequest {
         switch await httpClient.requestAsync(httpRequest.urlRequest) {
         case .success(let (data, httpUrlResponse)):
