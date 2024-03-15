@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct HTTPRequestDefault: HTTPRequest {
+class HTTPRequestDefault: HTTPRequest {
     var configuration: HTTPRequestConfiguration
+    
+    init(configuration: HTTPRequestConfiguration) {
+        self.configuration = configuration
+    }
     
     var urlRequest: URLRequest {
         URLRequest(url: url)

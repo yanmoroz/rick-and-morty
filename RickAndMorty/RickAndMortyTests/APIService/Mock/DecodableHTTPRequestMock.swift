@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct DecodableHTTPRequestMock<T: Decodable>: DecodableHTTPRequest {
+class DecodableHTTPRequestMock<T: Decodable>: HTTPRequestMock, DecodableHTTPRequest {
     typealias DecodeType = T
-    
-    let configuration: HTTPRequestConfiguration
-    
-    var urlRequest: URLRequest {
-        URLRequest(url: configuration.baseUrl)
-    }
 }
