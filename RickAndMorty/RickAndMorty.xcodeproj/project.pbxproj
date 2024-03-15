@@ -26,6 +26,7 @@
 		A3698DC12BA49CAC0077F620 /* HTTPRequestDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3698DC02BA49CAC0077F620 /* HTTPRequestDefault.swift */; };
 		A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */; };
 		A39E2ED52BA4ABAF00E86389 /* RickAndMortyApiRootResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39E2ED42BA4ABAF00E86389 /* RickAndMortyApiRootResponse.swift */; };
+		A39E2ED92BA4ACCF00E86389 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39E2ED82BA4ACCF00E86389 /* APITests.swift */; };
 		A3B754C32BA1E2E8004E22CB /* Sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754C22BA1E2E8004E22CB /* Sandbox.swift */; };
 		A3B754C62BA224E5004E22CB /* URLProtocolAsyncMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754C52BA224E5004E22CB /* URLProtocolAsyncMock.swift */; };
 		A3B754C82BA224F6004E22CB /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B754C72BA224F6004E22CB /* URLProtocolMock.swift */; };
@@ -70,6 +71,7 @@
 		A3944C682B9CF03B0086B326 /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
 		A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		A39E2ED42BA4ABAF00E86389 /* RickAndMortyApiRootResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyApiRootResponse.swift; sourceTree = "<group>"; };
+		A39E2ED82BA4ACCF00E86389 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		A3B754C22BA1E2E8004E22CB /* Sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sandbox.swift; sourceTree = "<group>"; };
 		A3B754C52BA224E5004E22CB /* URLProtocolAsyncMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolAsyncMock.swift; sourceTree = "<group>"; };
 		A3B754C72BA224F6004E22CB /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		A39E2ED72BA4ACC800E86389 /* APITests */ = {
+			isa = PBXGroup;
+			children = (
+				A39E2ED82BA4ACCF00E86389 /* APITests.swift */,
+			);
+			path = APITests;
+			sourceTree = "<group>";
+		};
 		A3B754C42BA224D5004E22CB /* URLProtocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +202,7 @@
 				A3D165DE2B97C67D00F225CE /* JunkTests.swift */,
 				A39E2ED42BA4ABAF00E86389 /* RickAndMortyApiRootResponse.swift */,
 				A3BDBE022BA3A7AF0017879D /* APIService */,
+				A39E2ED72BA4ACC800E86389 /* APITests */,
 				A3BDBE012BA3A7A70017879D /* HTTPClient */,
 			);
 			path = Tests;
@@ -376,6 +387,7 @@
 				A39E2ED52BA4ABAF00E86389 /* RickAndMortyApiRootResponse.swift in Sources */,
 				A34B3E1D2BA25B2F00963158 /* APIServiceMock.swift in Sources */,
 				A3698DBB2BA49A990077F620 /* HTTPRequestConfigurationDefault.swift in Sources */,
+				A39E2ED92BA4ACCF00E86389 /* APITests.swift in Sources */,
 				A3B754C82BA224F6004E22CB /* URLProtocolMock.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
 				A3BDBE002BA3A7990017879D /* APIServiceDefaultTests.swift in Sources */,

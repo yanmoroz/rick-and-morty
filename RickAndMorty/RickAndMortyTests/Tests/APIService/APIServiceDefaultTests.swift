@@ -16,6 +16,14 @@ final class APIServiceDefaultTests: XCTestCase {
         static let path = "/api/"
         static let badPath = "/api/pepege/"
     }
+    
+    private func makeSUT() -> APIService {
+        APIServiceDefault(
+            httpClient: HTTPClientDefault(),
+            responseValidator: HTTPURLResponseValidatorDefault(),
+            responseDecoder: HTTPResponseDecoderDefault()
+        )
+    }
 }
 
 // MARK: - Sync
@@ -216,17 +224,86 @@ extension APIServiceDefaultTests {
 
         wait(for: exp)
     }
-    
-    private func makeSUT() -> APIService {
-        APIServiceDefault(
-            httpClient: HTTPClientDefault(),
-            responseValidator: HTTPURLResponseValidatorDefault(),
-            responseDecoder: HTTPResponseDecoderDefault()
-        )
-    }
 }
 
 // MARK: - Async
 extension APIServiceDefaultTests {
+    func test_apiService_request_async_returnsNilErrorOnSuccess() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestDefault(configuration: configuration)
+        
+        guard await apiService.requestAsync(httpRequest) == nil else {
+            XCTFail("Should be nil")
+            return
+        }
+    }
     
+    func test_apiService_decodableRequest_async_returnsSmthOnSuccess() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.path)
+        let httpRequest = HTTPRequestDecodableDefault<RickAndMortyApiRootResponse>(configuration: configuration)
+        
+        guard case .success = await apiService.requestDecodableAsync(httpRequest) else {
+            XCTFail("Should be success")
+            return
+        }
+    }
+    
+    func test_apiService_request_async_returnsUrlError() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.badBaseUrl)
+        let httpRequest = HTTPRequestDefault(configuration: configuration)
+        
+        guard let _ = await apiService.requestAsync(httpRequest) else {
+            XCTFail("Shouldn't be nil")
+            return
+        }
+    }
+    
+    func test_apiService_request_async_returnsBadStatusCodeError() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.badPath)
+        let httpRequest = HTTPRequestDefault(configuration: configuration)
+        
+        guard case .badStatusCode = await apiService.requestAsync(httpRequest) else {
+            XCTFail("Shouldn't be .badStatusCode")
+            return
+        }
+    }
+    
+    func test_apiService_decodableRequest_async_returnsUrlError() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.badBaseUrl)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
+        
+        guard case .failure = await apiService.requestDecodableAsync(httpRequest) else {
+            XCTFail("Shouldn't be nil")
+            return
+        }
+    }
+    
+    func test_apiService_decodableRequest_async_returnsBadStatusCodeError() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.badPath)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
+        
+        guard case .failure(let apiServiceError) = await apiService.requestDecodableAsync(httpRequest),
+              case .badStatusCode = apiServiceError else {
+            XCTFail("Shouldn't be .badStatusCode")
+            return
+        }
+    }
+    
+    func test_apiService_decodableRequest_async_returnsDecodingError() async {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.path)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
+        
+        guard case .failure(let apiServiceError) = await apiService.requestDecodableAsync(httpRequest),
+              case .decodingError = apiServiceError else {
+            XCTFail("Shouldn't be .decodingError")
+            return
+        }
+    }
 }
