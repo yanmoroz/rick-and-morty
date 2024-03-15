@@ -11,6 +11,8 @@ final class APIServiceDefaultTests: XCTestCase {
     enum Locals {
         private static let baseAddress = "https://rickandmortyapi.com/"
         static let baseUrl = URL(string: baseAddress)!
+        private static let badBaseAddress = "https://rickandmortyapi.com/"
+        static let badBaseUrl = URL(string: badBaseAddress)!
         static let path = "/api/"
     }
 }
@@ -20,7 +22,7 @@ extension APIServiceDefaultTests {
     func test_apiService_request_cancels() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
-        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let httpRequest = HTTPRequestDefault(configuration: configuration)
         let exp = XCTestExpectation()
         
         let task = apiService.request(httpRequest) { error in
@@ -66,7 +68,7 @@ extension APIServiceDefaultTests {
     func test_apiService_request_returnsNilErrorOnSuccess() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
-        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let httpRequest = HTTPRequestDefault(configuration: configuration)
         let exp = XCTestExpectation()
 
         apiService.request(httpRequest) { error in
@@ -102,6 +104,26 @@ extension APIServiceDefaultTests {
 
         wait(for: exp)
     }
+    
+//    func test_apiService_request_returnsUrlError() {
+//        let apiService = makeSUT()
+//        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.badBaseUrl)
+//        let httpRequest = HTTPRequestMock(configuration: configuration)
+//        let exp = XCTestExpectation()
+//
+//        apiService.request(httpRequest) { error in
+//            defer {
+//                exp.fulfill()
+//            }
+//
+//            guard error == nil else {
+//                XCTFail("Error should be nil")
+//                return
+//            }
+//        }
+//
+//        wait(for: exp)
+//    }
     
     private func makeSUT() -> APIService {
         APIServiceDefault(
