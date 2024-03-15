@@ -47,7 +47,7 @@ extension APIServiceDefaultTests {
     func test_apiService_decodableRequest_cancels() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestDefault<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
         
         let task = apiService.requestDecodable(httpRequest) { result in
@@ -91,7 +91,7 @@ extension APIServiceDefaultTests {
     func test_apiService_decodableRequest_returnsSmthOnSuccess() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.path)
-        let httpRequest = DecodableHTTPRequestDefault<RickAndMortyApiRootResponse>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableDefault<RickAndMortyApiRootResponse>(configuration: configuration)
         let exp = XCTestExpectation()
 
         apiService.requestDecodable(httpRequest) { result in
@@ -153,7 +153,7 @@ extension APIServiceDefaultTests {
     func test_apiService_decodableRequest_returnsUrlError() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.badBaseUrl)
-        let httpRequest = DecodableHTTPRequestDefault<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
 
         apiService.requestDecodable(httpRequest) { result in
@@ -176,7 +176,7 @@ extension APIServiceDefaultTests {
     func test_apiService_decodableRequest_returnsBadStatusCodeError() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.badPath)
-        let httpRequest = DecodableHTTPRequestDefault<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
 
         apiService.requestDecodable(httpRequest) { result in
@@ -198,7 +198,7 @@ extension APIServiceDefaultTests {
     func test_apiService_decodableRequest_returnsDecodingError() {
         let apiService = makeSUT()
         let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.path)
-        let httpRequest = DecodableHTTPRequestDefault<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableDefault<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
 
         apiService.requestDecodable(httpRequest) { result in
@@ -229,10 +229,4 @@ extension APIServiceDefaultTests {
 // MARK: - Async
 extension APIServiceDefaultTests {
     
-}
-
-struct RickAndMortyApiRootResponse: Decodable {
-    let characters: String
-    let locations: String
-    let episodes: String
 }

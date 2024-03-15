@@ -44,7 +44,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard let apiServiceError,
-                  case let .urlError(urlError) = apiServiceError else {
+                  case let .urlError(urlError) = apiServiceError
+            else {
                 XCTFail("Should be .urlError")
                 return
             }
@@ -59,7 +60,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_cancels() {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
@@ -70,7 +71,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard case let .failure(apiServiceError) = result,
-                  case let .urlError(urlError) = apiServiceError else {
+                  case let .urlError(urlError) = apiServiceError
+            else {
                 XCTFail("Should be .urlError")
                 return
             }
@@ -104,7 +106,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_returnsSmthOnSuccess() {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
@@ -137,7 +139,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard let apiServiceError,
-                  case .urlError = apiServiceError else {
+                  case .urlError = apiServiceError
+            else {
                 XCTFail("Should be .urlError")
                 return
             }
@@ -160,7 +163,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard let apiServiceError,
-                  case .badStatusCode = apiServiceError else {
+                  case .badStatusCode = apiServiceError
+            else {
                 XCTFail("Should be .badStatusCode")
                 return
             }
@@ -172,7 +176,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_returnsUrlError() {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
@@ -183,7 +187,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard case let .failure(apiServiceError) = result,
-                  case .urlError = apiServiceError else {
+                  case .urlError = apiServiceError
+            else {
                 XCTFail("Should be .urlError")
                 return
             }
@@ -195,7 +200,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_returnsBadStatusCodeError() {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
@@ -206,7 +211,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard case let .failure(apiServiceError) = result,
-                  case .badStatusCode = apiServiceError else {
+                  case .badStatusCode = apiServiceError
+            else {
                 XCTFail("Should be .badStatusCode")
                 return
             }
@@ -218,7 +224,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_returnsDecodingError() {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { request in
@@ -229,7 +235,8 @@ extension APIServiceMockTests {
             defer { exp.fulfill() }
             
             guard case let .failure(apiServiceError) = result,
-                  case .decodingError = apiServiceError else {
+                  case .decodingError = apiServiceError
+            else {
                 XCTFail("Should be .decodingError")
                 return
             }
@@ -259,7 +266,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_async_returnsSmthOnSuccess() async {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         
         URLProtocolAsyncMock.requestHandler = { request in
             (Locals.data, Locals.goodResponse)
@@ -304,7 +311,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_async_returnsUrlError() async {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         
         URLProtocolAsyncMock.requestHandler = { request in
             throw Locals.notConnectedToInternetError
@@ -319,7 +326,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_async_returnsBadStatusCodeError() async {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         
         URLProtocolAsyncMock.requestHandler = { request in
             (Locals.data, Locals.badResponse)
@@ -335,7 +342,7 @@ extension APIServiceMockTests {
     func test_apiService_decodableRequest_async_returnsDecodingError() async {
         let apiService = makeMockSUT()
         let configuration = HTTPRequestConfigurationMock(baseUrl: Locals.baseUrl)
-        let httpRequest = DecodableHTTPRequestMock<DecodableMock>(configuration: configuration)
+        let httpRequest = HTTPRequestDecodableMock<DecodableMock>(configuration: configuration)
         
         URLProtocolAsyncMock.requestHandler = { request in
             (Locals.junkData, Locals.goodResponse)
