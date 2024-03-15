@@ -11,4 +11,8 @@ struct DecodableHTTPRequestMock<T: Decodable>: DecodableHTTPRequest {
     typealias DecodeType = T
     
     let configuration: HTTPRequestConfiguration
+    
+    var urlRequest: URLRequest {
+        URLRequest(url: configuration.baseUrl)
+    }
 }

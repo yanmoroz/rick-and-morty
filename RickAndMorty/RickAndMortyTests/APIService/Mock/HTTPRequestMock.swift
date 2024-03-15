@@ -9,4 +9,8 @@ import Foundation
 
 struct HTTPRequestMock: HTTPRequest {
     let configuration: HTTPRequestConfiguration
+    
+    var urlRequest: URLRequest {
+        URLRequest(url: configuration.baseUrl)
+    }
 }

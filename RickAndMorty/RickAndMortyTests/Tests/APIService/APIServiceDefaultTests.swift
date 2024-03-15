@@ -8,15 +8,117 @@
 import XCTest
 
 final class APIServiceDefaultTests: XCTestCase {
-    
+    enum Locals {
+        private static let baseAddress = "https://rickandmortyapi.com/"
+        static let baseUrl = URL(string: baseAddress)!
+        static let path = "/api/"
+    }
 }
 
 // MARK: - Sync
-extension APIServiceMockTests {
+extension APIServiceDefaultTests {
+    func test_apiService_request_cancels() {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        let task = apiService.request(httpRequest) { error in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard let error,
+                  case .urlError(let urlError) = error,
+                  urlError.code == URLError.cancelled else {
+                      XCTFail("Error shouldn't be nil")
+                      return
+                  }
+        }
+        
+        task.cancel()
+        wait(for: exp)
+    }
     
+    func test_apiService_decodableRequest_cancels() {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
+        let httpRequest = DecodableHTTPRequestDefault<DecodableMock>(configuration: configuration)
+        let exp = XCTestExpectation()
+        
+        let task = apiService.requestDecodable(httpRequest) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case .failure(let apiServiceError) = result,
+                  case .urlError(let urlError) = apiServiceError,
+                  urlError.code == URLError.cancelled else {
+                      XCTFail("Error shouldn't be nil")
+                      return
+                  }
+        }
+        
+        task.cancel()
+        wait(for: exp)
+    }
+    
+    func test_apiService_request_returnsNilErrorOnSuccess() {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl)
+        let httpRequest = HTTPRequestMock(configuration: configuration)
+        let exp = XCTestExpectation()
+
+        apiService.request(httpRequest) { error in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard error == nil else {
+                XCTFail("Error should be nil")
+                return
+            }
+        }
+
+        wait(for: exp)
+    }
+    
+    func test_apiService_decodableRequest_returnsSmthOnSuccess() {
+        let apiService = makeSUT()
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.path)
+        let httpRequest = DecodableHTTPRequestDefault<RickAndMortyApiRootResponse>(configuration: configuration)
+        let exp = XCTestExpectation()
+
+        apiService.requestDecodable(httpRequest) { result in
+            defer {
+                exp.fulfill()
+            }
+            
+            guard case .success = result else {
+                XCTFail("Should be .success")
+                return
+            }
+        }
+
+        wait(for: exp)
+    }
+    
+    private func makeSUT() -> APIService {
+        APIServiceDefault(
+            httpClient: HTTPClientDefault(),
+            responseValidator: HTTPURLResponseValidatorDefault(),
+            responseDecoder: HTTPResponseDecoderDefault()
+        )
+    }
 }
 
 // MARK: - Async
-extension APIServiceMockTests {
+extension APIServiceDefaultTests {
     
+}
+
+struct RickAndMortyApiRootResponse: Decodable {
+    let characters: String
+    let locations: String
+    let episodes: String
 }

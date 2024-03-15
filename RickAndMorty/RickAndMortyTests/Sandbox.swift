@@ -67,12 +67,6 @@ protocol HTTPRequest {
     var urlRequest: URLRequest { get }
 }
 
-extension HTTPRequest {
-    var urlRequest: URLRequest {
-        URLRequest(url: configuration.baseUrl)
-    }
-}
-
 protocol DecodableHTTPRequest: HTTPRequest {
     associatedtype DecodeType
 }
