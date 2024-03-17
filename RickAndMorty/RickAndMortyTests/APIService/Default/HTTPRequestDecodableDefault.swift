@@ -7,6 +7,6 @@
 
 import Foundation
 
-class HTTPRequestDecodableDefault<T: Decodable>: HTTPRequestDefault, DecodableHTTPRequest {
+class HTTPRequestDecodableDefault<T: Decodable>: HTTPRequestDefault, HTTPRequestDecodable {
     typealias DecodeType = T
 }

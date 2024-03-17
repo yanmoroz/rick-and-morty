@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A318DEB42BA7925F0020DBEC /* FailableURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEB32BA7925F0020DBEC /* FailableURL.swift */; };
+		A318DEB62BA792840020DBEC /* RAMCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEB52BA792840020DBEC /* RAMCharacter.swift */; };
+		A318DEB82BA792950020DBEC /* RAMPageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEB72BA792950020DBEC /* RAMPageInfo.swift */; };
+		A318DEBB2BA792AB0020DBEC /* MultipleCharactersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEBA2BA792AB0020DBEC /* MultipleCharactersResponse.swift */; };
+		A318DEBD2BA792B90020DBEC /* MultipleCharactersByIdsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEBC2BA792B90020DBEC /* MultipleCharactersByIdsResponse.swift */; };
+		A318DEBF2BA792C70020DBEC /* SingleCharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEBE2BA792C70020DBEC /* SingleCharacterResponse.swift */; };
+		A318DEC22BA793760020DBEC /* SingleLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEC12BA793760020DBEC /* SingleLocationResponse.swift */; };
+		A318DEC42BA7938E0020DBEC /* RAMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEC32BA7938E0020DBEC /* RAMLocation.swift */; };
+		A318DEC82BA7945C0020DBEC /* MultipleLocationsByIdsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEC72BA7945C0020DBEC /* MultipleLocationsByIdsResponse.swift */; };
+		A318DECA2BA795200020DBEC /* MultipleLocationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DEC92BA795200020DBEC /* MultipleLocationsResponse.swift */; };
+		A318DECC2BA795F70020DBEC /* RAMEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DECB2BA795F70020DBEC /* RAMEpisode.swift */; };
+		A318DECF2BA7965C0020DBEC /* MultipleEpisodesByIdsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DECE2BA7965C0020DBEC /* MultipleEpisodesByIdsResponse.swift */; };
+		A318DED12BA796910020DBEC /* MultipleEpisodesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DED02BA796910020DBEC /* MultipleEpisodesResponse.swift */; };
+		A318DED32BA796C90020DBEC /* SingleEpisodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318DED22BA796C90020DBEC /* SingleEpisodeResponse.swift */; };
 		A34B3E162BA226D600963158 /* HTTPClientMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B3E142BA226D600963158 /* HTTPClientMockTests.swift */; };
 		A34B3E1A2BA236DB00963158 /* APIServiceMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B3E192BA236DB00963158 /* APIServiceMockTests.swift */; };
 		A34B3E1D2BA25B2F00963158 /* APIServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B3E1C2BA25B2F00963158 /* APIServiceMock.swift */; };
@@ -51,6 +65,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A318DEB32BA7925F0020DBEC /* FailableURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableURL.swift; sourceTree = "<group>"; };
+		A318DEB52BA792840020DBEC /* RAMCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMCharacter.swift; sourceTree = "<group>"; };
+		A318DEB72BA792950020DBEC /* RAMPageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMPageInfo.swift; sourceTree = "<group>"; };
+		A318DEBA2BA792AB0020DBEC /* MultipleCharactersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCharactersResponse.swift; sourceTree = "<group>"; };
+		A318DEBC2BA792B90020DBEC /* MultipleCharactersByIdsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCharactersByIdsResponse.swift; sourceTree = "<group>"; };
+		A318DEBE2BA792C70020DBEC /* SingleCharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCharacterResponse.swift; sourceTree = "<group>"; };
+		A318DEC12BA793760020DBEC /* SingleLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLocationResponse.swift; sourceTree = "<group>"; };
+		A318DEC32BA7938E0020DBEC /* RAMLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMLocation.swift; sourceTree = "<group>"; };
+		A318DEC72BA7945C0020DBEC /* MultipleLocationsByIdsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLocationsByIdsResponse.swift; sourceTree = "<group>"; };
+		A318DEC92BA795200020DBEC /* MultipleLocationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLocationsResponse.swift; sourceTree = "<group>"; };
+		A318DECB2BA795F70020DBEC /* RAMEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMEpisode.swift; sourceTree = "<group>"; };
+		A318DECE2BA7965C0020DBEC /* MultipleEpisodesByIdsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEpisodesByIdsResponse.swift; sourceTree = "<group>"; };
+		A318DED02BA796910020DBEC /* MultipleEpisodesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleEpisodesResponse.swift; sourceTree = "<group>"; };
+		A318DED22BA796C90020DBEC /* SingleEpisodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEpisodeResponse.swift; sourceTree = "<group>"; };
 		A34B3E142BA226D600963158 /* HTTPClientMockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientMockTests.swift; sourceTree = "<group>"; };
 		A34B3E192BA236DB00963158 /* APIServiceMockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceMockTests.swift; sourceTree = "<group>"; };
 		A34B3E1C2BA25B2F00963158 /* APIServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceMock.swift; sourceTree = "<group>"; };
@@ -106,6 +134,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A318DEB92BA7929F0020DBEC /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A318DEC52BA7943B0020DBEC /* Characters */,
+				A318DECD2BA796480020DBEC /* Episodes */,
+				A318DEC62BA794440020DBEC /* Locations */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		A318DEC02BA792DA0020DBEC /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				A318DEB52BA792840020DBEC /* RAMCharacter.swift */,
+				A318DECB2BA795F70020DBEC /* RAMEpisode.swift */,
+				A318DEC32BA7938E0020DBEC /* RAMLocation.swift */,
+				A318DEB72BA792950020DBEC /* RAMPageInfo.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		A318DEC52BA7943B0020DBEC /* Characters */ = {
+			isa = PBXGroup;
+			children = (
+				A318DEBC2BA792B90020DBEC /* MultipleCharactersByIdsResponse.swift */,
+				A318DEBA2BA792AB0020DBEC /* MultipleCharactersResponse.swift */,
+				A318DEBE2BA792C70020DBEC /* SingleCharacterResponse.swift */,
+			);
+			path = Characters;
+			sourceTree = "<group>";
+		};
+		A318DEC62BA794440020DBEC /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				A318DEC72BA7945C0020DBEC /* MultipleLocationsByIdsResponse.swift */,
+				A318DEC92BA795200020DBEC /* MultipleLocationsResponse.swift */,
+				A318DEC12BA793760020DBEC /* SingleLocationResponse.swift */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		A318DECD2BA796480020DBEC /* Episodes */ = {
+			isa = PBXGroup;
+			children = (
+				A318DECE2BA7965C0020DBEC /* MultipleEpisodesByIdsResponse.swift */,
+				A318DED02BA796910020DBEC /* MultipleEpisodesResponse.swift */,
+				A318DED22BA796C90020DBEC /* SingleEpisodeResponse.swift */,
+			);
+			path = Episodes;
+			sourceTree = "<group>";
+		};
 		A34B3E1B2BA25B0F00963158 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +252,9 @@
 			isa = PBXGroup;
 			children = (
 				A39E2ED82BA4ACCF00E86389 /* APITests.swift */,
+				A318DEB32BA7925F0020DBEC /* FailableURL.swift */,
+				A318DEC02BA792DA0020DBEC /* DTO */,
+				A318DEB92BA7929F0020DBEC /* Responses */,
 			);
 			path = APITests;
 			sourceTree = "<group>";
@@ -378,30 +460,44 @@
 			files = (
 				A34B3E2D2BA2856E00963158 /* HTTPClientDefault.swift in Sources */,
 				A34B3E162BA226D600963158 /* HTTPClientMockTests.swift in Sources */,
+				A318DEBD2BA792B90020DBEC /* MultipleCharactersByIdsResponse.swift in Sources */,
 				A34B3E212BA25C2300963158 /* HTTPRequestDecodableMock.swift in Sources */,
 				A3698DBD2BA49AAB0077F620 /* HTTPRequestDecodableDefault.swift in Sources */,
+				A318DEC22BA793760020DBEC /* SingleLocationResponse.swift in Sources */,
 				A34B3E2B2BA2834100963158 /* HTTPClientDefaultTests.swift in Sources */,
+				A318DEBF2BA792C70020DBEC /* SingleCharacterResponse.swift in Sources */,
 				A3BDBDFE2BA3A76B0017879D /* APIServiceDefault.swift in Sources */,
+				A318DECA2BA795200020DBEC /* MultipleLocationsResponse.swift in Sources */,
 				A34B3E232BA25C3300963158 /* HTTPRequestConfigurationMock.swift in Sources */,
 				A34B3E272BA281F200963158 /* HTTPURLResponseValidatorMock.swift in Sources */,
+				A318DED12BA796910020DBEC /* MultipleEpisodesResponse.swift in Sources */,
+				A318DEBB2BA792AB0020DBEC /* MultipleCharactersResponse.swift in Sources */,
 				A39E2ED52BA4ABAF00E86389 /* RickAndMortyApiRootResponse.swift in Sources */,
 				A34B3E1D2BA25B2F00963158 /* APIServiceMock.swift in Sources */,
 				A3698DBB2BA49A990077F620 /* HTTPRequestConfigurationDefault.swift in Sources */,
 				A39E2ED92BA4ACCF00E86389 /* APITests.swift in Sources */,
 				A3B754C82BA224F6004E22CB /* URLProtocolMock.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
+				A318DECF2BA7965C0020DBEC /* MultipleEpisodesByIdsResponse.swift in Sources */,
 				A3BDBE002BA3A7990017879D /* APIServiceDefaultTests.swift in Sources */,
+				A318DEB42BA7925F0020DBEC /* FailableURL.swift in Sources */,
+				A318DED32BA796C90020DBEC /* SingleEpisodeResponse.swift in Sources */,
 				A3698DBF2BA49B050077F620 /* URL+Extensions.swift in Sources */,
+				A318DECC2BA795F70020DBEC /* RAMEpisode.swift in Sources */,
 				A3B754CB2BA22531004E22CB /* HTTPClientMock.swift in Sources */,
 				A3B754C32BA1E2E8004E22CB /* Sandbox.swift in Sources */,
 				A3B754C62BA224E5004E22CB /* URLProtocolAsyncMock.swift in Sources */,
 				A34B3E1A2BA236DB00963158 /* APIServiceMockTests.swift in Sources */,
 				A3D165DF2B97C67D00F225CE /* JunkTests.swift in Sources */,
 				A34B3E292BA2820000963158 /* HTTPResponseDecoderMock.swift in Sources */,
+				A318DEB82BA792950020DBEC /* RAMPageInfo.swift in Sources */,
+				A318DEC42BA7938E0020DBEC /* RAMLocation.swift in Sources */,
 				A3698DB72BA49A340077F620 /* HTTPURLResponseValidatorDefault.swift in Sources */,
 				A3698DC12BA49CAC0077F620 /* HTTPRequestDefault.swift in Sources */,
 				A3698DB92BA49A400077F620 /* HTTPResponseDecoderDefault.swift in Sources */,
 				A34B3E252BA25C3F00963158 /* DecodableMock.swift in Sources */,
+				A318DEC82BA7945C0020DBEC /* MultipleLocationsByIdsResponse.swift in Sources */,
+				A318DEB62BA792840020DBEC /* RAMCharacter.swift in Sources */,
 				A34B3E1F2BA25C1300963158 /* HTTPRequestMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,6 @@
 
 import Foundation
 
-class HTTPRequestDecodableMock<T: Decodable>: HTTPRequestMock, DecodableHTTPRequest {
+class HTTPRequestDecodableMock<T: Decodable>: HTTPRequestMock, HTTPRequestDecodable {
     typealias DecodeType = T
 }

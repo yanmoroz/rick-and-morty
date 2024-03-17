@@ -10,4 +10,5 @@ import Foundation
 struct HTTPRequestConfigurationMock: HTTPRequestConfiguration {
     var baseUrl: URL
     var path: String? = nil
+    var queryParameters: [String : Any]? = nil
 }

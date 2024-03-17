@@ -15,7 +15,18 @@ class HTTPRequestDefault: HTTPRequest {
     }
     
     var urlRequest: URLRequest {
-        URLRequest(url: url)
+        let url = url
+        
+        guard let queryParameters = configuration.queryParameters else {
+            return URLRequest(url: url)
+        }
+        
+        guard var urlComponents = URLComponents(string: url.absoluteString) else {
+            return URLRequest(url: url)
+        }
+        
+        urlComponents.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+        return URLRequest(url: urlComponents.url!)
     }
     
     private var url: URL {

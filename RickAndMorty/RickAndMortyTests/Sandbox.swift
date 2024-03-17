@@ -60,6 +60,7 @@ extension URLSessionTask: Cancellable { }
 protocol HTTPRequestConfiguration {
     var baseUrl: URL { get }
     var path: String? { get }
+    var queryParameters: [String: Any]? { get }
 }
 
 protocol HTTPRequest {
@@ -67,7 +68,7 @@ protocol HTTPRequest {
     var urlRequest: URLRequest { get }
 }
 
-protocol DecodableHTTPRequest: HTTPRequest {
+protocol HTTPRequestDecodable: HTTPRequest {
     associatedtype DecodeType
 }
 
@@ -87,29 +88,17 @@ protocol APIService {
     
     @discardableResult
     func requestDecodable<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
-    -> Cancellable where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T
+    -> Cancellable where T: Decodable, Request: HTTPRequestDecodable, Request.DecodeType == T
     @discardableResult
     func request(_ httpRequest: HTTPRequest, completion: @escaping Completion) -> Cancellable
     
     func requestDecodableAsync<T, Request>(_ httpRequest: Request) async
-    -> Result<T, APIServiceError> where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T
+    -> Result<T, APIServiceError> where T: Decodable, Request: HTTPRequestDecodable, Request.DecodeType == T
     func requestAsync(_ httpRequest: HTTPRequest) async -> APIServiceError?
 }
 
 protocol HTTPResponseDecoder {
     func decode<T>(_ data: Data) -> Result<T, DecodingError> where T: Decodable
-}
-
-extension HTTPResponseDecoder {
-    func decode<T>(_ data: Data) -> Result<T, DecodingError> where T: Decodable {
-        let decoder = JSONDecoder()
-        do {
-            let decoded = try decoder.decode(T.self, from: data)
-            return .success(decoded)
-        } catch {
-            return .failure(error as! DecodingError)
-        }
-    }
 }
 
 protocol HTTPURLResponseValidator {
@@ -125,7 +114,7 @@ extension HTTPURLResponseValidator {
 extension APIService {
     @discardableResult
     func requestDecodable<T, Request>(_ httpRequest: Request, completion: @escaping DecodableCompletion<T>)
-    -> Cancellable where T: Decodable, Request: DecodableHTTPRequest, Request.DecodeType == T {
+    -> Cancellable where T: Decodable, Request: HTTPRequestDecodable, Request.DecodeType == T {
         httpClient.request(httpRequest.urlRequest) { result in
             switch result {
             case .success(let (data, httpUrlResponse)):
@@ -166,7 +155,7 @@ extension APIService {
     }
     
     func requestDecodableAsync<T, Request>(_ httpRequest: Request) async
-    -> Result<T, APIServiceError> where T : Decodable, T == Request.DecodeType, Request : DecodableHTTPRequest {
+    -> Result<T, APIServiceError> where T : Decodable, T == Request.DecodeType, Request : HTTPRequestDecodable {
         switch await httpClient.requestAsync(httpRequest.urlRequest) {
         case .success(let (data, httpUrlResponse)):
             if let responseValidationError = responseValidator.validate(httpUrlResponse) {

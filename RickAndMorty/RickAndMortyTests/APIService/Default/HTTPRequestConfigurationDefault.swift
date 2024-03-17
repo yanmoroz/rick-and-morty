@@ -10,4 +10,5 @@ import Foundation
 struct HTTPRequestConfigurationDefault: HTTPRequestConfiguration {
     var baseUrl: URL
     var path: String?
+    var queryParameters: [String : Any]?
 }
