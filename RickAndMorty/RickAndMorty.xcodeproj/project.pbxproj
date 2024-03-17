@@ -215,7 +215,6 @@
 			children = (
 				A318DED92BA7A4F90020DBEC /* Cancellable.swift */,
 				A318DED72BA7A4E20020DBEC /* HTTPClient.swift */,
-				A34B3E2C2BA2856E00963158 /* HTTPClientDefault.swift */,
 				A318DEED2BA7A5F50020DBEC /* APIService */,
 			);
 			path = Core;
@@ -259,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BDBDFD2BA3A76B0017879D /* APIServiceDefault.swift */,
+				A34B3E2C2BA2856E00963158 /* HTTPClientDefault.swift */,
 				A3698DBA2BA49A990077F620 /* HTTPRequestConfigurationDefault.swift */,
 				A3698DBC2BA49AAB0077F620 /* HTTPRequestDecodableDefault.swift */,
 				A3698DC02BA49CAC0077F620 /* HTTPRequestDefault.swift */,
@@ -266,6 +266,16 @@
 				A3698DB62BA49A340077F620 /* HTTPURLResponseValidatorDefault.swift */,
 			);
 			path = Default;
+			sourceTree = "<group>";
+		};
+		A318DF1A2BA7AA8B0020DBEC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A34B3E1B2BA25B0F00963158 /* APIService */,
+				A3B754C92BA22524004E22CB /* HTTPClient */,
+				A3B754C42BA224D5004E22CB /* URLProtocols */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		A34B3E1B2BA25B0F00963158 /* APIService */ = {
@@ -396,11 +406,9 @@
 		A3D165DD2B97C67D00F225CE /* RickAndMortyTests */ = {
 			isa = PBXGroup;
 			children = (
-				A34B3E1B2BA25B0F00963158 /* APIService */,
 				A3944C692B9CF2DE0086B326 /* Extensions */,
-				A3B754C92BA22524004E22CB /* HTTPClient */,
+				A318DF1A2BA7AA8B0020DBEC /* Network */,
 				A3B754D22BA225F3004E22CB /* Tests */,
-				A3B754C42BA224D5004E22CB /* URLProtocols */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
