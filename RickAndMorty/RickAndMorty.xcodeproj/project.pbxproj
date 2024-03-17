@@ -202,13 +202,10 @@
 		A318DED52BA7A4C80020DBEC /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A3BDBDFD2BA3A76B0017879D /* APIServiceDefault.swift */,
-				A3698DBA2BA49A990077F620 /* HTTPRequestConfigurationDefault.swift */,
-				A3698DBC2BA49AAB0077F620 /* HTTPRequestDecodableDefault.swift */,
-				A3698DC02BA49CAC0077F620 /* HTTPRequestDefault.swift */,
-				A3698DB82BA49A400077F620 /* HTTPResponseDecoderDefault.swift */,
-				A3698DB62BA49A340077F620 /* HTTPURLResponseValidatorDefault.swift */,
 				A318DED62BA7A4D10020DBEC /* Core */,
+				A318DF192BA7A9310020DBEC /* Default */,
+				A318DF0E2BA7A80A0020DBEC /* DTO */,
+				A318DEB92BA7929F0020DBEC /* Responses */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -256,6 +253,19 @@
 				A318DEB72BA792950020DBEC /* RAMPageInfo.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		A318DF192BA7A9310020DBEC /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				A3BDBDFD2BA3A76B0017879D /* APIServiceDefault.swift */,
+				A3698DBA2BA49A990077F620 /* HTTPRequestConfigurationDefault.swift */,
+				A3698DBC2BA49AAB0077F620 /* HTTPRequestDecodableDefault.swift */,
+				A3698DC02BA49CAC0077F620 /* HTTPRequestDefault.swift */,
+				A3698DB82BA49A400077F620 /* HTTPResponseDecoderDefault.swift */,
+				A3698DB62BA49A340077F620 /* HTTPURLResponseValidatorDefault.swift */,
+			);
+			path = Default;
 			sourceTree = "<group>";
 		};
 		A34B3E1B2BA25B0F00963158 /* APIService */ = {
@@ -376,10 +386,8 @@
 			children = (
 				A318DEB32BA7925F0020DBEC /* FailableURL.swift */,
 				A3944C222B9914F70086B326 /* Application */,
-				A318DF0E2BA7A80A0020DBEC /* DTO */,
 				A318DEDB2BA7A5090020DBEC /* Extensions */,
 				A318DED42BA7A4BA0020DBEC /* Infrastructure */,
-				A318DEB92BA7929F0020DBEC /* Responses */,
 				A3944C212B9914ED0086B326 /* Supporting Files */,
 			);
 			path = RickAndMorty;
