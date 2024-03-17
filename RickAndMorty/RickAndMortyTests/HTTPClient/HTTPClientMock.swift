@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 class HTTPClientMock: HTTPClient {
     lazy var urlSession: URLSession = {

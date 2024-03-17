@@ -6,5 +6,6 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 struct HTTPURLResponseValidatorMock: HTTPURLResponseValidator { }

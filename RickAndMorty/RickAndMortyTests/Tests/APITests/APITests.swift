@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import RickAndMorty
 
 final class APITests: XCTestCase {
     enum Locals {
@@ -55,12 +56,20 @@ final class APITests: XCTestCase {
             
             guard case .success = result else {
                 XCTFail("Should be .success")
-                print(result)
                 return
             }
         }
         
         wait(for: exp)
+    }
+    
+    private func testHTTPRequest<T: Decodable>(_ httpRequest: HTTPRequestDecodableDefault<T>) async {
+        let apiService = makeSUT()
+        
+        guard case .success = await apiService.requestDecodableAsync(httpRequest) else {
+            XCTFail("Should be .success")
+            return
+        }
     }
 }
 
@@ -159,7 +168,93 @@ extension APITests {
 
 // MARK: Async
 extension APITests {
-    func test_api_root_decodes() async {
-        
+    func test_api_root_async_decodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.rootPath)
+        let httpRequest = HTTPRequestDecodableDefault<RickAndMortyApiRootResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_singleCharacter_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.singleCharacterPath)
+        let httpRequest = HTTPRequestDecodableDefault<SingleCharacterResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_multipleCharactersByIds_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.multipleCharactersByIdsPath)
+        let httpRequest = HTTPRequestDecodableDefault<MultipleCharactersByIdsResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_multipleCharacters_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.multipleCharactersPath)
+        let httpRequest = HTTPRequestDecodableDefault<MultipleCharactersResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_filteredMultipleCharacters_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(
+            baseUrl: Locals.baseUrl,
+            path: Locals.multipleCharactersPath,
+            queryParameters: Locals.filteredCharactersQueryParameters
+        )
+        let httpRequest = HTTPRequestDecodableDefault<MultipleCharactersResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_singleLocation_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.singleLocationPath)
+        let httpRequest = HTTPRequestDecodableDefault<SingleLocationResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_multipleLocationsByIds_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.multipleLocationsByIdsPath)
+        let httpRequest = HTTPRequestDecodableDefault<MultipleLocationsByIdsResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_multipleLocations_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.multipleLocationsPath)
+        let httpRequest = HTTPRequestDecodableDefault<MultipleLocationsResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_filteredMultipleLocations_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(
+            baseUrl: Locals.baseUrl,
+            path: Locals.multipleLocationsPath,
+            queryParameters: Locals.filteredLocationsQueryParameters
+        )
+        let httpRequest = HTTPRequestDecodableDefault<MultipleLocationsResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_singleEpisode_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.singleEpisodePath)
+        let httpRequest = HTTPRequestDecodableDefault<SingleEpisodeResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_multipleEpisodesByIds_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.multipleEpisodesByIdsPath)
+        let httpRequest = HTTPRequestDecodableDefault<MultipleEpisodesByIdsResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_multipleEpisodes_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(baseUrl: Locals.baseUrl, path: Locals.multipleEpisodesPath)
+        let httpRequest = HTTPRequestDecodableDefault<MultipleEpisodesResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
+    }
+    
+    func test_api_filteredMultipleEpisodes_async_requestDecodes() async {
+        let configuration = HTTPRequestConfigurationDefault(
+            baseUrl: Locals.baseUrl,
+            path: Locals.multipleEpisodesPath,
+            queryParameters: Locals.filteredEpisodesQueryParameters
+        )
+        let httpRequest = HTTPRequestDecodableDefault<MultipleEpisodesResponse>(configuration: configuration)
+        await testHTTPRequest(httpRequest)
     }
 }

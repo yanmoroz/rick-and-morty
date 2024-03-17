@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 struct APIServiceMock: APIService {
     let httpClient: HTTPClient

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 struct HTTPRequestConfigurationMock: HTTPRequestConfiguration {
     var baseUrl: URL

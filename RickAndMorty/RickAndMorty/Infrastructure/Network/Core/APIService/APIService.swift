@@ -1,82 +1,11 @@
 //
-//  Sandbox.swift
-//  RickAndMortyTests
+//  APIService.swift
+//  RickAndMorty
 //
-//  Created by Yan Moroz on 13.03.2024.
+//  Created by Yan Moroz on 18.03.2024.
 //
 
 import Foundation
-
-protocol HTTPClient {
-    var urlSession: URLSession { get }
-    var urlSessionAsync: URLSession { get }
-    
-    typealias Completion = (Result<(Data, HTTPURLResponse), URLError>) -> Void
-    
-    func request(_ urlRequest: URLRequest, completion: @escaping Completion) -> Cancellable
-    func requestAsync(_ urlRequest: URLRequest) async -> Result<(Data, HTTPURLResponse), URLError>
-}
-
-extension HTTPClient {
-    @discardableResult
-    func request(_ urlRequest: URLRequest, completion: @escaping Completion) -> Cancellable {
-        let task = urlSession.dataTask(with: urlRequest) { data, urlResponse, error in
-            if let urlError = error as? URLError {
-                completion(.failure(urlError))
-                return
-            }
-            
-            if let data, let httpUrlResponse = urlResponse as? HTTPURLResponse {
-                completion(.success((data, httpUrlResponse)))
-            }
-        }
-        
-        task.resume()
-        return task
-    }
-    
-    func requestAsync(_ urlRequest: URLRequest) async -> Result<(Data, HTTPURLResponse), URLError> {
-        do {
-            let (data, urlResponse) = try await urlSessionAsync.data(for: urlRequest)
-            return .success((data, urlResponse as! HTTPURLResponse))
-        } catch {
-            return .failure(error as! URLError)
-        }
-    }
-}
-
-protocol Cancellable {
-    func cancel()
-}
-
-extension URLSessionTask: Cancellable { }
-
-
-
-
-
-
-
-protocol HTTPRequestConfiguration {
-    var baseUrl: URL { get }
-    var path: String? { get }
-    var queryParameters: [String: Any]? { get }
-}
-
-protocol HTTPRequest {
-    var configuration: HTTPRequestConfiguration { get }
-    var urlRequest: URLRequest { get }
-}
-
-protocol HTTPRequestDecodable: HTTPRequest {
-    associatedtype DecodeType
-}
-
-enum APIServiceError: Error {
-    case urlError(URLError)
-    case badStatusCode(Int)
-    case decodingError(DecodingError)
-}
 
 protocol APIService {
     var httpClient: HTTPClient { get }
@@ -95,20 +24,6 @@ protocol APIService {
     func requestDecodableAsync<T, Request>(_ httpRequest: Request) async
     -> Result<T, APIServiceError> where T: Decodable, Request: HTTPRequestDecodable, Request.DecodeType == T
     func requestAsync(_ httpRequest: HTTPRequest) async -> APIServiceError?
-}
-
-protocol HTTPResponseDecoder {
-    func decode<T>(_ data: Data) -> Result<T, DecodingError> where T: Decodable
-}
-
-protocol HTTPURLResponseValidator {
-    func validate(_ httpUrlResponse: HTTPURLResponse) -> APIServiceError?
-}
-
-extension HTTPURLResponseValidator {
-    func validate(_ httpUrlResponse: HTTPURLResponse) -> APIServiceError? {
-        httpUrlResponse.statusCode < 300 ? nil : .badStatusCode(httpUrlResponse.statusCode)
-    }
 }
 
 extension APIService {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 struct HTTPResponseDecoderMock: HTTPResponseDecoder {
     func decode<T>(_ data: Data) -> Result<T, DecodingError> where T: Decodable {

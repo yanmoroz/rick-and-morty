@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import RickAndMorty
 
 final class APIServiceDefaultTests: XCTestCase {
     enum Locals {

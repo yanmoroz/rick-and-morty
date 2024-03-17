@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 class HTTPRequestMock: HTTPRequest {
     let configuration: HTTPRequestConfiguration

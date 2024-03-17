@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import RickAndMorty
 
 class HTTPRequestDecodableMock<T: Decodable>: HTTPRequestMock, HTTPRequestDecodable {
     typealias DecodeType = T
