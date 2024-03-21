@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */; };
+		A3792B962BAC83C7000D12CA /* HTTPClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B952BAC83C7000D12CA /* HTTPClientError.swift */; };
+		A3792B982BAC83DB000D12CA /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B972BAC83DB000D12CA /* HTTPClient.swift */; };
+		A3792B9A2BAC83E7000D12CA /* HTTPClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B992BAC83E7000D12CA /* HTTPClientImpl.swift */; };
+		A3792B9C2BAC83F5000D12CA /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B9B2BAC83F5000D12CA /* URLProtocolMock.swift */; };
+		A3792B9F2BAC8415000D12CA /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B9E2BAC8415000D12CA /* NetworkServiceError.swift */; };
+		A3792BA12BAC8425000D12CA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA02BAC8425000D12CA /* NetworkService.swift */; };
+		A3792BA32BAC8431000D12CA /* NetworkServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA22BAC8431000D12CA /* NetworkServiceImpl.swift */; };
+		A3792BA62BAC8456000D12CA /* HTTPURLResponseValidatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA52BAC8456000D12CA /* HTTPURLResponseValidatorError.swift */; };
+		A3792BA82BAC8464000D12CA /* HTTPURLResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA72BAC8464000D12CA /* HTTPURLResponseValidator.swift */; };
+		A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA92BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift */; };
 		A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
@@ -27,6 +37,16 @@
 
 /* Begin PBXFileReference section */
 		A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyTests.swift; sourceTree = "<group>"; };
+		A3792B952BAC83C7000D12CA /* HTTPClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientError.swift; sourceTree = "<group>"; };
+		A3792B972BAC83DB000D12CA /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		A3792B992BAC83E7000D12CA /* HTTPClientImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientImpl.swift; sourceTree = "<group>"; };
+		A3792B9B2BAC83F5000D12CA /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
+		A3792B9E2BAC8415000D12CA /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
+		A3792BA02BAC8425000D12CA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A3792BA22BAC8431000D12CA /* NetworkServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceImpl.swift; sourceTree = "<group>"; };
+		A3792BA52BAC8456000D12CA /* HTTPURLResponseValidatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidatorError.swift; sourceTree = "<group>"; };
+		A3792BA72BAC8464000D12CA /* HTTPURLResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidator.swift; sourceTree = "<group>"; };
+		A3792BA92BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidatorImpl.swift; sourceTree = "<group>"; };
 		A3944C682B9CF03B0086B326 /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
 		A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +76,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A3792B942BAC83BB000D12CA /* HTTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				A3792B972BAC83DB000D12CA /* HTTPClient.swift */,
+				A3792B952BAC83C7000D12CA /* HTTPClientError.swift */,
+				A3792B992BAC83E7000D12CA /* HTTPClientImpl.swift */,
+				A3792B9B2BAC83F5000D12CA /* URLProtocolMock.swift */,
+			);
+			path = HTTPClient;
+			sourceTree = "<group>";
+		};
+		A3792B9D2BAC840B000D12CA /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				A3792BA02BAC8425000D12CA /* NetworkService.swift */,
+				A3792B9E2BAC8415000D12CA /* NetworkServiceError.swift */,
+				A3792BA22BAC8431000D12CA /* NetworkServiceImpl.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		A3792BA42BAC844A000D12CA /* HTTPURLResponseValidator */ = {
+			isa = PBXGroup;
+			children = (
+				A3792BA72BAC8464000D12CA /* HTTPURLResponseValidator.swift */,
+				A3792BA52BAC8456000D12CA /* HTTPURLResponseValidatorError.swift */,
+				A3792BA92BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift */,
+			);
+			path = HTTPURLResponseValidator;
+			sourceTree = "<group>";
+		};
 		A3944C212B9914ED0086B326 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +167,9 @@
 			children = (
 				A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */,
 				A3944C692B9CF2DE0086B326 /* Extensions */,
+				A3792B942BAC83BB000D12CA /* HTTPClient */,
+				A3792BA42BAC844A000D12CA /* HTTPURLResponseValidator */,
+				A3792B9D2BAC840B000D12CA /* NetworkService */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -229,7 +283,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3792B9F2BAC8415000D12CA /* NetworkServiceError.swift in Sources */,
+				A3792B962BAC83C7000D12CA /* HTTPClientError.swift in Sources */,
+				A3792BA62BAC8456000D12CA /* HTTPURLResponseValidatorError.swift in Sources */,
+				A3792BA12BAC8425000D12CA /* NetworkService.swift in Sources */,
+				A3792B9C2BAC83F5000D12CA /* URLProtocolMock.swift in Sources */,
+				A3792BA32BAC8431000D12CA /* NetworkServiceImpl.swift in Sources */,
 				A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */,
+				A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */,
+				A3792B982BAC83DB000D12CA /* HTTPClient.swift in Sources */,
+				A3792BA82BAC8464000D12CA /* HTTPURLResponseValidator.swift in Sources */,
+				A3792B9A2BAC83E7000D12CA /* HTTPClientImpl.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
