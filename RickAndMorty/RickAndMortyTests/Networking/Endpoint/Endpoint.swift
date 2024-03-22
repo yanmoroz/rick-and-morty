@@ -8,10 +8,20 @@
 import Foundation
 
 protocol Endpoint {
-    associatedtype DecodeType: Decodable
-    
     var baseUrl: URL { get }
     var urlRequest: URLRequest { get throws }
-    var decoder: JSONDecoder { get }
-    var decodeType: DecodeType.Type { get }
+}
+
+extension Endpoint {
+    var urlRequest: URLRequest {
+        get throws {
+            guard let components = URLComponents(string: baseUrl.absoluteString),
+                  let url = components.url
+            else {
+                throw EndpointError.badUrl
+            }
+            
+            return URLRequest(url: url)
+        }
+    }
 }

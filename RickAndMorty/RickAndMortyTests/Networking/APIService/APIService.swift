@@ -9,5 +9,5 @@ import Foundation
 
 protocol APIService {
     typealias Completion<T> = (Result<Decodable, APIServiceError>) -> Void
-    func request<T: Decodable, U: Endpoint>(_ endpoint: U, completion: @escaping Completion<T>) where U.DecodeType == T
+    func request<T: Decodable, U: DecodableEndpoint>(_ endpoint: U, completion: @escaping Completion<T>) where U.DecodeType == T
 }

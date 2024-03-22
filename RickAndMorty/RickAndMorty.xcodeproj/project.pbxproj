@@ -21,17 +21,21 @@
 		A3792BAE2BAC85C0000D12CA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BAD2BAC85C0000D12CA /* APIService.swift */; };
 		A3792BB02BACFAC4000D12CA /* EndpointError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BAF2BACFAC4000D12CA /* EndpointError.swift */; };
 		A3792BB22BACFAD1000D12CA /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB12BACFAD1000D12CA /* Endpoint.swift */; };
-		A3792BB42BACFAE7000D12CA /* EndpointImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB32BACFAE7000D12CA /* EndpointImpl.swift */; };
+		A3792BB42BACFAE7000D12CA /* DecodableEndpointImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB32BACFAE7000D12CA /* DecodableEndpointImpl.swift */; };
 		A3792BB72BACFB3E000D12CA /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB62BACFB3E000D12CA /* APIServiceError.swift */; };
 		A3792BBA2BACFB56000D12CA /* APIServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB92BACFB56000D12CA /* APIServiceImpl.swift */; };
 		A3792BBD2BACFBE2000D12CA /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */; };
 		A3792BC02BAD0134000D12CA /* HTTPURLResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BBF2BAD0134000D12CA /* HTTPURLResponse+Extensions.swift */; };
 		A3792BC22BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */; };
+		A3792BC42BAD0E5F000D12CA /* DecodableEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BC32BAD0E5F000D12CA /* DecodableEndpoint.swift */; };
+		A3792BC62BAD0F7B000D12CA /* EndpointImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BC52BAD0F7B000D12CA /* EndpointImpl.swift */; };
+		A3792BC82BAD10B3000D12CA /* EndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BC72BAD10B3000D12CA /* EndpointTests.swift */; };
 		A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
 		A3D165D12B97C67D00F225CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D02B97C67D00F225CE /* Assets.xcassets */; };
 		A3D165D42B97C67D00F225CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D22B97C67D00F225CE /* LaunchScreen.storyboard */; };
+		A3F103052BAD114B00009902 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103042BAD114B00009902 /* NetworkServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,12 +63,15 @@
 		A3792BAD2BAC85C0000D12CA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A3792BAF2BACFAC4000D12CA /* EndpointError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointError.swift; sourceTree = "<group>"; };
 		A3792BB12BACFAD1000D12CA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		A3792BB32BACFAE7000D12CA /* EndpointImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointImpl.swift; sourceTree = "<group>"; };
+		A3792BB32BACFAE7000D12CA /* DecodableEndpointImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableEndpointImpl.swift; sourceTree = "<group>"; };
 		A3792BB62BACFB3E000D12CA /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
 		A3792BB92BACFB56000D12CA /* APIServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceImpl.swift; sourceTree = "<group>"; };
 		A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
 		A3792BBF2BAD0134000D12CA /* HTTPURLResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+Extensions.swift"; sourceTree = "<group>"; };
 		A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidatorTests.swift; sourceTree = "<group>"; };
+		A3792BC32BAD0E5F000D12CA /* DecodableEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableEndpoint.swift; sourceTree = "<group>"; };
+		A3792BC52BAD0F7B000D12CA /* EndpointImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointImpl.swift; sourceTree = "<group>"; };
+		A3792BC72BAD10B3000D12CA /* EndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointTests.swift; sourceTree = "<group>"; };
 		A3944C682B9CF03B0086B326 /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
 		A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +81,7 @@
 		A3D165D32B97C67D00F225CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3D165D52B97C67D00F225CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D165DA2B97C67D00F225CE /* RickAndMortyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RickAndMortyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3F103042BAD114B00009902 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +146,11 @@
 		A3792BB52BACFB0A000D12CA /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
+				A3792BC32BAD0E5F000D12CA /* DecodableEndpoint.swift */,
+				A3792BB32BACFAE7000D12CA /* DecodableEndpointImpl.swift */,
 				A3792BB12BACFAD1000D12CA /* Endpoint.swift */,
 				A3792BAF2BACFAC4000D12CA /* EndpointError.swift */,
-				A3792BB32BACFAE7000D12CA /* EndpointImpl.swift */,
+				A3792BC52BAD0F7B000D12CA /* EndpointImpl.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -148,8 +158,10 @@
 		A3792BBE2BACFE01000D12CA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A3792BC72BAD10B3000D12CA /* EndpointTests.swift */,
 				A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */,
 				A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */,
+				A3F103042BAD114B00009902 /* NetworkServiceTests.swift */,
 				A3792BAB2BAC85AB000D12CA /* APIService */,
 				A3792BB52BACFB0A000D12CA /* Endpoint */,
 				A3792B942BAC83BB000D12CA /* HTTPClient */,
@@ -334,7 +346,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3792BB42BACFAE7000D12CA /* EndpointImpl.swift in Sources */,
+				A3792BB42BACFAE7000D12CA /* DecodableEndpointImpl.swift in Sources */,
+				A3792BC62BAD0F7B000D12CA /* EndpointImpl.swift in Sources */,
 				A3792B9F2BAC8415000D12CA /* NetworkServiceError.swift in Sources */,
 				A3792BB02BACFAC4000D12CA /* EndpointError.swift in Sources */,
 				A3792B962BAC83C7000D12CA /* HTTPClientError.swift in Sources */,
@@ -343,9 +356,12 @@
 				A3792BA12BAC8425000D12CA /* NetworkService.swift in Sources */,
 				A3792BB72BACFB3E000D12CA /* APIServiceError.swift in Sources */,
 				A3792B9C2BAC83F5000D12CA /* URLProtocolMock.swift in Sources */,
+				A3792BC82BAD10B3000D12CA /* EndpointTests.swift in Sources */,
 				A3792BBD2BACFBE2000D12CA /* HTTPClientTests.swift in Sources */,
+				A3792BC42BAD0E5F000D12CA /* DecodableEndpoint.swift in Sources */,
 				A3792BA32BAC8431000D12CA /* NetworkServiceImpl.swift in Sources */,
 				A3792BBA2BACFB56000D12CA /* APIServiceImpl.swift in Sources */,
+				A3F103052BAD114B00009902 /* NetworkServiceTests.swift in Sources */,
 				A3792BC02BAD0134000D12CA /* HTTPURLResponse+Extensions.swift in Sources */,
 				A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */,
 				A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */,

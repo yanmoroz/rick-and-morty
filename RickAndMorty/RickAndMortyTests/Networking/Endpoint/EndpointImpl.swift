@@ -7,20 +7,6 @@
 
 import Foundation
 
-struct EndpointImpl<DecodeType: Decodable>: Endpoint {    
+struct EndpointImpl: Endpoint {
     let baseUrl: URL
-    let decoder: JSONDecoder
-    let decodeType: DecodeType.Type
-    
-    var urlRequest: URLRequest {
-        get throws {
-            guard let components = URLComponents(string: baseUrl.absoluteString),
-                  let url = components.url
-            else {
-                throw EndpointError.badUrl
-            }
-            
-            return URLRequest(url: url)
-        }
-    }
 }
