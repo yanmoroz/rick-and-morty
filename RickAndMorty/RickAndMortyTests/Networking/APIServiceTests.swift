@@ -9,14 +9,13 @@ import XCTest
 
 final class APIServiceTests: XCTestCase {
     enum Mocks {
+        static let urlSession = {
+            let configuration = URLSessionConfiguration.ephemeral
+            configuration.protocolClasses = [URLProtocolMock.self]
+            return URLSession(configuration: configuration)
+        }()
         static let networkService = NetworkServiceImpl(
-            httpClient: HTTPClientImpl(
-                urlSession: {
-                    let configuration = URLSessionConfiguration.ephemeral
-                    configuration.protocolClasses = [URLProtocolMock.self]
-                    return URLSession(configuration: configuration)
-                }()
-            ),
+            httpClient: HTTPClientImpl(urlSession: urlSession),
             responseValidator: HTTPURLResponseValidatorImpl()
         )
         static let url = URL(string: "https://pepe.com")!

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31D630F2BADA661008677B4 /* RickAndMortyAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31D630E2BADA661008677B4 /* RickAndMortyAPITests.swift */; };
 		A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */; };
 		A3792B962BAC83C7000D12CA /* HTTPClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B952BAC83C7000D12CA /* HTTPClientError.swift */; };
 		A3792B982BAC83DB000D12CA /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792B972BAC83DB000D12CA /* HTTPClient.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A31D630E2BADA661008677B4 /* RickAndMortyAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyAPITests.swift; sourceTree = "<group>"; };
 		A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyTests.swift; sourceTree = "<group>"; };
 		A3792B952BAC83C7000D12CA /* HTTPClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientError.swift; sourceTree = "<group>"; };
 		A3792B972BAC83DB000D12CA /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		A3D165DD2B97C67D00F225CE /* RickAndMortyTests */ = {
 			isa = PBXGroup;
 			children = (
+				A31D630E2BADA661008677B4 /* RickAndMortyAPITests.swift */,
 				A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */,
 				A3944C692B9CF2DE0086B326 /* Extensions */,
 				A3792BBE2BACFE01000D12CA /* Networking */,
@@ -367,6 +370,7 @@
 				A3F103052BAD114B00009902 /* NetworkServiceTests.swift in Sources */,
 				A3792BC02BAD0134000D12CA /* HTTPURLResponse+Extensions.swift in Sources */,
 				A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */,
+				A31D630F2BADA661008677B4 /* RickAndMortyAPITests.swift in Sources */,
 				A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */,
 				A3792BC22BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift in Sources */,
 				A3792B982BAC83DB000D12CA /* HTTPClient.swift in Sources */,
