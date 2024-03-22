@@ -18,6 +18,15 @@
 		A3792BA62BAC8456000D12CA /* HTTPURLResponseValidatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA52BAC8456000D12CA /* HTTPURLResponseValidatorError.swift */; };
 		A3792BA82BAC8464000D12CA /* HTTPURLResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA72BAC8464000D12CA /* HTTPURLResponseValidator.swift */; };
 		A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BA92BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift */; };
+		A3792BAE2BAC85C0000D12CA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BAD2BAC85C0000D12CA /* APIService.swift */; };
+		A3792BB02BACFAC4000D12CA /* EndpointError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BAF2BACFAC4000D12CA /* EndpointError.swift */; };
+		A3792BB22BACFAD1000D12CA /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB12BACFAD1000D12CA /* Endpoint.swift */; };
+		A3792BB42BACFAE7000D12CA /* EndpointImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB32BACFAE7000D12CA /* EndpointImpl.swift */; };
+		A3792BB72BACFB3E000D12CA /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB62BACFB3E000D12CA /* APIServiceError.swift */; };
+		A3792BBA2BACFB56000D12CA /* APIServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BB92BACFB56000D12CA /* APIServiceImpl.swift */; };
+		A3792BBD2BACFBE2000D12CA /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */; };
+		A3792BC02BAD0134000D12CA /* HTTPURLResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BBF2BAD0134000D12CA /* HTTPURLResponse+Extensions.swift */; };
+		A3792BC22BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */; };
 		A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */; };
 		A3D165C82B97C67B00F225CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C72B97C67B00F225CE /* AppDelegate.swift */; };
 		A3D165CA2B97C67B00F225CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D165C92B97C67B00F225CE /* SceneDelegate.swift */; };
@@ -47,6 +56,15 @@
 		A3792BA52BAC8456000D12CA /* HTTPURLResponseValidatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidatorError.swift; sourceTree = "<group>"; };
 		A3792BA72BAC8464000D12CA /* HTTPURLResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidator.swift; sourceTree = "<group>"; };
 		A3792BA92BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidatorImpl.swift; sourceTree = "<group>"; };
+		A3792BAD2BAC85C0000D12CA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A3792BAF2BACFAC4000D12CA /* EndpointError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointError.swift; sourceTree = "<group>"; };
+		A3792BB12BACFAD1000D12CA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A3792BB32BACFAE7000D12CA /* EndpointImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointImpl.swift; sourceTree = "<group>"; };
+		A3792BB62BACFB3E000D12CA /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
+		A3792BB92BACFB56000D12CA /* APIServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceImpl.swift; sourceTree = "<group>"; };
+		A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
+		A3792BBF2BAD0134000D12CA /* HTTPURLResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+Extensions.swift"; sourceTree = "<group>"; };
+		A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseValidatorTests.swift; sourceTree = "<group>"; };
 		A3944C682B9CF03B0086B326 /* RickAndMorty.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RickAndMorty.xctestplan; sourceTree = "<group>"; };
 		A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		A3D165C42B97C67B00F225CE /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +125,40 @@
 			path = HTTPURLResponseValidator;
 			sourceTree = "<group>";
 		};
+		A3792BAB2BAC85AB000D12CA /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				A3792BAD2BAC85C0000D12CA /* APIService.swift */,
+				A3792BB62BACFB3E000D12CA /* APIServiceError.swift */,
+				A3792BB92BACFB56000D12CA /* APIServiceImpl.swift */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		A3792BB52BACFB0A000D12CA /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				A3792BB12BACFAD1000D12CA /* Endpoint.swift */,
+				A3792BAF2BACFAC4000D12CA /* EndpointError.swift */,
+				A3792BB32BACFAE7000D12CA /* EndpointImpl.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		A3792BBE2BACFE01000D12CA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */,
+				A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */,
+				A3792BAB2BAC85AB000D12CA /* APIService */,
+				A3792BB52BACFB0A000D12CA /* Endpoint */,
+				A3792B942BAC83BB000D12CA /* HTTPClient */,
+				A3792BA42BAC844A000D12CA /* HTTPURLResponseValidator */,
+				A3792B9D2BAC840B000D12CA /* NetworkService */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		A3944C212B9914ED0086B326 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +181,7 @@
 		A3944C692B9CF2DE0086B326 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A3792BBF2BAD0134000D12CA /* HTTPURLResponse+Extensions.swift */,
 				A3944C6A2B9CF2F70086B326 /* XCTestCase+Extensions.swift */,
 			);
 			path = Extensions;
@@ -167,9 +220,7 @@
 			children = (
 				A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */,
 				A3944C692B9CF2DE0086B326 /* Extensions */,
-				A3792B942BAC83BB000D12CA /* HTTPClient */,
-				A3792BA42BAC844A000D12CA /* HTTPURLResponseValidator */,
-				A3792B9D2BAC840B000D12CA /* NetworkService */,
+				A3792BBE2BACFE01000D12CA /* Networking */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -283,15 +334,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3792BB42BACFAE7000D12CA /* EndpointImpl.swift in Sources */,
 				A3792B9F2BAC8415000D12CA /* NetworkServiceError.swift in Sources */,
+				A3792BB02BACFAC4000D12CA /* EndpointError.swift in Sources */,
 				A3792B962BAC83C7000D12CA /* HTTPClientError.swift in Sources */,
 				A3792BA62BAC8456000D12CA /* HTTPURLResponseValidatorError.swift in Sources */,
+				A3792BB22BACFAD1000D12CA /* Endpoint.swift in Sources */,
 				A3792BA12BAC8425000D12CA /* NetworkService.swift in Sources */,
+				A3792BB72BACFB3E000D12CA /* APIServiceError.swift in Sources */,
 				A3792B9C2BAC83F5000D12CA /* URLProtocolMock.swift in Sources */,
+				A3792BBD2BACFBE2000D12CA /* HTTPClientTests.swift in Sources */,
 				A3792BA32BAC8431000D12CA /* NetworkServiceImpl.swift in Sources */,
+				A3792BBA2BACFB56000D12CA /* APIServiceImpl.swift in Sources */,
+				A3792BC02BAD0134000D12CA /* HTTPURLResponse+Extensions.swift in Sources */,
 				A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */,
 				A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */,
+				A3792BC22BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift in Sources */,
 				A3792B982BAC83DB000D12CA /* HTTPClient.swift in Sources */,
+				A3792BAE2BAC85C0000D12CA /* APIService.swift in Sources */,
 				A3792BA82BAC8464000D12CA /* HTTPURLResponseValidator.swift in Sources */,
 				A3792B9A2BAC83E7000D12CA /* HTTPClientImpl.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,

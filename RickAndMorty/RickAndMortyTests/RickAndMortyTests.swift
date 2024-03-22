@@ -8,85 +8,22 @@
 import XCTest
 
 final class RickAndMortyTests: XCTestCase {
-    
     enum Mocks {
-        static let url = URL(string: "https://foo.bar")!
-        static let urlRequest = URLRequest(url: url)
-        static let notConnectedToInternetErrorCode = URLError.notConnectedToInternet
-        static let httpUrlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
-        static let data = "foo".data(using: .utf8)
+        static let baseUrl = URL(string: "https://pepega.com")!
+        static let decoder = JSONDecoder()
+        static let decodeType = Foo.self
     }
     
-    func test_httpClient_onUrlError_returnsUrlError() {
+    func test_returnsURLRequest() {
         let sut = makeSUT()
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { _ in
-            (nil, nil, URLError(Mocks.notConnectedToInternetErrorCode))
-        }
-        
-        sut.request(Mocks.urlRequest) { result in
-            defer { exp.fulfill() }
-            
-            guard case .failure(let httpClientError) = result,
-                  case .urlError = httpClientError else {
-                XCTFail("Must be .urlError")
-                return
-            }
-        }
-        
-        wait(for: exp)
+        XCTAssertNotNil(try? sut.urlRequest)
     }
     
-    func test_httpClient_onNilUrlResponse_returnsUnexpectedError() {
-        let sut = makeSUT()
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { _ in
-            ("foo".data(using: .utf8), nil, nil)
-        }
-        
-        sut.request(Mocks.urlRequest) { result in
-            defer { exp.fulfill() }
-            
-            guard case .failure(let httpClientError) = result,
-                  case .unexpectedError = httpClientError else {
-                XCTFail("Must be .unexpectedError")
-                return
-            }
-        }
-        
-        wait(for: exp)
+    private func makeSUT() -> some Endpoint {
+        EndpointImpl(baseUrl: Mocks.baseUrl, decoder: Mocks.decoder, decodeType: Mocks.decodeType)
     }
+}
+
+struct Foo: Decodable {
     
-    func test_httpClient_onDataAndHTTPUrlResponseReceived_returnsSuccess() {
-        let sut = makeSUT()
-        let exp = XCTestExpectation()
-        
-        URLProtocolMock.requestHandler = { _ in
-            (Mocks.data, Mocks.httpUrlResponse, nil)
-        }
-        
-        sut.request(Mocks.urlRequest) { result in
-            defer { exp.fulfill() }
-            
-            guard case .success = result else {
-                XCTFail("Must be .success")
-                return
-            }
-        }
-        
-        wait(for: exp)
-    }
-    
-    func test_() {
-        
-    }
-    
-    private func makeSUT() -> HTTPClient {
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [URLProtocolMock.self]
-        let urlSession = URLSession(configuration: configuration)
-        return HTTPClientImpl(urlSession: urlSession)
-    }
 }
