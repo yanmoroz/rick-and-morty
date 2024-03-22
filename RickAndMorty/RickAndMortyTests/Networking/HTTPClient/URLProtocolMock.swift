@@ -21,7 +21,8 @@ class URLProtocolMock: URLProtocol {
     
     override func startLoading() {
         guard let client,
-              let requestHandler = Self.requestHandler else {
+              let requestHandler = Self.requestHandler
+        else {
             return
         }
         

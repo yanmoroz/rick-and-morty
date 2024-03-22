@@ -21,7 +21,9 @@ class HTTPClientImpl: HTTPClient {
                 return
             }
             
-            guard let data, let httpUrlResponse = urlResponse as? HTTPURLResponse else {
+            guard let data,
+                  let httpUrlResponse = urlResponse as? HTTPURLResponse
+            else {
                 completion(.failure(.unexpectedError))
                 return
             }

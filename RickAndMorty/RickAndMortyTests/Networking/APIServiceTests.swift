@@ -21,6 +21,9 @@ final class APIServiceTests: XCTestCase {
         )
         static let url = URL(string: "https://pepe.com")!
         static let notConnectedToInternetErrorCode = URLError.notConnectedToInternet
+        static let decoder = JSONDecoder()
+        static let data = "foo".data(using: .utf8)
+        static let validHttpUrlResponse = HTTPURLResponse(url: url, statusCode: 200)!
     }
     
     func test_apiService_onNotConnectedToInternetError_returnsNetworkServiceError() {
@@ -43,11 +46,31 @@ final class APIServiceTests: XCTestCase {
         
         wait(for: exp)
     }
+    
+    func test_apiService_onBadData_returnsDecodingError() {
+        let sut = APIServiceImpl(networkService: Mocks.networkService)
+        let endpoint = DecodableEndpointImpl<DecodableStruct>(baseUrl: Mocks.url, decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { _ in
+            (Mocks.data, Mocks.validHttpUrlResponse, nil)
+        }
+        
+        sut.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .failure(let apiServiceError) = result,
+                  case .decodingError = apiServiceError
+            else {
+                XCTFail("Must be .decodingError")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
 }
 
-//enum APIServiceError: Error {
-//    case networkServiceError(NetworkServiceError)
-//    case endpointError(EndpointError)
-//    case decodingError(DecodingError)
-//    case unknownError(Error)
-//}
+private struct DecodableStruct: Decodable {
+    let id: Int
+}

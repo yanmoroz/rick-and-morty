@@ -28,7 +28,8 @@ final class HTTPClientTests: XCTestCase {
             defer { exp.fulfill() }
             
             guard case .failure(let httpClientError) = result,
-                  case .urlError = httpClientError else {
+                  case .urlError = httpClientError
+            else {
                 XCTFail("Must be .urlError")
                 return
             }
@@ -49,7 +50,8 @@ final class HTTPClientTests: XCTestCase {
             defer { exp.fulfill() }
             
             guard case .failure(let httpClientError) = result,
-                  case .unexpectedError = httpClientError else {
+                  case .unexpectedError = httpClientError
+            else {
                 XCTFail("Must be .unexpectedError")
                 return
             }

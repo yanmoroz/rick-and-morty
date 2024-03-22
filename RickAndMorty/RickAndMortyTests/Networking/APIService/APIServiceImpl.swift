@@ -19,11 +19,8 @@ class APIServiceImpl: APIService {
         
         do {
             urlRequest = try endpoint.urlRequest
-        } catch let error as EndpointError {
-            completion(APIServiceError.endpointError(error))
-            return
         } catch {
-            completion(APIServiceError.unknownError(error))
+            completion(APIServiceError.endpointError(error as! EndpointError))
             return
         }
         
@@ -42,11 +39,8 @@ class APIServiceImpl: APIService {
         
         do {
             urlRequest = try endpoint.urlRequest
-        } catch let error as EndpointError {
-            completion(.failure(APIServiceError.endpointError(error)))
-            return
         } catch {
-            completion(.failure(APIServiceError.unknownError(error)))
+            completion(.failure(APIServiceError.endpointError(error as! EndpointError)))
             return
         }
 

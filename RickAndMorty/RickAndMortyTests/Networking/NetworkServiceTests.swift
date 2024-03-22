@@ -37,7 +37,8 @@ final class NetworkServiceTests: XCTestCase {
             defer { exp.fulfill() }
             
             guard case .failure(let networkServiceError) = result,
-                  case .httpClientError = networkServiceError else {
+                  case .httpClientError = networkServiceError
+            else {
                 XCTFail("Must be .httpClientError")
                 return
             }
@@ -58,7 +59,8 @@ final class NetworkServiceTests: XCTestCase {
             defer { exp.fulfill() }
             
             guard case .failure(let networkServiceError) = result,
-                  case .httpUrlResponseValidatorError = networkServiceError else {
+                  case .httpUrlResponseValidatorError = networkServiceError
+            else {
                 XCTFail("Must be .httpUrlResponseValidatorError")
                 return
             }

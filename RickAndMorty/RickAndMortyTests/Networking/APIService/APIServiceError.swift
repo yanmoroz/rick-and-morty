@@ -11,5 +11,4 @@ enum APIServiceError: Error {
     case networkServiceError(NetworkServiceError)
     case endpointError(EndpointError)
     case decodingError(DecodingError)
-    case unknownError(Error)
 }
