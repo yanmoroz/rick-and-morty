@@ -36,6 +36,7 @@
 		A3D165D12B97C67D00F225CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D02B97C67D00F225CE /* Assets.xcassets */; };
 		A3D165D42B97C67D00F225CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D165D22B97C67D00F225CE /* LaunchScreen.storyboard */; };
 		A3F103052BAD114B00009902 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103042BAD114B00009902 /* NetworkServiceTests.swift */; };
+		A3F103072BAD1A1100009902 /* APIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103062BAD1A1100009902 /* APIServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		A3D165D52B97C67D00F225CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D165DA2B97C67D00F225CE /* RickAndMortyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RickAndMortyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F103042BAD114B00009902 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		A3F103062BAD1A1100009902 /* APIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		A3792BBE2BACFE01000D12CA /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A3F103062BAD1A1100009902 /* APIServiceTests.swift */,
 				A3792BC72BAD10B3000D12CA /* EndpointTests.swift */,
 				A3792BBC2BACFBE2000D12CA /* HTTPClientTests.swift */,
 				A3792BC12BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift */,
@@ -370,6 +373,7 @@
 				A3792BAE2BAC85C0000D12CA /* APIService.swift in Sources */,
 				A3792BA82BAC8464000D12CA /* HTTPURLResponseValidator.swift in Sources */,
 				A3792B9A2BAC83E7000D12CA /* HTTPClientImpl.swift in Sources */,
+				A3F103072BAD1A1100009902 /* APIServiceTests.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

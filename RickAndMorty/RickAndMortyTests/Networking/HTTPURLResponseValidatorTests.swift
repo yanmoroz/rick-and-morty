@@ -15,16 +15,12 @@ final class HTTPURLResponseValidatorTests: XCTestCase {
     }
     
     func test_onValidResponse_returnsNilError() {
-        let sut = makeSUT()
+        let sut = HTTPURLResponseValidatorImpl()
         XCTAssertNil(sut.validate(Mocks.validHttpUrlResponse))
     }
     
     func test_onInvalidResponse_returnsError() {
-        let sut = makeSUT()
+        let sut = HTTPURLResponseValidatorImpl()
         XCTAssertNotNil(sut.validate(Mocks.invalidHttpUrlResponse))
-    }
-    
-    private func makeSUT() -> HTTPURLResponseValidator {
-        HTTPURLResponseValidatorImpl()
     }
 }

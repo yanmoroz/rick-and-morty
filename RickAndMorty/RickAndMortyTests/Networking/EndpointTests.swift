@@ -14,13 +14,13 @@ final class EndpointTests: XCTestCase {
     }
     
     func test_endpoint_returnsCorrectURL() {
-        let endpoint = EndpointImpl(baseUrl: Mocks.baseUrl)
-        XCTAssertEqual(endpoint.baseUrl, Mocks.baseUrl)
+        let sut = EndpointImpl(baseUrl: Mocks.baseUrl)
+        XCTAssertEqual(sut.baseUrl, Mocks.baseUrl)
     }
     
     func test_decodableEndpoint_returnsCorrectURL() {
-        let endpoint = DecodableEndpointImpl<DecodableStruct>(baseUrl: Mocks.baseUrl, decoder: Mocks.decoder)
-        XCTAssertEqual(endpoint.baseUrl, Mocks.baseUrl)
+        let sut = DecodableEndpointImpl<DecodableStruct>(baseUrl: Mocks.baseUrl, decoder: Mocks.decoder)
+        XCTAssertEqual(sut.baseUrl, Mocks.baseUrl)
     }
 }
 
