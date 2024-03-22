@@ -8,28 +8,82 @@
 import XCTest
 
 final class NetworkServiceTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    enum Mocks {
+        static let httpClient = HTTPClientImpl(
+            urlSession: {
+                let configuration = URLSessionConfiguration.ephemeral
+                configuration.protocolClasses = [URLProtocolMock.self]
+                return URLSession(configuration: configuration)
+            }()
+        )
+        static let url = URL(string: "https://pepe.com")!
+        static let request = URLRequest(url: url)
+        static let responseValidator = HTTPURLResponseValidatorImpl()
+        static let notConnectedToInternetErrorCode = URLError.notConnectedToInternet
+        static let data = "foo".data(using: .utf8)
+        static let invalidHttpUrlResponse = HTTPURLResponse(url: url, statusCode: 404)!
+        static let validHttpUrlResponse = HTTPURLResponse(url: url, statusCode: 200)!
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_networkService_onNotConnectedToInternetError_returnsHttpClientError() {
+        let sut = NetworkServiceImpl(httpClient: Mocks.httpClient, responseValidator: Mocks.responseValidator)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { _ in
+            (nil, nil, URLError(Mocks.notConnectedToInternetErrorCode))
         }
+        
+        sut.request(Mocks.request) { result in
+            defer { exp.fulfill() }
+            
+            guard case .failure(let networkServiceError) = result,
+                  case .httpClientError = networkServiceError else {
+                XCTFail("Must be .httpClientError")
+                return
+            }
+        }
+        
+        wait(for: exp)
     }
-
+    
+    func test_networkService_onInvalidHttpUrlResponse_returnsHttpUrlResponseValidatorError() {
+        let sut = NetworkServiceImpl(httpClient: Mocks.httpClient, responseValidator: Mocks.responseValidator)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { _ in
+            (Mocks.data, Mocks.invalidHttpUrlResponse, nil)
+        }
+        
+        sut.request(Mocks.request) { result in
+            defer { exp.fulfill() }
+            
+            guard case .failure(let networkServiceError) = result,
+                  case .httpUrlResponseValidatorError = networkServiceError else {
+                XCTFail("Must be .httpUrlResponseValidatorError")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_networkService_onSuccessful_() {
+        let sut = NetworkServiceImpl(httpClient: Mocks.httpClient, responseValidator: Mocks.responseValidator)
+        let exp = XCTestExpectation()
+        
+        URLProtocolMock.requestHandler = { _ in
+            (Mocks.data, Mocks.validHttpUrlResponse, nil)
+        }
+        
+        sut.request(Mocks.request) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
 }

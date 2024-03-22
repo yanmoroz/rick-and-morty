@@ -12,7 +12,7 @@ final class HTTPClientTests: XCTestCase {
         static let url = URL(string: "https://foo.bar")!
         static let urlRequest = URLRequest(url: url)
         static let notConnectedToInternetErrorCode = URLError.notConnectedToInternet
-        static let httpUrlResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+        static let httpUrlResponse = HTTPURLResponse(url: url, statusCode: 200)
         static let data = "foo".data(using: .utf8)
     }
     
@@ -42,7 +42,7 @@ final class HTTPClientTests: XCTestCase {
         let exp = XCTestExpectation()
         
         URLProtocolMock.requestHandler = { _ in
-            ("foo".data(using: .utf8), nil, nil)
+            (Mocks.data, nil, nil)
         }
         
         sut.request(Mocks.urlRequest) { result in
