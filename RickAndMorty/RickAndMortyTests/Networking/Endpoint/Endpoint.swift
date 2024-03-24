@@ -10,15 +10,20 @@ import Foundation
 protocol Endpoint {
     var baseUrl: URL { get }
     var path: String? { get }
+    var queryParameters: [String: Any]? { get }
     var urlRequest: URLRequest { get throws }
 }
 
 extension Endpoint {
     var urlRequest: URLRequest {
         get throws {
-            guard let components = URLComponents(string: fullPath),
-                  let url = components.url
-            else {
+            guard var components = URLComponents(string: fullPath) else {
+                throw EndpointError.badUrl
+            }
+            
+            components.queryItems = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            
+            guard let url = components.url else {
                 throw EndpointError.badUrl
             }
             

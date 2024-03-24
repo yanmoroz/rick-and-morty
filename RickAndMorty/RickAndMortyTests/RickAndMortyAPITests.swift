@@ -181,4 +181,74 @@ final class RickAndMortyAPITests: XCTestCase {
         
         wait(for: exp)
     }
+    
+    func test_api_returnsFilteredCharactersResponse() {
+        let endpoint = DecodableEndpointImpl<RAMCharactersResponse>(
+            baseUrl: Mocks.baseUrl,
+            path: "/character",
+            queryParameters: [
+                "name": "rick",
+                "status": "alive"
+            ],
+            decoder: Mocks.decoder
+        )
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsFilteredLocationsResponse() {
+        let endpoint = DecodableEndpointImpl<RAMLocationsResponse>(
+            baseUrl: Mocks.baseUrl,
+            path: "/location",
+            queryParameters: [
+                "type": "planet"
+            ],
+            decoder: Mocks.decoder
+        )
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsFilteredEpisodesResponse() {
+        let endpoint = DecodableEndpointImpl<RAMEpisodesResponse>(
+            baseUrl: Mocks.baseUrl,
+            path: "/episode",
+            queryParameters: [
+                "name": "pilot"
+            ],
+            decoder: Mocks.decoder
+        )
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
 }
