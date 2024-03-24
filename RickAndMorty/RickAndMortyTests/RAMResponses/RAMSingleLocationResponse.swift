@@ -8,10 +8,10 @@
 import Foundation
 
 struct RAMSingleLocationResponse: Decodable {
-    let character: RAMLocation
+    let location: RAMLocation
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        character = try container.decode(RAMLocation.self)
+        location = try container.decode(RAMLocation.self)
     }
 }

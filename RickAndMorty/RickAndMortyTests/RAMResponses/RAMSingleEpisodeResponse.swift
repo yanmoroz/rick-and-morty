@@ -8,10 +8,10 @@
 import Foundation
 
 struct RAMSingleEpisodeResponse: Decodable {
-    let character: RAMEpisode
+    let episode: RAMEpisode
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        character = try container.decode(RAMEpisode.self)
+        episode = try container.decode(RAMEpisode.self)
     }
 }
