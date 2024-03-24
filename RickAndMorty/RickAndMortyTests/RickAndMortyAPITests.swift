@@ -133,4 +133,52 @@ final class RickAndMortyAPITests: XCTestCase {
         
         wait(for: exp)
     }
+    
+    func test_api_returnsMultipleCharactersResponse() {
+        let endpoint = DecodableEndpointImpl<RAMMultipleCharactersResponse>(baseUrl: Mocks.baseUrl, path: "/character/[1,2,3]", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsMultipleLocationsResponse() {
+        let endpoint = DecodableEndpointImpl<RAMMultipleLocationsResponse>(baseUrl: Mocks.baseUrl, path: "/location/[1,2,3]", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsMultipleEpisodesResponse() {
+        let endpoint = DecodableEndpointImpl<RAMMultipleEpisodesResponse>(baseUrl: Mocks.baseUrl, path: "/episode/[1,2,3]", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
 }

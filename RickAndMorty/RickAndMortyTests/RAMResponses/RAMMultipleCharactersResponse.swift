@@ -8,5 +8,17 @@
 import Foundation
 
 struct RAMMultipleCharactersResponse: Decodable {
+    let characters: [RAMCharacter]
     
+    init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        var characters: [RAMCharacter] = []
+        
+        while !container.isAtEnd {
+            let character = try container.decode(RAMCharacter.self)
+            characters.append(character)
+        }
+        
+        self.characters = characters
+    }
 }
