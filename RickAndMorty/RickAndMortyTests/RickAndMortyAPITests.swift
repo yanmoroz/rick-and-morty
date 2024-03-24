@@ -53,57 +53,84 @@ final class RickAndMortyAPITests: XCTestCase {
         
         wait(for: exp)
     }
-}
-
-struct RAMResourcesResponse: Decodable {
-    let characters: URL
-    let locations: URL
-    let episodes: URL
-}
-
-struct RAMCharactersResponse: Decodable {
-    let info: PageInfo
-    let results: [RAMCharacter]
-}
-
-struct PageInfo: Decodable {
-    let count: Int
-    let pages: Int
-    let next: FailableURL?
-    let prev: FailableURL?
-}
-
-struct RAMCharacter: Decodable {
-    let id: Int
-    let name: String
-    let status: String
-    let species: String
-    let type: String
-    let gender: String
-    let origin: RAMOrigin
-    let location: RAMLocation
-    let image: FailableURL
-    let episode: [FailableURL]
-    let url: FailableURL
-    let created: Date
-}
-
-struct RAMOrigin: Decodable {
-    let name: String
-    let url: FailableURL
-}
-
-struct RAMLocation: Decodable {
-    let name: String
-    let url: FailableURL
-}
-
-struct FailableURL: Decodable {
-    let url: URL?
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.url = try? container.decode(URL.self)
+    func test_api_returnsLocationsResponse() {
+        let endpoint = DecodableEndpointImpl<RAMLocationsResponse>(baseUrl: Mocks.baseUrl, path: "/location", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsEpisodesResponse() {
+        let endpoint = DecodableEndpointImpl<RAMEpisodesResponse>(baseUrl: Mocks.baseUrl, path: "/episode", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsSingleCharacterResponse() {
+        let endpoint = DecodableEndpointImpl<RAMSingleCharacterResponse>(baseUrl: Mocks.baseUrl, path: "/character/2", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsSingleLocationResponse() {
+        let endpoint = DecodableEndpointImpl<RAMSingleLocationResponse>(baseUrl: Mocks.baseUrl, path: "/location/2", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
+    }
+    
+    func test_api_returnsSingleEpisodeResponse() {
+        let endpoint = DecodableEndpointImpl<RAMSingleEpisodeResponse>(baseUrl: Mocks.baseUrl, path: "/episode/2", decoder: Mocks.decoder)
+        let exp = XCTestExpectation()
+        
+        Mocks.apiService.request(endpoint) { result in
+            defer { exp.fulfill() }
+            
+            guard case .success = result else {
+                XCTFail("Must be .success")
+                return
+            }
+        }
+        
+        wait(for: exp)
     }
 }
-

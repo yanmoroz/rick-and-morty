@@ -11,6 +11,7 @@ extension JSONDecoder {
     static let ramJsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(.ramDateFormatter)
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
 }

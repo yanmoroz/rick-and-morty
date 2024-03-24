@@ -40,6 +40,23 @@
 		A3F103072BAD1A1100009902 /* APIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103062BAD1A1100009902 /* APIServiceTests.swift */; };
 		A3F1030A2BAFA2ED00009902 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103092BAFA2ED00009902 /* DateFormatter+Extensions.swift */; };
 		A3F1030C2BAFA46900009902 /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1030B2BAFA46900009902 /* JSONDecoder+Extensions.swift */; };
+		A3F1030F2BB0A15C00009902 /* RAMCharactersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1030E2BB0A15C00009902 /* RAMCharactersResponse.swift */; };
+		A3F103112BB0A16D00009902 /* RAMResourcesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103102BB0A16D00009902 /* RAMResourcesResponse.swift */; };
+		A3F103152BB0A1B700009902 /* PageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103142BB0A1B700009902 /* PageInfo.swift */; };
+		A3F103172BB0A1C800009902 /* RAMCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103162BB0A1C800009902 /* RAMCharacter.swift */; };
+		A3F103192BB0A1D600009902 /* RAMOrigin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103182BB0A1D600009902 /* RAMOrigin.swift */; };
+		A3F1031B2BB0A1E700009902 /* RAMLocationSlim.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1031A2BB0A1E700009902 /* RAMLocationSlim.swift */; };
+		A3F1031D2BB0A21600009902 /* FailableURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1031C2BB0A21600009902 /* FailableURL.swift */; };
+		A3F1031F2BB0A31700009902 /* RAMLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1031E2BB0A31700009902 /* RAMLocation.swift */; };
+		A3F103212BB0A39200009902 /* RAMLocationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103202BB0A39200009902 /* RAMLocationsResponse.swift */; };
+		A3F103232BB0A3F400009902 /* RAMEpisodesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103222BB0A3F400009902 /* RAMEpisodesResponse.swift */; };
+		A3F103252BB0A41900009902 /* RAMEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103242BB0A41900009902 /* RAMEpisode.swift */; };
+		A3F103272BB0A72300009902 /* RAMSingleCharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103262BB0A72300009902 /* RAMSingleCharacterResponse.swift */; };
+		A3F103292BB0A73100009902 /* RAMSingleLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103282BB0A73100009902 /* RAMSingleLocationResponse.swift */; };
+		A3F1032B2BB0A73A00009902 /* RAMSingleEpisodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1032A2BB0A73A00009902 /* RAMSingleEpisodeResponse.swift */; };
+		A3F1032D2BB0AE8300009902 /* RAMMultipleCharactersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1032C2BB0AE8300009902 /* RAMMultipleCharactersResponse.swift */; };
+		A3F1032F2BB0AE9000009902 /* RAMMultipleLocationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F1032E2BB0AE9000009902 /* RAMMultipleLocationsResponse.swift */; };
+		A3F103312BB0AE9B00009902 /* RAMMultipleEpisodesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F103302BB0AE9B00009902 /* RAMMultipleEpisodesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +107,23 @@
 		A3F103062BAD1A1100009902 /* APIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceTests.swift; sourceTree = "<group>"; };
 		A3F103092BAFA2ED00009902 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		A3F1030B2BAFA46900009902 /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
+		A3F1030E2BB0A15C00009902 /* RAMCharactersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMCharactersResponse.swift; sourceTree = "<group>"; };
+		A3F103102BB0A16D00009902 /* RAMResourcesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMResourcesResponse.swift; sourceTree = "<group>"; };
+		A3F103142BB0A1B700009902 /* PageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInfo.swift; sourceTree = "<group>"; };
+		A3F103162BB0A1C800009902 /* RAMCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMCharacter.swift; sourceTree = "<group>"; };
+		A3F103182BB0A1D600009902 /* RAMOrigin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMOrigin.swift; sourceTree = "<group>"; };
+		A3F1031A2BB0A1E700009902 /* RAMLocationSlim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMLocationSlim.swift; sourceTree = "<group>"; };
+		A3F1031C2BB0A21600009902 /* FailableURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableURL.swift; sourceTree = "<group>"; };
+		A3F1031E2BB0A31700009902 /* RAMLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMLocation.swift; sourceTree = "<group>"; };
+		A3F103202BB0A39200009902 /* RAMLocationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMLocationsResponse.swift; sourceTree = "<group>"; };
+		A3F103222BB0A3F400009902 /* RAMEpisodesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMEpisodesResponse.swift; sourceTree = "<group>"; };
+		A3F103242BB0A41900009902 /* RAMEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMEpisode.swift; sourceTree = "<group>"; };
+		A3F103262BB0A72300009902 /* RAMSingleCharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMSingleCharacterResponse.swift; sourceTree = "<group>"; };
+		A3F103282BB0A73100009902 /* RAMSingleLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMSingleLocationResponse.swift; sourceTree = "<group>"; };
+		A3F1032A2BB0A73A00009902 /* RAMSingleEpisodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMSingleEpisodeResponse.swift; sourceTree = "<group>"; };
+		A3F1032C2BB0AE8300009902 /* RAMMultipleCharactersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMMultipleCharactersResponse.swift; sourceTree = "<group>"; };
+		A3F1032E2BB0AE9000009902 /* RAMMultipleLocationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMMultipleLocationsResponse.swift; sourceTree = "<group>"; };
+		A3F103302BB0AE9B00009902 /* RAMMultipleEpisodesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMMultipleEpisodesResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,8 +279,41 @@
 				A3538E772BAA3B1C009E950C /* RickAndMortyTests.swift */,
 				A3944C692B9CF2DE0086B326 /* Extensions */,
 				A3792BBE2BACFE01000D12CA /* Networking */,
+				A3F1030D2BB0A14800009902 /* RAMResponses */,
 			);
 			path = RickAndMortyTests;
+			sourceTree = "<group>";
+		};
+		A3F1030D2BB0A14800009902 /* RAMResponses */ = {
+			isa = PBXGroup;
+			children = (
+				A3F1031C2BB0A21600009902 /* FailableURL.swift */,
+				A3F1030E2BB0A15C00009902 /* RAMCharactersResponse.swift */,
+				A3F103222BB0A3F400009902 /* RAMEpisodesResponse.swift */,
+				A3F103202BB0A39200009902 /* RAMLocationsResponse.swift */,
+				A3F1032C2BB0AE8300009902 /* RAMMultipleCharactersResponse.swift */,
+				A3F103302BB0AE9B00009902 /* RAMMultipleEpisodesResponse.swift */,
+				A3F1032E2BB0AE9000009902 /* RAMMultipleLocationsResponse.swift */,
+				A3F103102BB0A16D00009902 /* RAMResourcesResponse.swift */,
+				A3F103262BB0A72300009902 /* RAMSingleCharacterResponse.swift */,
+				A3F1032A2BB0A73A00009902 /* RAMSingleEpisodeResponse.swift */,
+				A3F103282BB0A73100009902 /* RAMSingleLocationResponse.swift */,
+				A3F103122BB0A18500009902 /* DTOs */,
+			);
+			path = RAMResponses;
+			sourceTree = "<group>";
+		};
+		A3F103122BB0A18500009902 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				A3F103142BB0A1B700009902 /* PageInfo.swift */,
+				A3F103162BB0A1C800009902 /* RAMCharacter.swift */,
+				A3F103242BB0A41900009902 /* RAMEpisode.swift */,
+				A3F1031E2BB0A31700009902 /* RAMLocation.swift */,
+				A3F1031A2BB0A1E700009902 /* RAMLocationSlim.swift */,
+				A3F103182BB0A1D600009902 /* RAMOrigin.swift */,
+			);
+			path = DTOs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,9 +429,13 @@
 				A3792BC62BAD0F7B000D12CA /* EndpointImpl.swift in Sources */,
 				A3F1030A2BAFA2ED00009902 /* DateFormatter+Extensions.swift in Sources */,
 				A3792B9F2BAC8415000D12CA /* NetworkServiceError.swift in Sources */,
+				A3F1032F2BB0AE9000009902 /* RAMMultipleLocationsResponse.swift in Sources */,
 				A3792BB02BACFAC4000D12CA /* EndpointError.swift in Sources */,
 				A3792B962BAC83C7000D12CA /* HTTPClientError.swift in Sources */,
 				A3792BA62BAC8456000D12CA /* HTTPURLResponseValidatorError.swift in Sources */,
+				A3F1031D2BB0A21600009902 /* FailableURL.swift in Sources */,
+				A3F1031F2BB0A31700009902 /* RAMLocation.swift in Sources */,
+				A3F103112BB0A16D00009902 /* RAMResourcesResponse.swift in Sources */,
 				A3792BB22BACFAD1000D12CA /* Endpoint.swift in Sources */,
 				A3792BA12BAC8425000D12CA /* NetworkService.swift in Sources */,
 				A3792BB72BACFB3E000D12CA /* APIServiceError.swift in Sources */,
@@ -373,18 +444,31 @@
 				A3792BBD2BACFBE2000D12CA /* HTTPClientTests.swift in Sources */,
 				A3792BC42BAD0E5F000D12CA /* DecodableEndpoint.swift in Sources */,
 				A3792BA32BAC8431000D12CA /* NetworkServiceImpl.swift in Sources */,
+				A3F103192BB0A1D600009902 /* RAMOrigin.swift in Sources */,
 				A3792BBA2BACFB56000D12CA /* APIServiceImpl.swift in Sources */,
+				A3F103252BB0A41900009902 /* RAMEpisode.swift in Sources */,
 				A3F103052BAD114B00009902 /* NetworkServiceTests.swift in Sources */,
+				A3F103292BB0A73100009902 /* RAMSingleLocationResponse.swift in Sources */,
+				A3F103152BB0A1B700009902 /* PageInfo.swift in Sources */,
 				A3792BC02BAD0134000D12CA /* HTTPURLResponse+Extensions.swift in Sources */,
 				A3538E782BAA3B1C009E950C /* RickAndMortyTests.swift in Sources */,
 				A31D630F2BADA661008677B4 /* RickAndMortyAPITests.swift in Sources */,
+				A3F103272BB0A72300009902 /* RAMSingleCharacterResponse.swift in Sources */,
+				A3F103312BB0AE9B00009902 /* RAMMultipleEpisodesResponse.swift in Sources */,
 				A3792BAA2BAC8473000D12CA /* HTTPURLResponseValidatorImpl.swift in Sources */,
 				A3792BC22BAD024E000D12CA /* HTTPURLResponseValidatorTests.swift in Sources */,
 				A3792B982BAC83DB000D12CA /* HTTPClient.swift in Sources */,
+				A3F1030F2BB0A15C00009902 /* RAMCharactersResponse.swift in Sources */,
 				A3792BAE2BAC85C0000D12CA /* APIService.swift in Sources */,
+				A3F103212BB0A39200009902 /* RAMLocationsResponse.swift in Sources */,
+				A3F1031B2BB0A1E700009902 /* RAMLocationSlim.swift in Sources */,
 				A3F1030C2BAFA46900009902 /* JSONDecoder+Extensions.swift in Sources */,
 				A3792BA82BAC8464000D12CA /* HTTPURLResponseValidator.swift in Sources */,
+				A3F1032D2BB0AE8300009902 /* RAMMultipleCharactersResponse.swift in Sources */,
+				A3F1032B2BB0A73A00009902 /* RAMSingleEpisodeResponse.swift in Sources */,
 				A3792B9A2BAC83E7000D12CA /* HTTPClientImpl.swift in Sources */,
+				A3F103172BB0A1C800009902 /* RAMCharacter.swift in Sources */,
+				A3F103232BB0A3F400009902 /* RAMEpisodesResponse.swift in Sources */,
 				A3F103072BAD1A1100009902 /* APIServiceTests.swift in Sources */,
 				A3944C6B2B9CF2F70086B326 /* XCTestCase+Extensions.swift in Sources */,
 			);
