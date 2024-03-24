@@ -9,13 +9,14 @@ import Foundation
 
 protocol Endpoint {
     var baseUrl: URL { get }
+    var path: String? { get }
     var urlRequest: URLRequest { get throws }
 }
 
 extension Endpoint {
     var urlRequest: URLRequest {
         get throws {
-            guard let components = URLComponents(string: baseUrl.absoluteString),
+            guard let components = URLComponents(string: fullPath),
                   let url = components.url
             else {
                 throw EndpointError.badUrl
@@ -23,5 +24,16 @@ extension Endpoint {
             
             return URLRequest(url: url)
         }
+    }
+    
+    private var fullPath: String {
+        let baseUrl = baseUrl.absoluteString.trimmingCharacters(in: ["/"])
+        let path = path?.trimmingCharacters(in: ["/"])
+        
+        guard let path else {
+            return baseUrl
+        }
+        
+        return "\(baseUrl)/\(path)"
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct DecodableEndpointImpl<DecodeType: Decodable>: DecodableEndpoint {    
-    let baseUrl: URL
-    let decoder: JSONDecoder
+    var baseUrl: URL
+    var path: String? = nil
+    var decoder: JSONDecoder
 }

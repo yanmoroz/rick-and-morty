@@ -8,5 +8,6 @@
 import Foundation
 
 struct EndpointImpl: Endpoint {
-    let baseUrl: URL
+    var baseUrl: URL
+    var path: String?
 }
