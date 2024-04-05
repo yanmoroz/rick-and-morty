@@ -25,9 +25,9 @@ class APIServiceImpl: APIService {
                 completion(.failure(error))
                 return
             }
-            
+
             // validate response
-            
+
             if let data {
                 let decoded = try! JSONDecoder().decode(T.self, from: data)
                 completion(.success(decoded))
@@ -35,6 +35,12 @@ class APIServiceImpl: APIService {
         }.resume()
     }
 }
+
+// (Data?, URLResponse?, Error?)    - URLSession
+// -->
+// Result<Data?, Error>             - NetworkService
+// -->
+// Result<T, Error>                 - APIService
 
 protocol Endpoint {
     associatedtype DecodeType
