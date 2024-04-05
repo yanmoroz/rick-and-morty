@@ -6,15 +6,16 @@ func execute(_ action: @escaping () -> Void) {
     action()
 }
 
-execute {
-    let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
-    URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
-        // handle error and validate response
-        // Data -> some T
-        if let data {
-            let foo = try? JSONDecoder().decode(Foo.self, from: data)
-            // completion(...)
-        }
+protocol APIService {
+    associatedtype DecodeType
+    
+    typealias Completion<T> = (Result<T, Error>) -> Void
+    func request(_ urlRequest: URLRequest, completion: @escaping Completion<DecodeType>)
+}
+
+class APIServiceImpl<DecodeType>: APIService {
+    func request(_ urlRequest: URLRequest, completion: @escaping Completion<DecodeType>) {
+        // ...
     }
 }
 
@@ -22,34 +23,10 @@ struct Foo: Decodable {
     
 }
 
-protocol APIService {
-    typealias Completion<T> = (Result<T, Error>) -> Void
-    func request<T>(_ urlRequest: URLRequest, completion: @escaping Completion<T>)
-    func request<T>(_ urlRequest: URLRequest, decodeType: T.Type, completion: @escaping Completion<T>)
-}
-
-class APIServiceImpl: APIService {
-    func request<T>(_ urlRequest: URLRequest, completion: @escaping Completion<T>) {
-        // ...
-    }
-    
-    func request<T>(_ urlRequest: URLRequest, decodeType: T.Type, completion: @escaping Completion<T>) {
-        // ...
-    }
-}
-
 execute {
-    let apiService = APIServiceImpl()
+    let apiService = APIServiceImpl<Foo>()
     let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
-    apiService.request(urlRequest) { (result: Result<Foo, Error>) in
-        // ...
-    }
-}
-
-execute {
-    let apiService = APIServiceImpl()
-    let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
-    apiService.request(urlRequest, decodeType: Foo.self) { result in
-        // ...
+    apiService.request(urlRequest) { result in
+        
     }
 }
