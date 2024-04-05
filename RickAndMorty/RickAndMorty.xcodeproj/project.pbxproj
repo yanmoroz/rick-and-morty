@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A33DF4E72BC06623001FD9AA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4E62BC06623001FD9AA /* Network.swift */; };
 		A3D5C9C62BB9CF240048D444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C9C52BB9CF240048D444 /* AppDelegate.swift */; };
 		A3D5C9C82BB9CF240048D444 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C9C72BB9CF240048D444 /* SceneDelegate.swift */; };
 		A3D5C9CF2BB9CF250048D444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D5C9CE2BB9CF250048D444 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		A327EE5D2BC052FC0033C595 /* AppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A33DF4E62BC06623001FD9AA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		A3D5C9C22BB9CF240048D444 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D5C9C52BB9CF240048D444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D5C9C72BB9CF240048D444 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				A3D5C9DC2BB9CF250048D444 /* RickAndMortyTests.swift */,
+				A33DF4E62BC06623001FD9AA /* Network.swift */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33DF4E72BC06623001FD9AA /* Network.swift in Sources */,
 				A3D5C9DD2BB9CF250048D444 /* RickAndMortyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
