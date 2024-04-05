@@ -8,16 +8,23 @@ func execute(_ action: @escaping () -> Void) {
 
 protocol APIService {
     typealias Completion<T> = (Result<T, Error>) -> Void
-    func request(_ endpoint: Endpoint,
-                 completion: @escaping Completion<Endpoint.DecodeType>)
+    func request<E: Endpoint>(_ endpoint: E,
+                              completion: @escaping Completion<E.DecodeType>)
 }
 
-//class APIServiceImpl: APIService {
-//
-//}
+class APIServiceImpl: APIService {
+    func request<E: Endpoint>(_ endpoint: E,
+                              completion: @escaping Completion<E.DecodeType>) {
+        // ...
+    }
+}
 
 protocol Endpoint {
     associatedtype DecodeType
+}
+
+struct EndpointImpl<DecodeType>: Endpoint {
+    typealias DecodeType = DecodeType
 }
 
 struct Foo: Decodable {
@@ -25,5 +32,9 @@ struct Foo: Decodable {
 }
 
 execute {
-    
+    let apiService = APIServiceImpl()
+    let endpoint = EndpointImpl<Foo>()
+    apiService.request(endpoint) { result in
+        
+    }
 }
