@@ -25,10 +25,15 @@ struct Foo: Decodable {
 protocol APIService {
     typealias Completion<T> = (Result<T, Error>) -> Void
     func request<T>(_ urlRequest: URLRequest, completion: @escaping Completion<T>)
+    func request<T>(_ urlRequest: URLRequest, decodeType: T.Type, completion: @escaping Completion<T>)
 }
 
 class APIServiceImpl: APIService {
     func request<T>(_ urlRequest: URLRequest, completion: @escaping Completion<T>) {
+        // ...
+    }
+    
+    func request<T>(_ urlRequest: URLRequest, decodeType: T.Type, completion: @escaping Completion<T>) {
         // ...
     }
 }
@@ -37,6 +42,14 @@ execute {
     let apiService = APIServiceImpl()
     let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
     apiService.request(urlRequest) { (result: Result<Foo, Error>) in
+        // ...
+    }
+}
+
+execute {
+    let apiService = APIServiceImpl()
+    let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
+    apiService.request(urlRequest, decodeType: Foo.self) { result in
         // ...
     }
 }
