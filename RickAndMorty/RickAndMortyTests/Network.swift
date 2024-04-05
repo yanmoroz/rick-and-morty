@@ -8,7 +8,9 @@
 import Foundation
 
 enum APIServiceError: Error {
-    
+    case networkServiceError(NetworkServiceError)
+    case decodingError(DecodingError)
+    case unknown(Error)
 }
 
 protocol APIService {
@@ -20,23 +22,33 @@ protocol APIService {
 }
 
 class APIServiceImpl: APIService {
+    let networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
+    
     func request<T: Decodable, E: Endpoint>(
         _ endpoint: E,
         completion: @escaping Completion<T>
     ) where E.DecodeType == T {
-        URLSession.shared.dataTask(with: endpoint.urlRequest) { data, _, error in
-            if let error {
-                completion(.failure(error))
-                return
+        networkService.request(endpoint.urlRequest) { result in
+            switch result {
+            case .success(let data):
+                if let data {
+                    do {
+                        let decoded = try JSONDecoder().decode(T.self, from: data)
+                        completion(.success(decoded))
+                    } catch let error as DecodingError {
+                        completion(.failure(.decodingError(error)))
+                    } catch {
+                        completion(.failure(.unknown(error)))
+                    }
+                }
+            case .failure(let error):
+                completion(.failure(.networkServiceError(error)))
             }
-
-            // validate response
-
-            if let data {
-                let decoded = try! JSONDecoder().decode(T.self, from: data)
-                completion(.success(decoded))
-            }
-        }.resume()
+        }
     }
 }
 
