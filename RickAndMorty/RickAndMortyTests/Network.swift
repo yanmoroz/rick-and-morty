@@ -7,8 +7,12 @@
 
 import Foundation
 
+enum APIServiceError: Error {
+    
+}
+
 protocol APIService {
-    typealias Completion<T> = (Result<T, Error>) -> Void
+    typealias Completion<T> = (Result<T, APIServiceError>) -> Void
     func request<T: Decodable, E: Endpoint>(
         _ endpoint: E,
         completion: @escaping Completion<T>
