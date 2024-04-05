@@ -25,18 +25,19 @@ class APIServiceImpl: APIService {
             
             if let data {
                 let decoded = try! JSONDecoder().decode(E.DecodeType.self, from: data)
+                completion(.success(decoded))
             }
         }.resume()
     }
 }
 
 protocol Endpoint {
-    associatedtype DecodeType
+    associatedtype DecodeType: Decodable
     
     var urlRequest: URLRequest { get }
 }
 
-struct EndpointImpl<DecodeType>: Endpoint {
+struct EndpointImpl<DecodeType: Decodable>: Endpoint {
     typealias DecodeType = DecodeType
     
     var urlRequest: URLRequest
