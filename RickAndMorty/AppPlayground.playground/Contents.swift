@@ -8,13 +8,17 @@ func execute(_ action: @escaping () -> Void) {
 
 protocol APIService {
     typealias Completion<T> = (Result<T, Error>) -> Void
-    func request<E: Endpoint>(_ endpoint: E,
-                              completion: @escaping Completion<E.DecodeType>)
+    func request<T: Decodable, E: Endpoint>(
+        _ endpoint: E,
+        completion: @escaping Completion<T>
+    ) where E.DecodeType == T
 }
 
 class APIServiceImpl: APIService {
-    func request<E: Endpoint>(_ endpoint: E,
-                              completion: @escaping Completion<E.DecodeType>) {
+    func request<T: Decodable, E: Endpoint>(
+        _ endpoint: E,
+        completion: @escaping Completion<T>
+    ) where E.DecodeType == T {
         URLSession.shared.dataTask(with: endpoint.urlRequest) { data, _, error in
             if let error {
                 completion(.failure(error))
@@ -24,7 +28,7 @@ class APIServiceImpl: APIService {
             // validate response
             
             if let data {
-                let decoded = try! JSONDecoder().decode(E.DecodeType.self, from: data)
+                let decoded = try! JSONDecoder().decode(T.self, from: data)
                 completion(.success(decoded))
             }
         }.resume()
@@ -32,12 +36,12 @@ class APIServiceImpl: APIService {
 }
 
 protocol Endpoint {
-    associatedtype DecodeType: Decodable
+    associatedtype DecodeType
     
     var urlRequest: URLRequest { get }
 }
 
-struct EndpointImpl<DecodeType: Decodable>: Endpoint {
+struct EndpointImpl<DecodeType>: Endpoint {
     typealias DecodeType = DecodeType
     
     var urlRequest: URLRequest
