@@ -25,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A327EE5D2BC052FC0033C595 /* AppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A3D5C9C22BB9CF240048D444 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D5C9C52BB9CF240048D444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D5C9C72BB9CF240048D444 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		A3D5C9B92BB9CF240048D444 = {
 			isa = PBXGroup;
 			children = (
+				A327EE5D2BC052FC0033C595 /* AppPlayground.playground */,
 				A3D5C9C42BB9CF240048D444 /* RickAndMorty */,
 				A3D5C9DB2BB9CF250048D444 /* RickAndMortyTests */,
 				A3D5C9C32BB9CF240048D444 /* Products */,
