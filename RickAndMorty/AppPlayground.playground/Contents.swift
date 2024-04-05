@@ -36,7 +36,7 @@ class APIServiceImpl: APIService {
 execute {
     let apiService = APIServiceImpl()
     let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
-    apiService.request(urlRequest) { result in
+    apiService.request(urlRequest) { (result: Result<Foo, Error>) in
         // ...
     }
 }
