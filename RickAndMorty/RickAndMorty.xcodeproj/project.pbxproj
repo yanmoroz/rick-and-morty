@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A33DF4E72BC06623001FD9AA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4E62BC06623001FD9AA /* Network.swift */; };
 		A33DF4EA2BC09713001FD9AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4E92BC09713001FD9AA /* NetworkService.swift */; };
 		A33DF4EC2BC09737001FD9AA /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4EB2BC09737001FD9AA /* NetworkServiceError.swift */; };
 		A33DF4EE2BC0974F001FD9AA /* NetworkServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4ED2BC0974F001FD9AA /* NetworkServiceImpl.swift */; };
+		A33DF4F12BC09BDB001FD9AA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4F02BC09BDB001FD9AA /* APIService.swift */; };
+		A33DF4F32BC09BF0001FD9AA /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4F22BC09BF0001FD9AA /* APIServiceError.swift */; };
+		A33DF4F52BC09BFB001FD9AA /* APIServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4F42BC09BFB001FD9AA /* APIServiceImpl.swift */; };
+		A33DF4F82BC09C23001FD9AA /* ResourcesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4F72BC09C23001FD9AA /* ResourcesResponse.swift */; };
+		A33DF4FB2BC09C43001FD9AA /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4FA2BC09C43001FD9AA /* Endpoint.swift */; };
+		A33DF4FD2BC09C4F001FD9AA /* EndpointImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33DF4FC2BC09C4F001FD9AA /* EndpointImpl.swift */; };
 		A3D5C9C62BB9CF240048D444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C9C52BB9CF240048D444 /* AppDelegate.swift */; };
 		A3D5C9C82BB9CF240048D444 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D5C9C72BB9CF240048D444 /* SceneDelegate.swift */; };
 		A3D5C9CF2BB9CF250048D444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D5C9CE2BB9CF250048D444 /* Assets.xcassets */; };
@@ -30,10 +35,15 @@
 
 /* Begin PBXFileReference section */
 		A327EE5D2BC052FC0033C595 /* AppPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AppPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		A33DF4E62BC06623001FD9AA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		A33DF4E92BC09713001FD9AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		A33DF4EB2BC09737001FD9AA /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
 		A33DF4ED2BC0974F001FD9AA /* NetworkServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceImpl.swift; sourceTree = "<group>"; };
+		A33DF4F02BC09BDB001FD9AA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A33DF4F22BC09BF0001FD9AA /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
+		A33DF4F42BC09BFB001FD9AA /* APIServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceImpl.swift; sourceTree = "<group>"; };
+		A33DF4F72BC09C23001FD9AA /* ResourcesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesResponse.swift; sourceTree = "<group>"; };
+		A33DF4FA2BC09C43001FD9AA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A33DF4FC2BC09C4F001FD9AA /* EndpointImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointImpl.swift; sourceTree = "<group>"; };
 		A3D5C9C22BB9CF240048D444 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D5C9C52BB9CF240048D444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D5C9C72BB9CF240048D444 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +82,34 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
+		A33DF4EF2BC09BD3001FD9AA /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				A33DF4F02BC09BDB001FD9AA /* APIService.swift */,
+				A33DF4F22BC09BF0001FD9AA /* APIServiceError.swift */,
+				A33DF4F42BC09BFB001FD9AA /* APIServiceImpl.swift */,
+				A33DF4F92BC09C3B001FD9AA /* Endpoint */,
+			);
+			path = APIService;
+			sourceTree = "<group>";
+		};
+		A33DF4F62BC09C1B001FD9AA /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				A33DF4F72BC09C23001FD9AA /* ResourcesResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		A33DF4F92BC09C3B001FD9AA /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				A33DF4FA2BC09C43001FD9AA /* Endpoint.swift */,
+				A33DF4FC2BC09C4F001FD9AA /* EndpointImpl.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
 		A3D5C9B92BB9CF240048D444 = {
 			isa = PBXGroup;
 			children = (
@@ -103,9 +141,10 @@
 		A3D5C9DB2BB9CF250048D444 /* RickAndMortyTests */ = {
 			isa = PBXGroup;
 			children = (
-				A33DF4E62BC06623001FD9AA /* Network.swift */,
 				A3D5C9DC2BB9CF250048D444 /* RickAndMortyTests.swift */,
+				A33DF4EF2BC09BD3001FD9AA /* APIService */,
 				A33DF4E82BC09705001FD9AA /* NetworkService */,
+				A33DF4F62BC09C1B001FD9AA /* Responses */,
 			);
 			path = RickAndMortyTests;
 			sourceTree = "<group>";
@@ -238,10 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A33DF4E72BC06623001FD9AA /* Network.swift in Sources */,
+				A33DF4FD2BC09C4F001FD9AA /* EndpointImpl.swift in Sources */,
 				A33DF4EC2BC09737001FD9AA /* NetworkServiceError.swift in Sources */,
+				A33DF4F32BC09BF0001FD9AA /* APIServiceError.swift in Sources */,
 				A33DF4EA2BC09713001FD9AA /* NetworkService.swift in Sources */,
+				A33DF4FB2BC09C43001FD9AA /* Endpoint.swift in Sources */,
+				A33DF4F52BC09BFB001FD9AA /* APIServiceImpl.swift in Sources */,
 				A33DF4EE2BC0974F001FD9AA /* NetworkServiceImpl.swift in Sources */,
+				A33DF4F82BC09C23001FD9AA /* ResourcesResponse.swift in Sources */,
+				A33DF4F12BC09BDB001FD9AA /* APIService.swift in Sources */,
 				A3D5C9DD2BB9CF250048D444 /* RickAndMortyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
