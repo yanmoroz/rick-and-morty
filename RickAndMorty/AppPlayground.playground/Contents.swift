@@ -16,17 +16,30 @@ class APIServiceImpl: APIService {
     func request<E: Endpoint>(_ endpoint: E,
                               completion: @escaping Completion<E.DecodeType>) {
         URLSession.shared.dataTask(with: endpoint.urlRequest) { data, _, error in
-            // ...
+            if let error {
+                completion(.failure(error))
+                return
+            }
+            
+            // validate response
+            
+            if let data {
+                let decoded = try! JSONDecoder().decode(E.DecodeType.self, from: data)
+            }
         }.resume()
     }
 }
 
 protocol Endpoint {
     associatedtype DecodeType
+    
+    var urlRequest: URLRequest { get }
 }
 
 struct EndpointImpl<DecodeType>: Endpoint {
     typealias DecodeType = DecodeType
+    
+    var urlRequest: URLRequest
 }
 
 struct ResourcesResponse: Decodable {
@@ -37,7 +50,8 @@ struct ResourcesResponse: Decodable {
 
 execute {
     let apiService = APIServiceImpl()
-    let endpoint = EndpointImpl<ResourcesResponse>()
+    let urlRequest = URLRequest(url: URL(string: "https://rickandmortyapi.com/api/")!)
+    let endpoint = EndpointImpl<ResourcesResponse>(urlRequest: urlRequest)
     apiService.request(endpoint) { result in
         switch result {
         case .success(let decoded):
