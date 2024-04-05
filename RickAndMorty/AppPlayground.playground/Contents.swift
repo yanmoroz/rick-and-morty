@@ -7,16 +7,17 @@ func execute(_ action: @escaping () -> Void) {
 }
 
 protocol APIService {
-    associatedtype DecodeType
-    
     typealias Completion<T> = (Result<T, Error>) -> Void
-    func request(_ urlRequest: URLRequest, completion: @escaping Completion<DecodeType>)
+    func request(_ endpoint: Endpoint,
+                 completion: @escaping Completion<Endpoint.DecodeType>)
 }
 
-class APIServiceImpl<DecodeType>: APIService {
-    func request(_ urlRequest: URLRequest, completion: @escaping Completion<DecodeType>) {
-        // ...
-    }
+//class APIServiceImpl: APIService {
+//
+//}
+
+protocol Endpoint {
+    associatedtype DecodeType
 }
 
 struct Foo: Decodable {
@@ -24,9 +25,5 @@ struct Foo: Decodable {
 }
 
 execute {
-    let apiService = APIServiceImpl<Foo>()
-    let urlRequest = URLRequest(url: URL(string: "https://foo.bar")!)
-    apiService.request(urlRequest) { result in
-        
-    }
+    
 }
