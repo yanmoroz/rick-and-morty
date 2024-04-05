@@ -36,11 +36,11 @@ class APIServiceImpl: APIService {
     }
 }
 
-// (Data?, URLResponse?, Error?)    - URLSession
+// (Data?, URLResponse?, Error?)        - URLSession
 // -->
-// Result<Data?, Error>             - NetworkService
+// Result<Data?, NetworkServiceError>   - NetworkService
 // -->
-// Result<T, Error>                 - APIService
+// Result<T, APIService>                - APIService
 
 protocol Endpoint {
     associatedtype DecodeType
