@@ -14,9 +14,12 @@ class APIServiceImpl: APIService {
         self.networkService = networkService
     }
     
-    func request<T: Decodable, E: Endpoint>(
+    func decodableRequest<
+        T: Decodable,
+        E: DecodableEndpoint
+    >(
         _ endpoint: E,
-        completion: @escaping Completion<T>
+        completion: @escaping DecodableCompletion<T>
     ) where E.DecodeType == T {
         networkService.request(endpoint.urlRequest) { result in
             switch result {
@@ -33,6 +36,20 @@ class APIServiceImpl: APIService {
                 }
             case .failure(let error):
                 completion(.failure(.networkServiceError(error)))
+            }
+        }
+    }
+    
+    func request(
+        _ endpoint: Endpoint,
+        completion: @escaping Completion
+    ) {
+        networkService.request(endpoint.urlRequest) { result in
+            switch result {
+            case .success:
+                completion(nil)
+            case .failure(let error):
+                completion(.networkServiceError(error))
             }
         }
     }

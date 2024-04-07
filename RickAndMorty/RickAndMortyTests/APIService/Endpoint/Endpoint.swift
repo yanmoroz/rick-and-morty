@@ -8,7 +8,5 @@
 import Foundation
 
 protocol Endpoint {
-    associatedtype DecodeType
-    
     var urlRequest: URLRequest { get }
 }

@@ -7,8 +7,6 @@
 
 import Foundation
 
-struct EndpointImpl<DecodeType>: Endpoint {
-    typealias DecodeType = DecodeType
-    
+struct EndpointImpl: Endpoint {
     var urlRequest: URLRequest
 }

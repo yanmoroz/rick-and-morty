@@ -9,5 +9,8 @@ import Foundation
 
 protocol NetworkService {
     typealias Completion = (Result<Data?, NetworkServiceError>) -> Void
-    func request(_ urlRequest: URLRequest, completion: @escaping Completion)
+    func request(
+        _ urlRequest: URLRequest,
+        completion: @escaping Completion
+    )
 }
