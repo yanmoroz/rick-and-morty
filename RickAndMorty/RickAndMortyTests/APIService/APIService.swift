@@ -11,10 +11,7 @@ protocol APIService {
     typealias DecodableCompletion<T> = (Result<T, APIServiceError>) -> Void
     typealias Completion = (APIServiceError?) -> Void
     
-    func decodableRequest<
-        T: Decodable,
-        E: DecodableEndpoint
-    >(
+    func decodableRequest<T: Decodable, E: DecodableEndpoint>(
         _ endpoint: E,
         completion: @escaping DecodableCompletion<T>
     ) where E.DecodeType == T
