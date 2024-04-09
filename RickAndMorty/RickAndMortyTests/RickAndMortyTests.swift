@@ -8,41 +8,46 @@
 import XCTest
 
 final class RickAndMortyTests: XCTestCase {
-    func test_apiService_returnsGoogleResponse() {
-        let networkService = NetworkServiceImpl()
-        let apiService = APIServiceImpl(networkService: networkService)
-        let urlRequest = URLRequest(url: URL(string: "https://google.com/")!)
-        let endpoint = EndpointImpl(urlRequest: urlRequest)
-        let exp = XCTestExpectation()
-        
-        apiService.request(endpoint) { error in
-            defer { exp.fulfill() }
-            
-            guard let error else {
-                return
-            }
-            
-            print(error)
-        }
-        
-        wait(for: [exp])
+    
+    enum Locals {
+        static let networkService = NetworkServiceImpl()
+        static let apiService = APIServiceImpl(
+            networkService: networkService,
+            decoder: JSONDecoder.ramJsonDecoder
+        )
+        static let rickAndMortyAPIService = RickAndMortyAPIServiceImpl(apiService: apiService)
     }
     
     func test_apiService_returnsResourcesResponse() {
-        let networkService = NetworkServiceImpl()
-        let apiService = APIServiceImpl(networkService: networkService)
-        let urlRequest = URLRequest(url: URL(string: "https://rickandmortyapi.com/api")!)
-        let endpoint = DecodableEndpointImpl<ResourcesResponse>(urlRequest: urlRequest)
         let exp = XCTestExpectation()
         
-        apiService.decodableRequest(endpoint) { result in
+        Locals.rickAndMortyAPIService.fetchResources { result in
             defer { exp.fulfill() }
             
             switch result {
             case .success(let response):
                 print(response)
-            case .failure(let apiServiceError):
-                print(apiServiceError)
+            case .failure(let error):
+                print(error)
+                XCTFail("Should be .success")
+            }
+        }
+        
+        wait(for: [exp])
+    }
+    
+    func test_apiService_episodesResponse() {
+        let exp = XCTestExpectation()
+        
+        Locals.rickAndMortyAPIService.episodesResources { result in
+            defer { exp.fulfill() }
+            
+            switch result {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                print(error)
+                XCTFail("Should be .success")
             }
         }
         

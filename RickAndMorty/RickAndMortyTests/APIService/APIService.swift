@@ -13,11 +13,11 @@ protocol APIService {
     
     func decodableRequest<T: Decodable, E: DecodableEndpoint>(
         _ endpoint: E,
-        completion: @escaping DecodableCompletion<T>
+        handler: @escaping DecodableCompletion<T>
     ) where E.DecodeType == T
     
     func request(
         _ endpoint: Endpoint,
-        completion: @escaping Completion
+        handler: @escaping Completion
     )
 }
